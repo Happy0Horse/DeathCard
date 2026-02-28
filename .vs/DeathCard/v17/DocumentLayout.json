@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Comand Project\\DeathCard\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|d:\\comand project\\deathcard\\assets\\mini first person controller\\scripts\\firstpersonlook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\mini first person controller\\scripts\\firstpersonlook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|d:\\comand project\\deathcard\\assets\\mini first person controller\\scripts\\firstpersonmovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\mini first person controller\\scripts\\firstpersonmovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FirstPersonMovement.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Mini First Person Controller\\Scripts\\FirstPersonMovement.cs",
+              "RelativeDocumentMoniker": "Assets\\Mini First Person Controller\\Scripts\\FirstPersonMovement.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Mini First Person Controller\\Scripts\\FirstPersonMovement.cs",
+              "RelativeToolTip": "Assets\\Mini First Person Controller\\Scripts\\FirstPersonMovement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T11:47:01.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FirstPersonLook.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Mini First Person Controller\\Scripts\\FirstPersonLook.cs",
+              "RelativeDocumentMoniker": "Assets\\Mini First Person Controller\\Scripts\\FirstPersonLook.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Mini First Person Controller\\Scripts\\FirstPersonLook.cs",
+              "RelativeToolTip": "Assets\\Mini First Person Controller\\Scripts\\FirstPersonLook.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowAgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T11:44:05.141Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
