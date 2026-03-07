@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|h:\\univercity_6th_sem\\practise project\\deathcard\\deathcard\\assets\\tmp\\artemtmp\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\tmp\\artemtmp\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\tmp\\artemtmp\\scripts\\canvastomeshscaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\tmp\\artemtmp\\scripts\\canvastomeshscaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|h:\\univercity_6th_sem\\practise project\\deathcard\\deathcard\\assets\\tmp\\artemtmp\\scripts\\cardstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\tmp\\artemtmp\\scripts\\cardstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CardState.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\CardState.cs",
+              "RelativeDocumentMoniker": "Assets\\Tmp\\ArtemTMP\\Scripts\\CardState.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\CardState.cs",
+              "RelativeToolTip": "Assets\\Tmp\\ArtemTMP\\Scripts\\CardState.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T13:04:21.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CanvasToMeshScaler.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "RelativeDocumentMoniker": "Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "RelativeToolTip": "Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwDIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T12:11:33.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainMenuManager.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "RelativeToolTip": "Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAwGIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T10:52:21.597Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
