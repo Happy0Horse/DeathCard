@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playerinteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|d:\\comand project\\deathcard\\assets\\other\\infectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\other\\infectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\other\\interactable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\other\\interactable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|d:\\comand project\\deathcard\\assets\\player\\scripts\\playerattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playerattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|d:\\comand project\\deathcard\\assets\\other\\infectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\other\\infectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,27 +36,27 @@
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerInteract.cs",
               "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Player\\Scripts\\PlayerInteract.cs",
               "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerInteract.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBMAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwCAAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-07T14:08:37.315Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Infectable.cs",
               "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Other\\Infectable.cs",
               "RelativeDocumentMoniker": "Assets\\Other\\Infectable.cs",
               "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Other\\Infectable.cs",
               "RelativeToolTip": "Assets\\Other\\Infectable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-07T14:04:30.237Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "PlayerAttack.cs",
               "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Player\\Scripts\\PlayerAttack.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerAttack.cs",
@@ -69,7 +69,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Interactable.cs",
               "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Other\\Interactable.cs",
               "RelativeDocumentMoniker": "Assets\\Other\\Interactable.cs",
