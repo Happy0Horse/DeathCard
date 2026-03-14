@@ -9,6 +9,39 @@
     {
       "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|h:\\univercity_6th_sem\\practise project\\deathcard\\deathcard\\assets\\tmp\\artemtmp\\scripts\\canvastomeshscaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\tmp\\artemtmp\\scripts\\canvastomeshscaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+  "WorkspaceRootPath": "D:\\Comand Project\\DeathCard\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Comand Project\\DeathCard\\Temp\\Compiled-Standard.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Temp\\Compiled-Standard.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Comand Project\\DeathCard\\Temp\\ParsedCombinations-Standard.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Temp\\ParsedCombinations-Standard.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\maze\\scripts\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\maze\\scripts\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\maze\\scripts\\mazecell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\maze\\scripts\\mazecell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\player\\scripts\\playerattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playerattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\player\\scripts\\playerinteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playerinteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\other\\infectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\other\\infectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\other\\interactable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\other\\interactable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,6 +64,14 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-07T12:11:33.672Z",
+              "Title": "ParsedCombinations-Standard.shader",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Temp\\ParsedCombinations-Standard.shader",
+              "RelativeDocumentMoniker": "Temp\\ParsedCombinations-Standard.shader",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Temp\\ParsedCombinations-Standard.shader",
+              "RelativeToolTip": "Temp\\ParsedCombinations-Standard.shader",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2026-03-10T16:56:40.951Z",
               "EditorCaption": ""
             },
             {
@@ -45,6 +86,87 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-07T10:52:21.597Z",
               "EditorCaption": ""
+              "Title": "Compiled-Standard.shader",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Temp\\Compiled-Standard.shader",
+              "RelativeDocumentMoniker": "Temp\\Compiled-Standard.shader",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Temp\\Compiled-Standard.shader",
+              "RelativeToolTip": "Temp\\Compiled-Standard.shader",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2026-03-10T16:53:29.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MazeGenerator.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Maze\\Scripts\\MazeGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Maze\\Scripts\\MazeGenerator.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Maze\\Scripts\\MazeGenerator.cs",
+              "RelativeToolTip": "Assets\\Maze\\Scripts\\MazeGenerator.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAADwv3IAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T16:31:23.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MazeCell.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Maze\\Scripts\\MazeCell.cs",
+              "RelativeDocumentMoniker": "Assets\\Maze\\Scripts\\MazeCell.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Maze\\Scripts\\MazeCell.cs",
+              "RelativeToolTip": "Assets\\Maze\\Scripts\\MazeCell.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwB4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T16:30:51.781Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PlayerInteract.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Player\\Scripts\\PlayerInteract.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerInteract.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Player\\Scripts\\PlayerInteract.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerInteract.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBMAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T14:08:37.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Infectable.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Other\\Infectable.cs",
+              "RelativeDocumentMoniker": "Assets\\Other\\Infectable.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Other\\Infectable.cs",
+              "RelativeToolTip": "Assets\\Other\\Infectable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T14:04:30.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayerAttack.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Player\\Scripts\\PlayerAttack.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerAttack.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Player\\Scripts\\PlayerAttack.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerAttack.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T13:44:02.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Interactable.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\Other\\Interactable.cs",
+              "RelativeDocumentMoniker": "Assets\\Other\\Interactable.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\Other\\Interactable.cs",
+              "RelativeToolTip": "Assets\\Other\\Interactable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T13:38:13.037Z"
             }
           ]
         }
