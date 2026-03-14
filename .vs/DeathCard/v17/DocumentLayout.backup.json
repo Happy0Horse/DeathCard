@@ -1,5 +1,14 @@
 {
   "Version": 1,
+  "WorkspaceRootPath": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\tmp\\artemtmp\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\tmp\\artemtmp\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|h:\\univercity_6th_sem\\practise project\\deathcard\\deathcard\\assets\\tmp\\artemtmp\\scripts\\canvastomeshscaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\tmp\\artemtmp\\scripts\\canvastomeshscaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
   "WorkspaceRootPath": "D:\\Comand Project\\DeathCard\\",
   "Documents": [
     {
@@ -47,6 +56,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "CanvasToMeshScaler.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "RelativeDocumentMoniker": "Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "RelativeToolTip": "Assets\\Tmp\\ArtemTMP\\Scripts\\CanvasToMeshScaler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T12:11:33.672Z",
               "Title": "ParsedCombinations-Standard.shader",
               "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Temp\\ParsedCombinations-Standard.shader",
               "RelativeDocumentMoniker": "Temp\\ParsedCombinations-Standard.shader",
@@ -60,6 +77,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MainMenuManager.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "RelativeToolTip": "Assets\\Tmp\\ArtemTMP\\Scripts\\MainMenuManager.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAmwGIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T10:52:21.597Z",
+              "EditorCaption": ""
               "Title": "Compiled-Standard.shader",
               "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Temp\\Compiled-Standard.shader",
               "RelativeDocumentMoniker": "Temp\\Compiled-Standard.shader",
