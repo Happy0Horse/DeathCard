@@ -19,27 +19,27 @@ public class MazeGeneratorTests
         Object.DestroyImmediate(mazeObject);
     }
 
-    // 1. Правильний тест – перевірка значень розміру лабіринту
     [Test]
     public void Maze_Size_ShouldBePositive()
     {
-        Assert.Greater(generator.width, 0);
-        Assert.Greater(generator.height, 0);
-    }
+        TestContext.WriteLine("Executing: Maze_Size_ShouldBePositive");
 
-    // 2. Правильний тест – перевірка розміру клітинки
+        Assert.Greater(generator.width, 0, "Width should be positive");
+        Assert.Greater(generator.height, 0, "Height should be positive");
+    }
     [Test]
     public void CellSize_ShouldBeGreaterThanZero()
     {
-        Assert.Greater(generator.cellSize, 0);
+        TestContext.WriteLine("Executing: CellSize_ShouldBeGreaterThanZero");
+
+        Assert.Greater(generator.cellSize, 0, "Cell size should be greater than zero");
     }
 
-    // 3. Неправильний тест (навмисно)
-    // Очікує що ширина лабіринту дорівнює 5,
-    // але в коді width = 10
     [Test]
     public void MazeWidth_ShouldBeFive()
     {
-        Assert.AreEqual(5, generator.width);
+        TestContext.WriteLine("Executing: MazeWidth_ShouldBeFive");
+
+        Assert.AreEqual(5, generator.width, "This test is intentionally failing because width is not 5");
     }
 }
