@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CardState : MonoBehaviour
 {
-    [SerializeField] private GameObject stateA;
-    [SerializeField] private GameObject stateB;
+    [SerializeField] public GameObject stateA;
+    [SerializeField] public GameObject stateB;
 
     public void SetState(bool isStateA)
     {
