@@ -4,6 +4,7 @@ public class PlayerInteract : MonoBehaviour
 {
     public Transform cameraTransform;
     public float interactDistance = 3f;
+    public DebuffSystem debuffSystem;
 
     void Update()
     {
@@ -19,12 +20,12 @@ public class PlayerInteract : MonoBehaviour
     {
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         RaycastHit hit;
+        int layerMask = LayerMask.GetMask("Interactable");
 
-        if (Physics.Raycast(ray, out hit, interactDistance))
+        if (Physics.Raycast(ray, out hit, interactDistance, layerMask))
         {
             return hit.collider.GetComponent<Interactable>();
         }
-
         return null;
     }
 
@@ -33,6 +34,13 @@ public class PlayerInteract : MonoBehaviour
         Interactable obj = GetInteractable();
 
         if (obj != null)
+        {
+            if (obj.CompareTag("Infected"))
+            {
+                debuffSystem.ApplyRandomDebuff();
+            }
+
             obj.Interact();
+        }
     }
 }
