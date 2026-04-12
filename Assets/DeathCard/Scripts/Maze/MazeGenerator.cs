@@ -1,9 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MazeGenerator : MonoBehaviour
 {
     #region Variables
+    [Header("Editor & Workflow")]
+    public bool autoRegenerateInEditor = true;
+    public bool regenerateOnStart = true;
+    public MazeDecorator decorator;
+    public SpawnManager spawner;
+
     [Header("Settings")]
     public int width = 50;
     public int height = 50;
@@ -26,52 +35,56 @@ public class MazeGenerator : MonoBehaviour
     [Range(2, 10)] public int minSize = 2;
     [Range(4, 15)] public int maxSize = 4;
 
+    [Header("Decorations")]
+    [Range(0, 50)] public int torchFrequency = 5;
+
     private MazeCell[,] grid;
     #endregion
 
-    #region Runtime Auto-Regeneration
-
-    private int _lW, _lH, _lMin, _lMax;
-    private float _lRA, _lHA, _lEA, _lER;
-    private bool _lUR, _lUH;
-
-    void Update()
+    #region Unity Lifecycle
+    private void Start()
     {
-        if (CheckChanges())
+        if (decorator == null)
         {
-            CaptureState();
+            decorator = GetComponent<MazeDecorator>();
+        }
+
+        if (regenerateOnStart)
+        {
             Generate();
         }
     }
 
-    bool CheckChanges()
+#if UNITY_EDITOR
+#if UNITY_EDITOR
+    private double _nextAllowedTime = 0;
+
+    private void OnValidate()
     {
-        return width != _lW || height != _lH || useRooms != _lUR || useHollows != _lUH ||
-               minSize != _lMin || maxSize != _lMax ||
-               !Mathf.Approximately(roomAmountMultiplier, _lRA) ||
-               !Mathf.Approximately(hollowAmountMultiplier, _lHA) ||
-               !Mathf.Approximately(erosionAmount, _lEA) ||
-               !Mathf.Approximately(erosionRandomness, _lER);
+        if (Application.isPlaying || !autoRegenerateInEditor) return;
+        if (EditorApplication.timeSinceStartup < _nextAllowedTime) return;
+
+        _nextAllowedTime = EditorApplication.timeSinceStartup + 0.2f;
+
+        EditorApplication.delayCall -= OnEditorUpdate;
+        EditorApplication.delayCall += OnEditorUpdate;
+    }
+#endif
+
+    private void OnDestroy()
+    {
+        EditorApplication.delayCall -= OnEditorUpdate;
     }
 
-    void CaptureState()
+    private void OnEditorUpdate()
     {
-        _lW = width; _lH = height; _lUR = useRooms; _lUH = useHollows;
-        _lMin = minSize; _lMax = maxSize;
-        _lRA = roomAmountMultiplier; _lHA = hollowAmountMultiplier;
-        _lEA = erosionAmount; _lER = erosionRandomness;
+        if (this == null) return;
+        Generate();
     }
+#endif
     #endregion
 
     #region Initialization
-    void Start()
-    {
-        // remove if removed runtime modification
-#if UNITY_EDITOR
-        CaptureState();
-#endif
-        Generate();
-    }
 
     public void Generate()
     {
@@ -84,12 +97,13 @@ public class MazeGenerator : MonoBehaviour
 
         GenerateMaze();
 
-        if (SpawnManager.Instance != null)
-        {
-            SpawnManager.Instance.SetupSpawns(grid, width, height);
-        }
+        if (spawner == null) spawner = GetComponent<SpawnManager>();
+        if (spawner != null) spawner.SetupSpawns(grid, width, height);
 
         CleanUpLonelyPillars();
+
+        if (decorator == null) decorator = GetComponent<MazeDecorator>();
+        if (decorator != null) decorator.Decorate(grid, width, height);
     }
 
     void ClearOldMaze()
@@ -97,8 +111,18 @@ public class MazeGenerator : MonoBehaviour
         MazeCell[] existingCells = GetComponentsInChildren<MazeCell>();
         for (int i = existingCells.Length - 1; i >= 0; i--)
         {
-            if (Application.isPlaying) Destroy(existingCells[i].gameObject);
-            else DestroyImmediate(existingCells[i].gameObject);
+            if (existingCells[i] == null) continue;
+
+            GameObject go = existingCells[i].gameObject;
+
+            if (Application.isPlaying)
+            {
+                Destroy(go);
+            }
+            else
+            {
+                DestroyImmediate(go, false);
+            }
         }
         grid = null;
     }
@@ -112,31 +136,38 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                grid[x, y] = Instantiate(cellPrefab, new Vector3(x * cellSize, 0, y * cellSize), Quaternion.identity, transform);
+                GameObject cellGo = Instantiate(cellPrefab.gameObject, transform.position + new Vector3(x * cellSize, 0, y * cellSize), Quaternion.identity, transform);
 
-                grid[x, y].pillarTR?.SetActive(true);
-                grid[x, y].wallTop?.SetActive(true);
-                grid[x, y].wallRight?.SetActive(true);
-
-                grid[x, y].pillarTL?.SetActive(false);
-                grid[x, y].pillarBL?.SetActive(false);
-                grid[x, y].pillarBR?.SetActive(false);
-                grid[x, y].wallLeft?.SetActive(false);
-                grid[x, y].wallBottom?.SetActive(false);
-
-                if (x == 0)
-                {
-                    grid[x, y].wallLeft?.SetActive(true);
-                    grid[x, y].pillarTL?.SetActive(true);
-                    grid[x, y].pillarBL?.SetActive(true);
-                }
-
-                if (y == 0)
-                {
-                    grid[x, y].wallBottom?.SetActive(true);
-                    grid[x, y].pillarBR?.SetActive(true);
-                }
+                grid[x, y] = cellGo.GetComponent<MazeCell>();
+                grid[x, y].visited = false;
+                InitializeCellWalls(x, y);
             }
+        }
+    }
+
+    void InitializeCellWalls(int x, int y)
+    {
+        grid[x, y].pillarTR?.SetActive(true);
+        grid[x, y].wallTop?.SetActive(true);
+        grid[x, y].wallRight?.SetActive(true);
+
+        grid[x, y].pillarTL?.SetActive(false);
+        grid[x, y].pillarBL?.SetActive(false);
+        grid[x, y].pillarBR?.SetActive(false);
+        grid[x, y].wallLeft?.SetActive(false);
+        grid[x, y].wallBottom?.SetActive(false);
+
+        if (x == 0)
+        {
+            grid[x, y].wallLeft?.SetActive(true);
+            grid[x, y].pillarTL?.SetActive(true);
+            grid[x, y].pillarBL?.SetActive(true);
+        }
+
+        if (y == 0)
+        {
+            grid[x, y].wallBottom?.SetActive(true);
+            grid[x, y].pillarBR?.SetActive(true);
         }
     }
     #endregion
