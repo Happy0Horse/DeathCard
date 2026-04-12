@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Mirror;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     public float speed = 5f;
     public float sprintSpeed = 8f;
@@ -17,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float staminaRecovery = 2f;
     public float jumpStaminaCost = 1.5f;
 
-    public float staminaRecoveryDelay = 1.5f; 
+    public float staminaRecoveryDelay = 1.5f;
     private float staminaTimer;
 
     public Slider staminaSlider;
@@ -38,14 +39,22 @@ public class PlayerMovement : MonoBehaviour
 
         stamina = maxStamina;
 
+        if (!isLocalPlayer)
+        {
+            if (staminaSlider != null)
+                staminaSlider.gameObject.SetActive(false);
+            return;
+        }
+
         staminaSlider.maxValue = maxStamina;
         staminaSlider.value = stamina;
-
         staminaSlider.gameObject.SetActive(false);
     }
 
     void Update()
     {
+        if (!isLocalPlayer) return;
+
         Move();
         UpdateStaminaUI();
     }
@@ -68,9 +77,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             float currentSpeed = canSprint ? sprintSpeed : speed;
-
             horizontalVelocity = inputDirection * currentSpeed;
-
             airVelocity = horizontalVelocity;
         }
         else
@@ -87,22 +94,15 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             if (staminaTimer > 0)
-            {
                 staminaTimer -= Time.deltaTime;
-            }
             else
-            {
                 stamina += staminaRecovery * Time.deltaTime;
-            }
         }
 
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
 
-        if (stamina <= 0)
-            isSprinting = false;
-
-        if (stamina >= maxStamina)
-            showStaminaBar = false;
+        if (stamina <= 0) isSprinting = false;
+        if (stamina >= maxStamina) showStaminaBar = false;
 
         Vector3 velocity = horizontalVelocity;
         velocity.y = yVelocity;
@@ -118,36 +118,31 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        if (!isLocalPlayer) return;
         moveInput = value.Get<Vector2>();
-
-        if (invertMovement)
-        {
-            moveInput = -moveInput;
-        }
+        if (invertMovement) moveInput = -moveInput;
     }
 
     public void OnSprint(InputValue value)
     {
+        if (!isLocalPlayer) return;
         isSprinting = value.isPressed;
-
-        if (isSprinting)
-            showStaminaBar = true;
+        if (isSprinting) showStaminaBar = true;
     }
 
     public void OnJump(InputValue value)
     {
+        if (!isLocalPlayer) return;
+
         if (value.isPressed && controller.isGrounded && stamina >= jumpStaminaCost)
         {
             yVelocity = jumpForce;
-
             stamina -= jumpStaminaCost;
             staminaTimer = staminaRecoveryDelay;
             showStaminaBar = true;
 
             float currentSpeed = isSprinting ? sprintSpeed : speed;
-
-            airVelocity = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized
-                          * currentSpeed;
+            airVelocity = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized * currentSpeed;
         }
     }
 }

@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
 
-public class PlayerLook : MonoBehaviour
+public class PlayerLook : NetworkBehaviour
 {
     public Transform cameraTransform;
     public float mouseSensitivity = 200f;
@@ -11,11 +12,13 @@ public class PlayerLook : MonoBehaviour
 
     void Start()
     {
+        if (!isLocalPlayer) return;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
+        if (!isLocalPlayer) return;
         Look();
     }
 
