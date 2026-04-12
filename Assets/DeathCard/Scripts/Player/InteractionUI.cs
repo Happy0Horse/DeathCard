@@ -10,6 +10,7 @@ public class InteractionUI : MonoBehaviour
     void Awake()
     {
         instance = this;
+
         panel.SetActive(false);
     }
 
