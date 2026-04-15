@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
 
     private List<GameObject> _spawnedObjects = new List<GameObject>();
 
-    public void SetupSpawns(MazeCell[,] grid, int width, int height)
+    public void SetupSpawns(MazeCell[,] grid, int width, int height, List<RoomData> rooms)
     {
         ClearSpawns();
 
@@ -25,7 +25,8 @@ public class SpawnManager : MonoBehaviour
 
         Vector2Int first = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
         int safetyNet = 0;
-        while (grid[first.x, first.y] == null && safetyNet < 1000)
+
+        while ((grid[first.x, first.y] == null || RoomGenerator.IsInsideRoom(first.x, first.y, rooms)) && safetyNet < 1000)
         {
             first = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
             safetyNet++;
@@ -38,7 +39,7 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 1; i < playerCount; i++)
         {
-            spawnPoints.Add(GetPointAtApproxDistance(grid, width, height, spawnPoints, targetDist));
+            spawnPoints.Add(GetPointAtApproxDistance(grid, width, height, spawnPoints, targetDist, rooms));
         }
 
         foreach (Vector2Int sp in spawnPoints)
@@ -47,12 +48,15 @@ public class SpawnManager : MonoBehaviour
                 grid[sp.x, sp.y].SetFloorMaterial(spawnMaterial);
         }
 
-        Vector3 startPos = grid[spawnPoints[0].x, spawnPoints[0].y].transform.position + Vector3.up * playerHeight;
-        GameObject newPlayer = Instantiate(player, startPos, Quaternion.identity);
-        _spawnedObjects.Add(newPlayer);
+        if (spawnPoints.Count > 0 && grid[spawnPoints[0].x, spawnPoints[0].y] != null)
+        {
+            Vector3 startPos = grid[spawnPoints[0].x, spawnPoints[0].y].transform.position + Vector3.up * playerHeight;
+            GameObject newPlayer = Instantiate(player, startPos, Quaternion.identity);
+            _spawnedObjects.Add(newPlayer);
+        }
     }
 
-    private Vector2Int GetPointAtApproxDistance(MazeCell[,] grid, int width, int height, List<Vector2Int> existing, float target)
+    private Vector2Int GetPointAtApproxDistance(MazeCell[,] grid, int width, int height, List<Vector2Int> existing, float target, List<RoomData> rooms)
     {
         Vector2Int bestCandidate = existing[0];
         float bestScore = float.MaxValue;
@@ -61,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if (grid[x, y] == null) continue;
+                if (grid[x, y] == null || RoomGenerator.IsInsideRoom(x, y, rooms)) continue;
 
                 Vector2Int current = new Vector2Int(x, y);
                 if (existing.Contains(current)) continue;

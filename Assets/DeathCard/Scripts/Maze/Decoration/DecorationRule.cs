@@ -22,7 +22,6 @@ public class DecorationRule
 
     [Header("Constraints")]
     public bool deadEndsOnly = false;
-    public bool roomsOnly = false;
 
     [HideInInspector] public int stepsSinceLast = 0;
     [HideInInspector] public int currentTargetInterval = 0;

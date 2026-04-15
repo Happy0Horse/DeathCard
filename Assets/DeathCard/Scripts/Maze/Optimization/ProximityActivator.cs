@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class ProximityActivator : MonoBehaviour
 {
+    public enum TargetFeature { Visuals, Shadows }
+    public TargetFeature feature;
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Sphere touched: " + other.name + " with tag: " + other.tag);
         if (other.CompareTag("Decoration"))
         {
             var culler = other.GetComponent<DecorationCuller>();
-            if (culler != null) culler.SetVisible(true);
+            if (culler == null) return;
+
+            if (feature == TargetFeature.Visuals) culler.SetVisible(true);
+            else culler.SetShadows(true);
         }
     }
 
@@ -17,7 +22,10 @@ public class ProximityActivator : MonoBehaviour
         if (other.CompareTag("Decoration"))
         {
             var culler = other.GetComponent<DecorationCuller>();
-            if (culler != null) culler.SetVisible(false);
+            if (culler == null) return;
+
+            if (feature == TargetFeature.Visuals) culler.SetVisible(false);
+            else culler.SetShadows(false);
         }
     }
 }

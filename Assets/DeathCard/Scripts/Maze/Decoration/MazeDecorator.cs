@@ -10,11 +10,9 @@ public class MazeDecorator : MonoBehaviour
     [Header("Ruleset")]
     public List<DecorationRule> rules = new List<DecorationRule>();
 
-    public void Decorate(MazeCell[,] grid, int width, int height)
+    public void Decorate(MazeCell[,] grid, int width, int height, List<RoomData> rooms)
     {
         if (grid == null || !enableDecorations) return;
-
-        // Reset counters at the start of every new generation
         ResetRuleCounters();
 
         for (int x = 0; x < width; x++)
@@ -27,7 +25,12 @@ public class MazeDecorator : MonoBehaviour
                 MazeCellDecor decor = cell.GetComponent<MazeCellDecor>();
                 if (decor == null) continue;
 
-                ApplyRules(cell, decor);
+                bool isInRoom = RoomGenerator.IsInsideRoom(x, y, rooms);
+
+                if (!isInRoom)
+                {
+                    ApplyRules(cell, decor);
+                }
 
                 if (hideEmptyMounts)
                 {
@@ -54,7 +57,6 @@ public class MazeDecorator : MonoBehaviour
         {
             if (!rule.isEnabled || rule.prefab == null) continue;
             if (rule.deadEndsOnly && !isDeadEnd) continue;
-            if (rule.roomsOnly && !cell.visited) continue;
 
             bool shouldSpawn = false;
 
@@ -65,20 +67,15 @@ public class MazeDecorator : MonoBehaviour
             else
             {
                 rule.stepsSinceLast++;
-
                 if (rule.stepsSinceLast >= rule.currentTargetInterval)
                 {
-                    if (Random.Range(0, 100) < rule.chance)
-                    {
-                        shouldSpawn = true;
-                    }
+                    shouldSpawn = true;
                 }
             }
 
             if (shouldSpawn)
             {
                 bool success = decor.PlaceProp(rule.prefab, rule.mountKey);
-
                 if (success)
                 {
                     rule.stepsSinceLast = 0;
