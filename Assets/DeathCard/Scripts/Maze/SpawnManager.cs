@@ -4,7 +4,6 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [Header("Testing fields")]
-    public Color spawnColor = Color.cyan;
     public int playerCount = 1;
     public float distanceBetweenPlayers = 0.25f;
 
@@ -12,25 +11,22 @@ public class SpawnManager : MonoBehaviour
     public GameObject player;
     public float playerHeight = 1f;
 
-    public static SpawnManager Instance { get; private set; }
+    [Header("Materials")]
+    public Material spawnMaterial;
+    public Material defaultMaterial;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
+    private List<GameObject> _spawnedObjects = new List<GameObject>();
 
-    public void SetupSpawns(MazeCell[,] grid, int width, int height)
+    public void SetupSpawns(MazeCell[,] grid, int width, int height, List<RoomData> rooms)
     {
+        ClearSpawns();
+
         List<Vector2Int> spawnPoints = new List<Vector2Int>();
 
         Vector2Int first = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
         int safetyNet = 0;
-        while (grid[first.x, first.y] == null && safetyNet < 1000)
+
+        while ((grid[first.x, first.y] == null || RoomGenerator.IsInsideRoom(first.x, first.y, rooms)) && safetyNet < 1000)
         {
             first = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
             safetyNet++;
@@ -43,20 +39,24 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 1; i < playerCount; i++)
         {
-            spawnPoints.Add(GetPointAtApproxDistance(grid, width, height, spawnPoints, targetDist));
+            spawnPoints.Add(GetPointAtApproxDistance(grid, width, height, spawnPoints, targetDist, rooms));
         }
 
         foreach (Vector2Int sp in spawnPoints)
         {
             if (grid[sp.x, sp.y] != null)
-                grid[sp.x, sp.y].SetFloorColor(spawnColor);
+                grid[sp.x, sp.y].SetFloorMaterial(spawnMaterial);
         }
 
-        Vector3 startPos = grid[spawnPoints[0].x, spawnPoints[0].y].transform.position + Vector3.up * playerHeight;
-        Object.Instantiate(player, startPos, Quaternion.identity);
+        if (spawnPoints.Count > 0 && grid[spawnPoints[0].x, spawnPoints[0].y] != null)
+        {
+            Vector3 startPos = grid[spawnPoints[0].x, spawnPoints[0].y].transform.position + Vector3.up * playerHeight;
+            GameObject newPlayer = Instantiate(player, startPos, Quaternion.identity);
+            _spawnedObjects.Add(newPlayer);
+        }
     }
 
-    private Vector2Int GetPointAtApproxDistance(MazeCell[,] grid, int width, int height, List<Vector2Int> existing, float target)
+    private Vector2Int GetPointAtApproxDistance(MazeCell[,] grid, int width, int height, List<Vector2Int> existing, float target, List<RoomData> rooms)
     {
         Vector2Int bestCandidate = existing[0];
         float bestScore = float.MaxValue;
@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if (grid[x, y] == null) continue;
+                if (grid[x, y] == null || RoomGenerator.IsInsideRoom(x, y, rooms)) continue;
 
                 Vector2Int current = new Vector2Int(x, y);
                 if (existing.Contains(current)) continue;
@@ -86,5 +86,19 @@ public class SpawnManager : MonoBehaviour
             }
         }
         return bestCandidate;
+    }
+
+    public void ClearSpawns()
+    {
+        for (int i = _spawnedObjects.Count - 1; i >= 0; i--)
+        {
+            if (_spawnedObjects[i] == null) continue;
+
+            if (Application.isPlaying)
+                Destroy(_spawnedObjects[i]);
+            else
+                DestroyImmediate(_spawnedObjects[i]);
+        }
+        _spawnedObjects.Clear();
     }
 }

@@ -23,9 +23,9 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.3
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 46698180}
   - component: {fileID: 46698179}
   - component: {fileID: 46698178}
+  - component: {fileID: 46698181}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -211,6 +212,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &46698181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46698177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &786843698
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 786843700}
   - component: {fileID: 786843699}
+  - component: {fileID: 786843701}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -308,6 +354,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &786843701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786843698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &824185530
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +393,9 @@ GameObject:
   m_Component:
   - component: {fileID: 824185532}
   - component: {fileID: 824185531}
+  - component: {fileID: 824185534}
+  - component: {fileID: 824185533}
+  - component: {fileID: 824185535}
   m_Layer: 0
   m_Name: MazeGenerator
   m_TagString: Untagged
@@ -337,18 +415,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8bbbc08c6badc44ad50d99b45e2585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MazeGenerator
-  width: 50
-  height: 50
+  autoRegenerateInEditor: 0
+  regenerateOnStart: 1
+  decorator: {fileID: 824185533}
+  spawner: {fileID: 824185534}
+  roomDecorator: {fileID: 824185535}
+  activeRooms: []
+  width: 30
+  height: 30
   cellSize: 8
-  cellPrefab: {fileID: 7291885286334016401, guid: bc6871e83d959504e974779880c3e7ab, type: 3}
-  erosionAmount: 0.6
-  erosionRandomness: 1
+  cellPrefab: {fileID: 7291885286334016401, guid: 1cdb8392f457e9848bb0593c11dde737, type: 3}
+  erosionAmount: 0.591
+  erosionRandomness: 4.34
   useRooms: 1
   useHollows: 1
-  roomAmountMultiplier: 2.02
-  hollowAmountMultiplier: 1
+  roomAmountMultiplier: 5
+  hollowAmountMultiplier: 0
   minSize: 2
-  maxSize: 4
+  maxSize: 7
+  allowedSizes:
+  - size: {x: 2, y: 2}
+    weight: 40
+  - size: {x: 2, y: 3}
+    weight: 40
+  - size: {x: 5, y: 7}
+    weight: 20
 --- !u!4 &824185532
 Transform:
   m_ObjectHideFlags: 0
@@ -358,61 +449,99 @@ Transform:
   m_GameObject: {fileID: 824185530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.90812, y: -0, z: -4.31788}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1228720151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1228720153}
-  - component: {fileID: 1228720152}
-  m_Layer: 0
-  m_Name: PlayerSpawnManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1228720152
+--- !u!114 &824185533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1228720151}
+  m_GameObject: {fileID: 824185530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2722ba94d1eb1e94b874fb6b660323cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MazeDecorator
+  enableDecorations: 1
+  hideEmptyMounts: 1
+  rules:
+  - ruleName: Torch
+    isEnabled: 1
+    mountKey: torch
+    prefab: {fileID: 4110817267414035329, guid: 0313b6ea05b15eb479be842fa93f5c26, type: 3}
+    chance: 11
+    interval: 2
+    intervalRandomness: 1
+    deadEndsOnly: 0
+    stepsSinceLast: 19
+    currentTargetInterval: 2
+  - ruleName: Sand Piles
+    isEnabled: 1
+    mountKey: sand
+    prefab: {fileID: 6035799633002254369, guid: 62347c2888c48c94fb6bb95c54c292c3, type: 3}
+    chance: 33
+    interval: 0
+    intervalRandomness: 0
+    deadEndsOnly: 0
+    stepsSinceLast: 19
+    currentTargetInterval: 2
+  - ruleName: Random Pile
+    isEnabled: 1
+    mountKey: randompile
+    prefab: {fileID: 3334353575616659542, guid: c66b434b511657341a20cdb92350b70d, type: 3}
+    chance: 4
+    interval: 0
+    intervalRandomness: 0
+    deadEndsOnly: 0
+    stepsSinceLast: 19
+    currentTargetInterval: 2
+--- !u!114 &824185534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824185530}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 292e94cee055b704783f2af6cab6843e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  spawnColor: {r: 0, g: 1, b: 1, a: 1}
   playerCount: 4
   distanceBetweenPlayers: 0.25
   player: {fileID: 8188624983818404496, guid: 4944a99b770b785439655cf5b2b06c7b, type: 3}
   playerHeight: 1
---- !u!4 &1228720153
-Transform:
+  spawnMaterial: {fileID: 2100000, guid: db6473d502111a6429b990bc99fea814, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: f3bef037c9ad6014db2a2a355db1c37d, type: 2}
+--- !u!114 &824185535
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1228720151}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 242.69537, y: -0, z: 208.1951}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 824185530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a536ae77ce6cee4c90b4f28203eb79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomInteriorDecorator
+  prefabs:
+  - size: {x: 2, y: 2}
+    prefab: {fileID: 8479029884011527626, guid: 06848e09acf8dac4aa29e798e2e11b95, type: 3}
+  - size: {x: 2, y: 3}
+    prefab: {fileID: 9169855972497010069, guid: ea13be68fed3a8645aef88b63db156cf, type: 3}
+  - size: {x: 5, y: 7}
+    prefab: {fileID: 9169855972497010069, guid: 2b39e7e055a35cc4f88481da036fd29e, type: 3}
+  doorVariants:
+  - prefab: {fileID: 3158240731587253908, guid: d17b80d959f71344abe1df4e5ee250e5, type: 3}
+    weight: 80
+  - prefab: {fileID: 7607122260873624434, guid: 25e7106219cb13149bc007eebb953357, type: 3}
+    weight: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -420,4 +549,3 @@ SceneRoots:
   - {fileID: 46698180}
   - {fileID: 786843700}
   - {fileID: 824185532}
-  - {fileID: 1228720153}

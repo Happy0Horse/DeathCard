@@ -1,6 +1,7 @@
 using UnityEngine;
+using Mirror;
 
-public class PlayerInteract : MonoBehaviour
+public class PlayerInteract : NetworkBehaviour
 {
     public Transform cameraTransform;
     public float interactDistance = 3f;
@@ -8,6 +9,8 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
+        if (!isLocalPlayer) return;
+
         Interactable obj = GetInteractable();
 
         if (obj != null)
@@ -23,24 +26,31 @@ public class PlayerInteract : MonoBehaviour
         int layerMask = LayerMask.GetMask("Interactable");
 
         if (Physics.Raycast(ray, out hit, interactDistance, layerMask))
-        {
             return hit.collider.GetComponent<Interactable>();
-        }
+
         return null;
     }
 
     public void OnInteract()
     {
+        if (!isLocalPlayer) return;
+
         Interactable obj = GetInteractable();
 
         if (obj != null)
         {
             if (obj.CompareTag("Infected"))
-            {
                 debuffSystem.ApplyRandomDebuff();
-            }
 
-            obj.Interact();
+            CmdInteract(obj.gameObject);
         }
+    }
+
+    [Command]
+    void CmdInteract(GameObject target)
+    {
+        Interactable obj = target.GetComponent<Interactable>();
+        if (obj != null)
+            obj.Interact();
     }
 }
