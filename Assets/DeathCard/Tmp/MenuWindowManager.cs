@@ -29,8 +29,6 @@ public class MenuWindowManager : MonoBehaviour
         
         currentWindow = window;
         currentWindow.SetActive(true);
-        
-        Debug.Log($"Открыто окно: {window.name} | Предыдущее: {(previousWindow != null ? previousWindow.name : "null")}");
     }
     
     public void OnBackButtonClick()
@@ -45,8 +43,6 @@ public class MenuWindowManager : MonoBehaviour
             currentWindow.SetActive(true);
             
             previousWindow = null;
-            
-            Debug.Log($"Возврат к окну: {currentWindow.name}");
         }
     }
     
