@@ -1,82 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\",
+  "WorkspaceRootPath": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|h:\\univercity_6th_sem\\practise project\\deathcard\\multiplayer\\deathcard\\assets\\deathcard\\scripts\\maze\\room\\roominteriordecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\room\\roominteriordecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|h:\\univercity_6th_sem\\practise project\\deathcard\\deathcard\\assets\\deathcard\\scripts\\player\\hexgrid\\playeractionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\playeractionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\decoration\\mazecelldecor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\decoration\\mazecelldecor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|h:\\univercity_6th_sem\\practise project\\deathcard\\deathcard\\assets\\deathcard\\scripts\\player\\hexgrid\\hexgridnavigator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\hexgridnavigator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\room\\roomdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\room\\roomdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\environmentbuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\environmentbuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\utilitybuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\utilitybuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\decoration\\mazedecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\decoration\\mazedecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\gameevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\gameevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\room\\roomgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\room\\roomgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\attackbuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\attackbuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\hollow\\hollowgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\hollow\\hollowgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\hexgrid\\hexviewmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\hexviewmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\decoration\\decorationrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\decoration\\decorationrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\grid\\hexcell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\grid\\hexcell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\decoration\\decorationgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\decoration\\decorationgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\movebuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\hexgrid\\uirelated\\movebuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\room\\roomprefabsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\room\\roomprefabsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\grid\\hexgridgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\grid\\hexgridgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\room\\weightedroomsize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\room\\weightedroomsize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\grid\\hexgrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\grid\\hexgrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\room\\roomcell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\room\\roomcell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\grid\\hexspawnmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\grid\\hexspawnmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\room\\roommap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\room\\roommap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\playerlook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\playerlook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\mazecell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\mazecell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\decoration\\decorationmount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\decoration\\decorationmount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\spawnmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\spawnmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\optimization\\decorationculler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\optimization\\decorationculler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\erosion\\erosiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\erosion\\erosiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\assets\\deathcard\\scripts\\maze\\optimization\\proximityactivator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\maze\\optimization\\proximityactivator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\assets\\deathcard\\scripts\\player\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,236 +66,177 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "WeightedRoomSize.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\WeightedRoomSize.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Room\\WeightedRoomSize.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\WeightedRoomSize.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Room\\WeightedRoomSize.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T13:40:59.644Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "RoomMap.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomMap.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomMap.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomMap.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomMap.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAiwCAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T06:54:38.731Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RoomCell.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomCell.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomCell.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomCell.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomCell.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwAcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T06:53:16.927Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "RoomPrefabSettings.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomPrefabSettings.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomPrefabSettings.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomPrefabSettings.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomPrefabSettings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T18:54:41.781Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RoomInteriorDecorator.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomInteriorDecorator.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomInteriorDecorator.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomInteriorDecorator.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomInteriorDecorator.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAgwK0AAAA8AAAAAAAAAA==",
+              "Title": "PlayerActionHandler.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\PlayerActionHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\PlayerActionHandler.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\PlayerActionHandler.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\PlayerActionHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T17:36:29.743Z",
+              "WhenOpened": "2026-04-18T19:56:53.853Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RoomData.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomData.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomData.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomData.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomData.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBYAAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "UtilityButtonHandler.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\UtilityButtonHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\UtilityButtonHandler.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\UtilityButtonHandler.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\UtilityButtonHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T17:38:56.451Z"
+              "WhenOpened": "2026-04-18T19:39:50.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EnvironmentButtonHandler.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\EnvironmentButtonHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\EnvironmentButtonHandler.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\EnvironmentButtonHandler.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\EnvironmentButtonHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T19:39:45.667Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "RoomGenerator.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomGenerator.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomGenerator.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Room\\RoomGenerator.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAAwF0AAAABAAAAAAAAAA==",
+              "Title": "AttackButtonHandler.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\AttackButtonHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\AttackButtonHandler.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\AttackButtonHandler.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\AttackButtonHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T16:10:07.812Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "HollowGenerator.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Hollow\\HollowGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Hollow\\HollowGenerator.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Hollow\\HollowGenerator.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Hollow\\HollowGenerator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T16:09:58.209Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ErosionGenerator.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Erosion\\ErosionGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Erosion\\ErosionGenerator.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Erosion\\ErosionGenerator.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Erosion\\ErosionGenerator.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T16:09:57.562Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ProximityActivator.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Optimization\\ProximityActivator.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Optimization\\ProximityActivator.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Optimization\\ProximityActivator.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Optimization\\ProximityActivator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T15:18:47.285Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "DecorationCuller.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Optimization\\DecorationCuller.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Optimization\\DecorationCuller.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Optimization\\DecorationCuller.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Optimization\\DecorationCuller.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAiwB8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T15:18:45.733Z"
+              "WhenOpened": "2026-04-18T17:53:24.635Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "MazeDecorator.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeDecorator.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeDecorator.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeDecorator.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeDecorator.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAwwE0AAAAuAAAAAAAAAA==",
+              "Title": "GameEvents.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\GameEvents.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\GameEvents.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\GameEvents.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\GameEvents.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:33:21.222Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MazeCellDecor.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeCellDecor.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeCellDecor.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeCellDecor.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\MazeCellDecor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:33:19.875Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DecorationRule.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationRule.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationRule.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationRule.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationRule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:33:18.34Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "DecorationMount.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationMount.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationMount.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationMount.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationMount.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:33:16.903Z"
+              "WhenOpened": "2026-04-18T16:16:40.301Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "DecorationGroup.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationGroup.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationGroup.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationGroup.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\Decoration\\DecorationGroup.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Title": "MoveButtonHandler.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\MoveButtonHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\MoveButtonHandler.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\MoveButtonHandler.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\UIRelated\\MoveButtonHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:33:15.368Z"
+              "WhenOpened": "2026-04-18T16:16:30.366Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "SpawnManager.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\SpawnManager.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\SpawnManager.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\SpawnManager.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\SpawnManager.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAAAEIAAAANAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "HexCell.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexCell.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Grid\\HexCell.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexCell.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Grid\\HexCell.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:33:05.901Z"
+              "WhenOpened": "2026-04-18T16:25:11.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HexGridNavigator.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexGridNavigator.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexGridNavigator.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexGridNavigator.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexGridNavigator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:27:55.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HexViewManager.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexViewManager.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexViewManager.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexViewManager.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\HexGrid\\HexViewManager.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAA1wLYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:28:31.426Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "MazeCell.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\MazeCell.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\MazeCell.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\MazeCell.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\MazeCell.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAkwDYAAAABAAAAAAAAAA==",
+              "Title": "PlayerMovement.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\PlayerMovement.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\PlayerMovement.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\PlayerMovement.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\PlayerMovement.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAywJgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:33:02.232Z"
+              "WhenOpened": "2026-04-18T12:25:19.186Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MazeGenerator.cs",
-              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\MazeGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Maze\\MazeGenerator.cs",
-              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\multiplayer\\DeathCard\\Assets\\DeathCard\\Scripts\\Maze\\MazeGenerator.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Maze\\MazeGenerator.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwA4AAAAuAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "PlayerLook.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\PlayerLook.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\PlayerLook.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\PlayerLook.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\PlayerLook.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAswCUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T21:08:01.145Z"
+              "WhenOpened": "2026-04-18T12:25:16.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "HexSpawnManager.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexSpawnManager.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Grid\\HexSpawnManager.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexSpawnManager.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Grid\\HexSpawnManager.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAAAGsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T11:45:34.98Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "HexGrid.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexGrid.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Grid\\HexGrid.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexGrid.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Grid\\HexGrid.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T11:35:12.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HexGridGenerator.cs",
+              "DocumentMoniker": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexGridGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Grid\\HexGridGenerator.cs",
+              "ToolTip": "H:\\Univercity_6th_sem\\Practise project\\DeathCard\\DeathCard\\Assets\\DeathCard\\Scripts\\Grid\\HexGridGenerator.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Grid\\HexGridGenerator.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAgwEEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T11:06:48.079Z"
             }
           ]
         }
