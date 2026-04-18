@@ -1,4 +1,17 @@
 using Mirror;
+using System;
+
+public static class StringExtensions
+{
+    public static System.Guid ToGuid(this string str)
+    {
+        // Конвертируем строку roomId в Guid
+        byte[] bytes = new byte[16];
+        byte[] strBytes = System.Text.Encoding.UTF8.GetBytes(str);
+        System.Array.Copy(strBytes, bytes, System.Math.Min(strBytes.Length, 16));
+        return new System.Guid(bytes);
+    }
+}
 
 public struct JoinMatchmakingMessage : NetworkMessage { }
 public struct LeaveMatchmakingMessage : NetworkMessage { }

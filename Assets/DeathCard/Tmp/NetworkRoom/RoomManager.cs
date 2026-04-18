@@ -7,7 +7,7 @@ public class RoomManager : MonoBehaviour
 {
     public static RoomManager instance;
 
-    public string gameSceneName = "GameScene"; // замените на название вашей игровой сцены
+    public string gameSceneName = "Labyrinth_Scene";
 
     private List<GameRoom> rooms = new List<GameRoom>();
     private Dictionary<NetworkConnectionToClient, GameRoom> playerRoomMap
@@ -20,6 +20,13 @@ public class RoomManager : MonoBehaviour
         instance = this;
     }
 
+    public string GetRoomId(NetworkConnectionToClient conn)
+    {
+        if (playerRoomMap.ContainsKey(conn))
+            return playerRoomMap[conn].roomId;
+        return null;
+    }
+
     public void JoinMatchmaking(NetworkConnectionToClient conn)
     {
         GameRoom room = rooms.Find(r => !r.IsFull && !r.isStarted);
@@ -28,13 +35,10 @@ public class RoomManager : MonoBehaviour
         {
             room = new GameRoom("room_" + roomCounter++);
             rooms.Add(room);
-            Debug.Log($"Создана комната {room.roomId}");
         }
 
         room.AddPlayer(conn);
         playerRoomMap[conn] = room;
-
-        Debug.Log($"Игрок добавлен в {room.roomId} ({room.players.Count}/4)");
 
         SendLobbyUpdate(room);
     }
@@ -48,14 +52,9 @@ public class RoomManager : MonoBehaviour
         playerRoomMap.Remove(conn);
 
         if (room.players.Count == 0)
-        {
             rooms.Remove(room);
-            Debug.Log($"Комната {room.roomId} удалена");
-        }
         else
-        {
             SendLobbyUpdate(room);
-        }
     }
 
     public void SetReady(NetworkConnectionToClient conn, bool ready)
@@ -132,8 +131,14 @@ public class RoomManager : MonoBehaviour
     {
         room.isStarted = true;
 
+        // Назначаем matchId всем игрокам в комнате
         foreach (var conn in room.players)
+        {
+            if (conn.identity != null)
+                conn.identity.SetMatchId(room.roomId);
+
             conn.Send(new RoomStartMessage { roomId = room.roomId });
+        }
     }
 
     public void OnPlayerDisconnected(NetworkConnectionToClient conn)
