@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "DeathCard_Server.slnx"
+    "dotnet.defaultSolution": "DeathCard.slnx"
 }
