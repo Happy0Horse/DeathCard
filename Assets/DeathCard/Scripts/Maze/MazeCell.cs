@@ -1,35 +1,73 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeCell : MonoBehaviour
 {
-    [Header("Walls")]
-    public GameObject wallLeft;
-    public GameObject wallRight;
-    public GameObject wallTop;
-    public GameObject wallBottom;
+    public int gridX;
+    public int gridY;
+    public bool visited;
 
-    [Header("Corners")]
+    [Header("Standard Walls")]
+    public GameObject wallTop;
+    public GameObject wallRight;
+    public GameObject wallBottom;
+    public GameObject wallLeft;
+
+    [Header("Pillars")]
     public GameObject pillarTR;
     public GameObject pillarTL;
-    public GameObject pillarBR;
     public GameObject pillarBL;
+    public GameObject pillarBR;
 
+    [Header("Floor")]
+    public MeshRenderer floorRenderer;
 
-    public Renderer floorRenderer;
-    public bool visited = false;
+    [Header("Wall Variations")]
+    public List<WeightedPrefab> wallVariants;
 
-    public void SetFloorColor(Color color)
+    public void RemoveWallTop() => wallTop?.SetActive(false);
+    public void RemoveWallRight() => wallRight?.SetActive(false);
+    public void RemoveWallBottom() => wallBottom?.SetActive(false);
+    public void RemoveWallLeft() => wallLeft?.SetActive(false);
+
+    public void RemovePillarTR() => pillarTR?.SetActive(false);
+    public void RemovePillarTL() => pillarTL?.SetActive(false);
+    public void RemovePillarBL() => pillarBL?.SetActive(false);
+    public void RemovePillarBR() => pillarBR?.SetActive(false);
+
+    public void SetFloorMaterial(Material mat)
     {
-        if (floorRenderer != null) floorRenderer.material.color = color;
+        if (floorRenderer != null)
+        {
+            floorRenderer.material = mat;
+        }
     }
 
-    public void SetupPillars(int x, int y, int maxWidth, int maxHeight)
+    public void TryReplaceWithVariant(GameObject originalWall)
     {
-        if (pillarTL) pillarTL.SetActive(x == 0);
-        if (pillarBL) pillarBL.SetActive(x == 0 && y == 0);
-        if (pillarBR) pillarBR.SetActive(y == 0);
+        if (originalWall == null || !originalWall.activeSelf) return;
+        if (wallVariants == null || wallVariants.Count == 0) return;
+
+        GameObject variantPrefab = GetWeightedVariant();
+
+        if (variantPrefab != null)
+        {
+            Instantiate(variantPrefab, originalWall.transform.position, originalWall.transform.rotation, transform);
+            originalWall.SetActive(false);
+        }
     }
-    public void RemovePillarTR() { if (pillarTR) pillarTR.SetActive(false); }
-    public void RemoveWallRight() { if (wallRight) wallRight.SetActive(false); }
-    public void RemoveWallTop() { if (wallTop) wallTop.SetActive(false); }
+
+    private GameObject GetWeightedVariant()
+    {
+        int roll = Random.Range(0, 100);
+        int current = 0;
+
+        foreach (var v in wallVariants)
+        {
+            current += v.weight;
+            if (roll < current) return v.prefab;
+        }
+
+        return null;
+    }
 }
