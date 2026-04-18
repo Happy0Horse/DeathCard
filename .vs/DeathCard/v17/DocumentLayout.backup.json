@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "D:\\Comand Project\\DeathCard\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\animations\\scripts\\lock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\animations\\scripts\\lock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|d:\\comand project\\deathcard\\assets\\deathcard\\scripts\\interact\\boosterpack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\interact\\boosterpack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|d:\\comand project\\deathcard\\assets\\deathcard\\animations\\scripts\\fence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\animations\\scripts\\fence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\interact\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\interact\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\animations\\scripts\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\animations\\scripts\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\inventory\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\inventory\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\player\\debuffsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\debuffsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\player\\playerinteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\player\\playerinteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\inventory\\inventoryslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\inventory\\inventoryslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\other\\interactable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\other\\interactable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|D:\\Comand Project\\DeathCard\\assets\\deathcard\\scripts\\inventory\\inventoryui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EEC4E83-E32C-9C1F-E7C0-F056D5B8185D}|Assembly-CSharp.csproj|solutionrelative:assets\\deathcard\\scripts\\inventory\\inventoryui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,81 +34,80 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Fence.cs",
-              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Animations\\Scripts\\Fence.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Animations\\Scripts\\Fence.cs",
-              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Animations\\Scripts\\Fence.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Animations\\Scripts\\Fence.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T10:02:37.422Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Door.cs",
-              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Animations\\Scripts\\Door.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Animations\\Scripts\\Door.cs",
-              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Animations\\Scripts\\Door.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Animations\\Scripts\\Door.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T09:52:21.215Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Lock.cs",
-              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Animations\\Scripts\\Lock.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Animations\\Scripts\\Lock.cs",
-              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Animations\\Scripts\\Lock.cs*",
-              "RelativeToolTip": "Assets\\DeathCard\\Animations\\Scripts\\Lock.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T09:51:23.72Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DebuffSystem.cs",
-              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\DebuffSystem.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\DebuffSystem.cs",
-              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\DebuffSystem.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\DebuffSystem.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowBAAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T14:28:18.569Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Interactable.cs",
-              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Other\\Interactable.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Other\\Interactable.cs",
-              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Other\\Interactable.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Other\\Interactable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Title": "InventoryUI.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\InventoryUI.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Inventory\\InventoryUI.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\InventoryUI.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Inventory\\InventoryUI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T14:33:28.825Z"
+              "WhenOpened": "2026-04-18T18:22:51.97Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "PlayerInteract.cs",
-              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\PlayerInteract.cs",
-              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Player\\PlayerInteract.cs",
-              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Player\\PlayerInteract.cs",
-              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Player\\PlayerInteract.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowDoAAAAbAAAAAAAAAA==",
+              "Title": "InventorySlot.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\InventorySlot.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Inventory\\InventorySlot.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\InventorySlot.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Inventory\\InventorySlot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T14:30:07.542Z"
+              "WhenOpened": "2026-04-18T18:19:56.876Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\Inventory.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Inventory\\Inventory.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\Inventory.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Inventory\\Inventory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T18:18:33.444Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Item.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\Item.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Inventory\\Item.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Inventory\\Item.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Inventory\\Item.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T18:13:14.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BoosterPack.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Interact\\BoosterPack.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Interact\\BoosterPack.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Interact\\BoosterPack.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Interact\\BoosterPack.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T17:35:43.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Card.cs",
+              "DocumentMoniker": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Interact\\Card.cs",
+              "RelativeDocumentMoniker": "Assets\\DeathCard\\Scripts\\Interact\\Card.cs",
+              "ToolTip": "D:\\Comand Project\\DeathCard\\Assets\\DeathCard\\Scripts\\Interact\\Card.cs",
+              "RelativeToolTip": "Assets\\DeathCard\\Scripts\\Interact\\Card.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T17:35:36.06Z"
             }
           ]
         }

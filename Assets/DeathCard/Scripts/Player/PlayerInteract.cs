@@ -14,10 +14,10 @@ public class PlayerInteract : MonoBehaviour
     {
         Interactable obj = GetInteractable();
 
-        if (obj != null && obj.tag == "Card")
-            InteractionUI.instance.Show();
-        else
-            InteractionUI.instance.Hide();
+        //if (obj != null && obj.tag == "Card")
+        //    InteractionUI.instance.Show();
+        //else
+        //    InteractionUI.instance.Hide();
     }
 
     Interactable GetInteractable()
@@ -41,21 +41,6 @@ public class PlayerInteract : MonoBehaviour
 
         if (obj != null)
         {
-            //Debug.Log("2");
-            //if (obj.CompareTag("Infected"))
-            //{
-            //    debuffSystem.ApplyRandomDebuff();
-            //}
-
-
-            //else if(obj.CompareTag("LockDoor") && !unlockDoor)
-            //{
-            //    return;
-            //}
-            //else if (obj.CompareTag("Fence") && !breakFences)
-            //{
-            //    return;
-            //}
             obj.Interact(unlockDoor, breakFences);
         }
     }

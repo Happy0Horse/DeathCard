@@ -20,7 +20,6 @@ public class Lock : Interactable
 
     public override void Interact(bool unlockDoor = false, bool breakFences = false)
     {
-        System.Random random = new System.Random();
         if (unlockDoor)
         {
             animator1.SetBool("IsLock", false);
