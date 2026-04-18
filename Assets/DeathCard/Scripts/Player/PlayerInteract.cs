@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
+   public bool unlockDoor = false;
+   public bool breakFences = false;
+
     public Transform cameraTransform;
     public float interactDistance = 3f;
     public DebuffSystem debuffSystem;
@@ -10,7 +14,7 @@ public class PlayerInteract : MonoBehaviour
     {
         Interactable obj = GetInteractable();
 
-        if (obj != null)
+        if (obj != null && obj.tag == "Card")
             InteractionUI.instance.Show();
         else
             InteractionUI.instance.Hide();
@@ -26,21 +30,33 @@ public class PlayerInteract : MonoBehaviour
         {
             return hit.collider.GetComponent<Interactable>();
         }
+
         return null;
     }
 
     public void OnInteract()
     {
         Interactable obj = GetInteractable();
+        Debug.Log(obj);
 
         if (obj != null)
         {
-            if (obj.CompareTag("Infected"))
-            {
-                debuffSystem.ApplyRandomDebuff();
-            }
+            //Debug.Log("2");
+            //if (obj.CompareTag("Infected"))
+            //{
+            //    debuffSystem.ApplyRandomDebuff();
+            //}
 
-            obj.Interact();
+
+            //else if(obj.CompareTag("LockDoor") && !unlockDoor)
+            //{
+            //    return;
+            //}
+            //else if (obj.CompareTag("Fence") && !breakFences)
+            //{
+            //    return;
+            //}
+            obj.Interact(unlockDoor, breakFences);
         }
     }
 }
