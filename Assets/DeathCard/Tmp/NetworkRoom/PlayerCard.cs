@@ -8,15 +8,15 @@ public class PlayerCard : MonoBehaviour
 
     public void SetEmpty()
     {
-        nameText.text = "Пусто";
-        statusText.text = "Ожидание...";
+        nameText.text = "Empty";
+        statusText.text = "Waiting...";
         statusText.color = Color.gray;
     }
 
     public void Setup(string playerName, bool isReady)
     {
         nameText.text = playerName;
-        statusText.text = isReady ? "Готов" : "Не готов";
+        statusText.text = isReady ? "Ready" : "NotReady";
         statusText.color = isReady ? Color.green : Color.red;
     }
 }

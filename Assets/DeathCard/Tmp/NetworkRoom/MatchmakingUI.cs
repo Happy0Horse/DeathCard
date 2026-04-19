@@ -54,10 +54,10 @@ public class MatchmakingUI : MonoBehaviour
 
     void UpdateReadyButton()
     {
-        readyButtonText.text = isReady ? "Не готов" : "Готов";
+        readyButtonText.text = isReady ? "NotReady" : "Ready";
         readyButton.image.color = isReady 
-            ? new Color(0.6f, 0.2f, 0.2f)  // красный — отжать
-            : new Color(0.2f, 0.6f, 0.2f); // зелёный — нажать
+            ? new Color(0.6f, 0.2f, 0.2f)
+            : new Color(0.2f, 0.6f, 0.2f);
     }
 
     void OnLobbyUpdate(LobbyUpdateMessage msg)
@@ -85,7 +85,7 @@ public class MatchmakingUI : MonoBehaviour
     {
         if (countdownText == null) return;
         countdownText.gameObject.SetActive(true);
-        countdownText.text = $"Игра начнётся через: {msg.secondsLeft}";
+        countdownText.text = $"Game starts: {msg.secondsLeft}";
     }
 
     void OnRoomStart(RoomStartMessage msg)
