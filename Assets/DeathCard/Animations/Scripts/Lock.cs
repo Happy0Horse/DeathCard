@@ -18,7 +18,7 @@ public class Lock : Interactable
         doorMiddle.canOpen = false;
     }
 
-    public override void Interact(bool unlockDoor = false, bool breakFences = false)
+    public override void Interact(PlayerInteract player = null, bool unlockDoor = false, bool breakFences = false)
     {
         if (unlockDoor)
         {

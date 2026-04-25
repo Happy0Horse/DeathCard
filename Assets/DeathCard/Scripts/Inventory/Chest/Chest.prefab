@@ -100,7 +100,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6993731116666136299}
   - component: {fileID: 6149549517115818358}
-  - component: {fileID: 4207188434489035036}
   - component: {fileID: 2285047331805286264}
   - component: {fileID: 3438762494922311841}
   m_Layer: 6
@@ -149,18 +148,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4207188434489035036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5300300372664439530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ce48078412f8347a2a345ff9674a60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Chest
 --- !u!65 &2285047331805286264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -194,7 +181,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5d11ef0f3f08b408c11812d0a23afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoosterPack
-  inventory: {fileID: 0}
+  items:
+  - {fileID: 11400000, guid: 810537d3183e7f041af02d6c10cec984, type: 2}
+  - {fileID: 11400000, guid: 810537d3183e7f041af02d6c10cec984, type: 2}
+  - {fileID: 11400000, guid: 810537d3183e7f041af02d6c10cec984, type: 2}
+  - {fileID: 11400000, guid: 810537d3183e7f041af02d6c10cec984, type: 2}
+  - {fileID: 11400000, guid: 810537d3183e7f041af02d6c10cec984, type: 2}
   item: {fileID: 11400000, guid: 2759380a5fce3fb49b23da6a5aa86318, type: 2}
 --- !u!1 &6056318443558696349
 GameObject:
