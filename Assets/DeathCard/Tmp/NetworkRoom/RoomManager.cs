@@ -27,7 +27,7 @@ public class RoomManager : MonoBehaviour
         return null;
     }
 
-    public void JoinMatchmaking(NetworkConnectionToClient conn)
+    public void JoinMatchmaking(NetworkConnectionToClient conn, string playerName, byte[] avatarData)
     {
         GameRoom room = rooms.Find(r => !r.IsFull && !r.isStarted);
 
@@ -37,7 +37,8 @@ public class RoomManager : MonoBehaviour
             rooms.Add(room);
         }
 
-        room.AddPlayer(conn);
+        PlayerInfo info = new PlayerInfo { name = playerName, avatarData = avatarData };
+        room.AddPlayer(conn, info);
         playerRoomMap[conn] = room;
 
         SendLobbyUpdate(room);
@@ -74,18 +75,23 @@ public class RoomManager : MonoBehaviour
     {
         string[] names = new string[4];
         bool[] ready = new bool[4];
+        byte[][] avatars = new byte[4][];
 
         for (int i = 0; i < 4; i++)
         {
             if (i < room.players.Count)
             {
-                names[i] = $"Player {i + 1}";
-                ready[i] = room.readyPlayers.Contains(room.players[i]);
+                var conn = room.players[i];
+                var info = room.playerInfos[conn];
+                names[i] = info.name;
+                ready[i] = room.readyPlayers.Contains(conn);
+                avatars[i] = info.avatarData ?? new byte[0];
             }
             else
             {
                 names[i] = "";
                 ready[i] = false;
+                avatars[i] = new byte[0];
             }
         }
 
@@ -94,10 +100,10 @@ public class RoomManager : MonoBehaviour
             playerCount = room.players.Count,
             maxPlayers = room.maxPlayers,
             isCountingDown = room.isCountingDown,
-            name0 = names[0], ready0 = ready[0],
-            name1 = names[1], ready1 = ready[1],
-            name2 = names[2], ready2 = ready[2],
-            name3 = names[3], ready3 = ready[3],
+            name0 = names[0], ready0 = ready[0], avatar0 = avatars[0],
+            name1 = names[1], ready1 = ready[1], avatar1 = avatars[1],
+            name2 = names[2], ready2 = ready[2], avatar2 = avatars[2],
+            name3 = names[3], ready3 = ready[3], avatar3 = avatars[3],
         };
 
         foreach (var conn in room.players)
@@ -131,7 +137,6 @@ public class RoomManager : MonoBehaviour
     {
         room.isStarted = true;
 
-        // Назначаем matchId всем игрокам в комнате
         foreach (var conn in room.players)
         {
             if (conn.identity != null)
@@ -144,5 +149,27 @@ public class RoomManager : MonoBehaviour
     public void OnPlayerDisconnected(NetworkConnectionToClient conn)
     {
         LeaveMatchmaking(conn);
+    }
+
+    public void SendChat(NetworkConnectionToClient conn, string text)
+    {
+        if (!playerRoomMap.ContainsKey(conn)) return;
+        if (string.IsNullOrEmpty(text)) return;
+
+        GameRoom room = playerRoomMap[conn];
+        string senderName = room.playerInfos[conn].name;
+
+        // Ограничиваем длину сообщения
+        if (text.Length > 100) text = text.Substring(0, 100);
+
+        ChatMessage msg = new ChatMessage
+        {
+            senderName = senderName,
+            text = text
+        };
+
+        // Рассылаем только игрокам в той же комнате
+        foreach (var player in room.players)
+            player.Send(msg);
     }
 }
