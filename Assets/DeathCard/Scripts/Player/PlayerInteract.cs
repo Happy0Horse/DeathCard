@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Mirror;
 
 public class PlayerInteract : NetworkBehaviour
 {
+   public bool unlockDoor = false;
+   public bool breakFences = false;
+
     public Transform cameraTransform;
     public float interactDistance = 3f;
     public DebuffSystem debuffSystem;
@@ -13,10 +17,10 @@ public class PlayerInteract : NetworkBehaviour
 
         Interactable obj = GetInteractable();
 
-        if (obj != null)
-            InteractionUI.instance.Show();
-        else
-            InteractionUI.instance.Hide();
+        //if (obj != null && obj.tag == "Card")
+        //    InteractionUI.instance.Show();
+        //else
+        //    InteractionUI.instance.Hide();
     }
 
     Interactable GetInteractable()
@@ -26,7 +30,9 @@ public class PlayerInteract : NetworkBehaviour
         int layerMask = LayerMask.GetMask("Interactable");
 
         if (Physics.Raycast(ray, out hit, interactDistance, layerMask))
+        {
             return hit.collider.GetComponent<Interactable>();
+        }
 
         return null;
     }
@@ -34,23 +40,13 @@ public class PlayerInteract : NetworkBehaviour
     public void OnInteract()
     {
         if (!isLocalPlayer) return;
-
+        
         Interactable obj = GetInteractable();
+        Debug.Log(obj);
 
         if (obj != null)
         {
-            if (obj.CompareTag("Infected"))
-                debuffSystem.ApplyRandomDebuff();
-
-            CmdInteract(obj.gameObject);
+            obj.Interact(unlockDoor, breakFences);
         }
-    }
-
-    [Command]
-    void CmdInteract(GameObject target)
-    {
-        Interactable obj = target.GetComponent<Interactable>();
-        if (obj != null)
-            obj.Interact();
     }
 }

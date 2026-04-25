@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -5,6 +6,12 @@ using Mirror;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    [Header("Crouch Settings")]
+    [SerializeField] private float crouchHeight = 1.0f;
+    [SerializeField] private float standHeight = 2.0f;
+    [SerializeField] private float crouchSpeed = 8f;
+
+
     public float speed = 5f;
     public float sprintSpeed = 8f;
     public float jumpForce = 5f;
@@ -12,16 +19,21 @@ public class PlayerMovement : NetworkBehaviour
 
     public bool invertMovement = false;
 
+    public bool canCrouch = false;
+    private float targetHeight;
+
     public float maxStamina = 5f;
     public float stamina;
     public float staminaDrain = 1f;
     public float staminaRecovery = 2f;
     public float jumpStaminaCost = 1.5f;
 
+    public Slider staminaSlider;
+
     public float staminaRecoveryDelay = 1.5f;
+
     private float staminaTimer;
 
-    public Slider staminaSlider;
 
     private CharacterController controller;
 
@@ -30,6 +42,7 @@ public class PlayerMovement : NetworkBehaviour
     private bool isSprinting;
 
     private bool showStaminaBar;
+    private bool isCrouching = false;
 
     private Vector3 airVelocity;
 
@@ -49,6 +62,9 @@ public class PlayerMovement : NetworkBehaviour
         staminaSlider.maxValue = maxStamina;
         staminaSlider.value = stamina;
         staminaSlider.gameObject.SetActive(false);
+
+        targetHeight = standHeight;
+        controller.height = standHeight;
     }
 
     void Update()
@@ -57,6 +73,20 @@ public class PlayerMovement : NetworkBehaviour
 
         Move();
         UpdateStaminaUI();
+
+        if (isCrouching)
+        {
+            controller.height = Mathf.Lerp(controller.height, crouchHeight, Time.deltaTime * crouchSpeed);
+            controller.center = new Vector3(0, controller.height / 2f, 0);
+        }
+        else
+        {
+            controller.height = Mathf.Lerp(controller.height, standHeight, Time.deltaTime * crouchSpeed);
+            if (controller.height < 2)
+                controller.center = new Vector3(0, 0, 0);
+        }
+
+
     }
 
     void Move()
@@ -142,7 +172,40 @@ public class PlayerMovement : NetworkBehaviour
             showStaminaBar = true;
 
             float currentSpeed = isSprinting ? sprintSpeed : speed;
-            airVelocity = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized * currentSpeed;
+
+            airVelocity = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized
+                          * currentSpeed;
+        }
+    }
+    public void OnCrouch(InputValue value)
+    {
+        if (canCrouch)
+        {
+            if (value.isPressed)
+            {
+                if (!isCrouching)
+                    StartCrouch();
+                else
+                    StopCrouch();
+
+                isCrouching = !isCrouching;
+            }
+        }
+    }
+    private void StartCrouch()
+    {
+        targetHeight = crouchHeight;
+    }
+
+    private void StopCrouch()
+    {
+        float checkDistance = standHeight - controller.height;
+
+        Vector3 rayOrigin = transform.position + Vector3.up * controller.height;
+        if (Physics.Raycast(rayOrigin, Vector3.up, checkDistance + 0.1f))
+        {
+            isCrouching = false;
+            targetHeight = standHeight;
         }
     }
 }

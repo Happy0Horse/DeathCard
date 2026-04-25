@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Infected
+  - Door
   - Decoration
+  - Card
+  - LockDoor
+  - Fence
   layers:
   - Default
   - TransparentFX
