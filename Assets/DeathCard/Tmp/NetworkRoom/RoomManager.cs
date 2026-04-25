@@ -79,7 +79,7 @@ public class RoomManager : MonoBehaviour
         {
             if (i < room.players.Count)
             {
-                names[i] = $"Игрок {i + 1}";
+                names[i] = $"Player {i + 1}";
                 ready[i] = room.readyPlayers.Contains(room.players[i]);
             }
             else
