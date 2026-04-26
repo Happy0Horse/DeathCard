@@ -50,23 +50,28 @@ public class PlayerAnimation : MonoBehaviour
     {
         CurrentMode = data.attackMode;
 
-        if (lander != null) lander.PrepareAttack(data.damage);
+        if (lander != null)
+        {
+            lander.PrepareAttack(data.damage, data.isMultiHit);
+        }
 
         animator.SetFloat("AttackRange", data.range);
-        Debug.Log("Prepared for animation: " + CurrentMode + " with damage: " + data.damage);
+        Debug.Log($"Prepared {CurrentMode}. Damage: {data.damage}. Multi-Hit: {data.isMultiHit}");
     }
 
     private IEnumerator PlayAttackSequence()
     {
         hexViewManager.IsLocked = true;
-        animator.SetTrigger(GetAnimationTrigger());
+        string trigger = GetAnimationTrigger();
+        animator.SetTrigger(trigger);
 
-        yield return null;
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName(trigger) ||
+                                         !animator.IsInTransition(0));
 
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(duration + 0.6f);
 
-        yield return new WaitForSeconds(duration);
-
+        lander.DisableHitbox();
         hexViewManager.IsLocked = false;
     }
 

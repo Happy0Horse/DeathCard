@@ -9,4 +9,9 @@ public class CardData : ItemData
 
     public int range;
     public int damage;
+    public bool isMultiHit;
+
+    [Header("UI Display")]
+    public Sprite categoryIcon;
+    public Sprite artSprite;
 }
