@@ -1,17 +1,29 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerActionHandler : MonoBehaviour
 {
     private HexGridNavigator _navigator;
-    public Material placedTrapMaterial;
+    private Animator _animator;
     private string _currentMode = "";
+    private CardUtillityAction _utilityAction;
+    private CardTrapAction _trapAction;
 
-    private void Awake() => _navigator = GetComponent<HexGridNavigator>();
+    public Material placedTrapMaterial;
+
+
+    private void Awake()
+    {
+        _navigator = GetComponent<HexGridNavigator>();
+        _animator = GetComponent<Animator>();
+        _utilityAction = GetComponent<CardUtillityAction>();
+        _trapAction = GetComponent<CardTrapAction>();
+    }
 
     private void OnEnable()
     {
         GameEvents.OnRequestMoveSelection += range => ToggleSelection(range, "Move", ExecuteMove);
-        GameEvents.OnRequestTrapSelection += range => ToggleSelection(range, "Trap", ExecuteTrap);
+        GameEvents.OnRequestTrapSelection += RequestTrap;
         GameEvents.OnRequestUtilityAction += ExecuteUtility;
         GameEvents.OnCancelCurrentAction += ResetMode;
     }
@@ -19,9 +31,18 @@ public class PlayerActionHandler : MonoBehaviour
     private void OnDisable()
     {
         GameEvents.OnRequestMoveSelection -= range => ToggleSelection(range, "Move", ExecuteMove);
-        GameEvents.OnRequestTrapSelection -= range => ToggleSelection(range, "Trap", ExecuteTrap);
+        GameEvents.OnRequestTrapSelection -= RequestTrap;
         GameEvents.OnRequestUtilityAction -= ExecuteUtility;
         GameEvents.OnCancelCurrentAction -= ResetMode;
+    }
+
+    private void RequestTrap(CardData data)
+    {
+        if (_trapAction != null)
+        {
+            _trapAction.RequestTrap(data);
+            ToggleSelection(data.range, "Trap", ExecuteTrap);
+        }
     }
 
     private void ToggleSelection(int range, string mode, System.Action<HexCell> callback)
@@ -47,16 +68,20 @@ public class PlayerActionHandler : MonoBehaviour
 
     private void ExecuteTrap(HexCell target)
     {
+        // Modify logic here as needed
         _navigator.ClearSelectionState();
-
-        Renderer rend = target.GetComponent<Renderer>();
-        if (rend != null)
-        {
-            rend.material = placedTrapMaterial;
-        }
-
+        if (_trapAction != null) _trapAction.Execute(target);
         ResetMode();
     }
 
-    private void ExecuteUtility() => Debug.Log("Utility Action Triggered");
+    private void ExecuteUtility(CardData data)
+    {
+        // Modify logic here as needed
+        if (_animator != null) _animator.SetTrigger("UtilityTrigger");
+
+        if (_utilityAction != null)
+        {
+            _utilityAction.Execute(data);
+        }
+    }
 }

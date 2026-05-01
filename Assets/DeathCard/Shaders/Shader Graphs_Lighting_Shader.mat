@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Pixelation_Shader_Alt
-  m_Shader: {fileID: -6465566751694194690, guid: 7d3158879c8efa84c902619f18d119d8, type: 3}
+  m_Name: Shader Graphs_Lighting_Shader
+  m_Shader: {fileID: -6465566751694194690, guid: 03020662fc715e3409c9337c5a283839, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,18 +37,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrightnessBoost: 1.5
-    - _ColorSteps: 300
-    - _DiffusionFocux: 0
-    - _HueOffset: 0.05
-    - _LightThreshold: -0.2
-    - _ShadowHardness: 0.8
+    - _DiffusionFocus: 3
     m_Colors:
-    - _ControlColor: {r: 1, g: 1, b: 1, a: 1}
-    - _DiffusionMinMax: {r: -0.01, g: 2, b: 0, a: 0}
-    - _DitherStepEdge: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-    - _Resolution: {r: 840, g: 440, b: 0, a: 0}
-    - _ShadowColor: {r: 1, g: 0, b: 0, a: 1}
-    - _ShadowTint: {r: 0.32075468, g: 0.27385187, b: 0.27385187, a: 1}
+    - _LightTint: {r: 0.6320754, g: 0.60474515, b: 0.5575382, a: 1}
+    - _ShadowTint: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

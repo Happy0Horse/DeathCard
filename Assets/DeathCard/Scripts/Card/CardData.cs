@@ -6,6 +6,8 @@ public class CardData : ItemData
     public enum CardCategory { Move, Attack, Trap, Utility }
     public CardCategory category;
     public PlayerAnimation.AttackMode attackMode;
+    public PlayerAnimation.UtilityType utilityType;
+    public PlayerAnimation.TrapType trapType;
 
     public int range;
     public int damage;

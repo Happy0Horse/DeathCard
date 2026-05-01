@@ -20,11 +20,11 @@ public class CardAction : MonoBehaviour
                 break;
 
             case CardData.CardCategory.Trap:
-                GameEvents.OnRequestTrapSelection?.Invoke(data.range);
+                GameEvents.OnRequestTrapSelection?.Invoke(data);
                 break;
 
             case CardData.CardCategory.Utility:
-                GameEvents.OnRequestUtilityAction?.Invoke();
+                GameEvents.OnRequestUtilityAction?.Invoke(data);
                 break;
         }
     }

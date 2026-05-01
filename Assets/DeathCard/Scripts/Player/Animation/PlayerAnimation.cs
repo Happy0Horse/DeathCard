@@ -12,6 +12,8 @@ public class PlayerAnimation : MonoBehaviour
     public CardAttackLander lander;
 
     public enum AttackMode { Melee, Spin, Ora, Shot }
+    public enum TrapType { Spikes, Stun, Explosive }
+    public enum UtilityType { GalaxyVoid, Heal, Shield }
 
     [Header("Animation mode")]
     public AttackMode CurrentMode = AttackMode.Melee;
