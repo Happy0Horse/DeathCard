@@ -13,6 +13,11 @@ public class PlayerStat : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    void Start()
+    {
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Max(0, currentHealth - damage);
@@ -21,6 +26,12 @@ public class PlayerStat : MonoBehaviour
         GlobalEvents.OnAnyDamageTaken?.Invoke(damage);
 
         if (currentHealth <= 0) Die();
+    }
+
+    public void Heal(float amount)
+    {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     private void Die()

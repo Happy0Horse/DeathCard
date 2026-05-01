@@ -81,6 +81,7 @@ public class PlayerActionHandler : MonoBehaviour
 
         if (_utilityAction != null)
         {
+            _navigator.ClearSelectionState();
             _utilityAction.Execute(data);
         }
     }

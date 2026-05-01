@@ -16,6 +16,10 @@ public class DebuffSystem : MonoBehaviour
     public Sprite invertIcon;
     public Sprite smallIcon;
     public Sprite slowIcon;
+    //Card
+    public Sprite stunIcon;
+
+    public bool IsStunned { get; private set; }
 
     float baseSpeed;
     float baseSprintSpeed;
@@ -26,7 +30,8 @@ public class DebuffSystem : MonoBehaviour
     {
         InvertMovement,
         SmallPlayer,
-        SlowMovement
+        SlowMovement,
+        Stun
     }
 
     class ActiveDebuff
@@ -41,8 +46,11 @@ public class DebuffSystem : MonoBehaviour
 
     void Start()
     {
-        baseSpeed = playerMovement.speed;
-        baseSprintSpeed = playerMovement.sprintSpeed;
+        if (playerMovement != null)
+        {
+            baseSpeed = playerMovement.speed;
+            baseSprintSpeed = playerMovement.sprintSpeed;
+        }
     }
 
     void Update()
@@ -73,32 +81,32 @@ public class DebuffSystem : MonoBehaviour
         AddDebuff(debuff);
     }
 
-    void AddDebuff(DebuffType type)
+    public void AddDebuff(DebuffType type, float customDuration = -1f)
     {
         ActiveDebuff debuff = new ActiveDebuff();
         debuff.type = type;
-        debuff.timeLeft = GetTimeForDebuff(type);
 
-        GameObject obj = Instantiate(debuffSlotPrefab, debuffContainer);
-        obj.SetActive(true);
-        debuff.uiObject = obj;
-        debuff.icon = obj.transform.Find("Icon").GetComponent<Image>();
-        debuff.timerText = obj.transform.Find("TimerText").GetComponent<Text>();
+        debuff.timeLeft = (customDuration > 0) ? customDuration : GetTimeForDebuff(type);
 
-        switch (type)
+        if (debuffSlotPrefab != null && debuffContainer != null)
         {
-            case DebuffType.InvertMovement:
-                debuff.icon.sprite = invertIcon;
-                break;
-            case DebuffType.SmallPlayer:
-                debuff.icon.sprite = smallIcon;
-                break;
-            case DebuffType.SlowMovement:
-                debuff.icon.sprite = slowIcon;
-                break;
+            GameObject obj = Instantiate(debuffSlotPrefab, debuffContainer);
+            obj.SetActive(true);
+            debuff.uiObject = obj;
+            debuff.icon = obj.transform.Find("Icon").GetComponent<Image>();
+            debuff.timerText = obj.transform.Find("TimerText").GetComponent<Text>();
+
+            switch (type)
+            {
+                case DebuffType.InvertMovement: debuff.icon.sprite = invertIcon; break;
+                case DebuffType.SmallPlayer: debuff.icon.sprite = smallIcon; break;
+                case DebuffType.SlowMovement: debuff.icon.sprite = slowIcon; break;
+                case DebuffType.Stun: debuff.icon.sprite = stunIcon; break;
+            }
         }
 
         activeDebuffs.Add(debuff);
+        RecalculateEffects();
     }
 
     void RemoveDebuff(ActiveDebuff debuff)
@@ -108,33 +116,29 @@ public class DebuffSystem : MonoBehaviour
 
     void RecalculateEffects()
     {
-        playerMovement.invertMovement = false;
-        playerModel.localScale = Vector3.one;
+        IsStunned = false;
 
-        float speedMultiplier = 1f;
-        float sprintMultiplier = 1f;
+        if (playerMovement != null) playerMovement.invertMovement = false;
+        if (playerModel != null) playerModel.localScale = Vector3.one;
+
+        float speedMult = 1f;
 
         foreach (var debuff in activeDebuffs)
         {
             switch (debuff.type)
             {
-                case DebuffType.InvertMovement:
-                    playerMovement.invertMovement = true;
-                    break;
-
-                case DebuffType.SmallPlayer:
-                    playerModel.localScale = Vector3.one * 0.5f;
-                    break;
-
-                case DebuffType.SlowMovement:
-                    speedMultiplier *= 0.5f;
-                    sprintMultiplier *= 0.5f;
-                    break;
+                case DebuffType.InvertMovement: if (playerMovement != null) playerMovement.invertMovement = true; break;
+                case DebuffType.SmallPlayer: if (playerModel != null) playerModel.localScale = Vector3.one * 0.5f; break;
+                case DebuffType.Stun: IsStunned = true; break;
+                case DebuffType.SlowMovement: speedMult *= 0.5f; break;
             }
         }
 
-        playerMovement.speed = baseSpeed * speedMultiplier;
-        playerMovement.sprintSpeed = baseSprintSpeed * sprintMultiplier;
+        if (playerMovement != null)
+        {
+            playerMovement.speed = IsStunned ? 0 : baseSpeed * speedMult;
+            playerMovement.sprintSpeed = IsStunned ? 0 : baseSprintSpeed * speedMult;
+        }
     }
 
     float GetTimeForDebuff(DebuffType type)

@@ -3,9 +3,21 @@ using UnityEngine;
 public class CardAction : MonoBehaviour
 {
     public CardData data;
+    private DebuffSystem _debuffs;
+
+    private void Start()
+    {
+        _debuffs = GetComponentInParent<DebuffSystem>();
+    }
 
     public void UseCard()
     {
+        if (_debuffs != null && _debuffs.IsStunned)
+        {
+            Debug.Log("Blocked: Player is stunned.");
+            return;
+        }
+
         Debug.Log("It got there");
         if (data == null) return;
 

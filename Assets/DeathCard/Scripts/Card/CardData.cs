@@ -10,7 +10,9 @@ public class CardData : ItemData
     public PlayerAnimation.TrapType trapType;
 
     public int range;
-    public int damage;
+    public int damage; 
+    public int effectiveRange;
+    public float effectDuration;
     public bool isMultiHit;
 
     [Header("UI Display")]

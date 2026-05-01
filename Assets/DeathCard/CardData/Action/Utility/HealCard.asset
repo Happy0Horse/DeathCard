@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 763dd532aea442f40b142ec373b1128a, type: 3}
-  m_Name: ExplodeTrapCard
+  m_Name: HealCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  itemName: Explosive Trap
+  itemName: Nose Care
   icon: {fileID: 0}
-  category: 2
-  attackMode: 1
-  utilityType: 0
-  trapType: 2
-  range: 3
+  category: 3
+  attackMode: 0
+  utilityType: 1
+  trapType: 0
+  range: 5
   damage: 5
-  effectiveRange: 2
+  effectiveRange: 0
   effectDuration: 0
   isMultiHit: 0
-  categoryIcon: {fileID: 21300000, guid: e263759e87b1c1240bbd461d4997b8f7, type: 3}
-  artSprite: {fileID: 21300000, guid: 012cc9b715551e5478a947e8978830e7, type: 3}
+  categoryIcon: {fileID: 21300000, guid: c47d26bddb022e04fadc2de3fb926d87, type: 3}
+  artSprite: {fileID: 21300000, guid: 0a47f96ba322ad248bcde591deee4009, type: 3}

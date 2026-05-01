@@ -6,6 +6,7 @@ public class CardDisplay : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private CardAction actionHandler;
+    [SerializeField] private GameObject stunOverlay;
 
     [Header("Images")]
     public Image cardArt;
@@ -24,11 +25,26 @@ public class CardDisplay : MonoBehaviour
     public Sprite rangeIcon;
     public Sprite moveIcon;
 
+    private DebuffSystem _debuffs;
+
     private void Start()
     {
+        _debuffs = GetComponentInParent<DebuffSystem>();
+
         if (actionHandler != null)
         {
             ApplyCardData();
+        }
+    }
+
+    private void Update()
+    {
+        if (_debuffs != null)
+        {
+            if (stunOverlay.activeSelf != _debuffs.IsStunned)
+            {
+                stunOverlay.SetActive(_debuffs.IsStunned);
+            }
         }
     }
 
