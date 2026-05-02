@@ -150,7 +150,7 @@ public class RoomInteriorDecorator : MonoBehaviour
         float angle = 0;
 
         if (ent.y == room.bounds.y) angle = 90f;
-        else if (ent.y == room.bounds.y + room.bounds.height - 1) angle = 0f;
+        else if (ent.y == room.bounds.y + room.bounds.height - 1) angle = 90f;
         else if (ent.x == room.bounds.x) angle = 270f;
         else if (ent.x == room.bounds.x + room.bounds.width - 1) angle = 90f;
 
