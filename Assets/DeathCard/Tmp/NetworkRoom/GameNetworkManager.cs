@@ -9,11 +9,17 @@ public class GameNetworkManager : NetworkManager
         NetworkServer.RegisterHandler<JoinMatchmakingMessage>(OnJoinMatchmaking);
         NetworkServer.RegisterHandler<LeaveMatchmakingMessage>(OnLeaveMatchmaking);
         NetworkServer.RegisterHandler<PlayerReadyMessage>(OnPlayerReady);
+        NetworkServer.RegisterHandler<SendChatMessage>(OnChatMessage); // добавьте это
+    }
+
+    void OnChatMessage(NetworkConnectionToClient conn, SendChatMessage msg)
+    {
+        RoomManager.instance.SendChat(conn, msg.text);
     }
 
     void OnJoinMatchmaking(NetworkConnectionToClient conn, JoinMatchmakingMessage msg)
     {
-        RoomManager.instance.JoinMatchmaking(conn);
+        RoomManager.instance.JoinMatchmaking(conn, msg.playerName, msg.avatarData);
     }
 
     void OnLeaveMatchmaking(NetworkConnectionToClient conn, LeaveMatchmakingMessage msg)
@@ -36,13 +42,8 @@ public class GameNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
-        // Назначаем matchId игроку
         string matchId = RoomManager.instance.GetRoomId(conn);
-        if (matchId != null)
-        {
-            NetworkIdentity identity = conn.identity;
-            if (identity != null)
-                identity.SetMatchId(matchId);
-        }
+        if (matchId != null && conn.identity != null)
+            conn.identity.SetMatchId(matchId);
     }
 }

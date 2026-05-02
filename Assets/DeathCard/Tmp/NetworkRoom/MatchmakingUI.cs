@@ -28,7 +28,12 @@ public class MatchmakingUI : MonoBehaviour
 
     public void OnFindGameClicked()
     {
-        NetworkClient.Send(new JoinMatchmakingMessage());
+        NetworkClient.Send(new JoinMatchmakingMessage
+        {
+            playerName = PlayerProfile.instance.playerName,
+            avatarData = PlayerProfile.instance.avatarData
+        });
+
         lobbyPanel.SetActive(true);
         countdownText.gameObject.SetActive(false);
         isReady = false;
@@ -66,13 +71,14 @@ public class MatchmakingUI : MonoBehaviour
 
         string[] names = { msg.name0, msg.name1, msg.name2, msg.name3 };
         bool[] ready = { msg.ready0, msg.ready1, msg.ready2, msg.ready3 };
+        byte[][] avatars = { msg.avatar0, msg.avatar1, msg.avatar2, msg.avatar3 };
 
         for (int i = 0; i < playerCards.Length; i++)
         {
             if (playerCards[i] == null) continue;
 
             if (i < msg.playerCount)
-                playerCards[i].Setup(names[i], ready[i]);
+                playerCards[i].Setup(names[i], ready[i], avatars[i]);
             else
                 playerCards[i].SetEmpty();
         }
@@ -90,6 +96,6 @@ public class MatchmakingUI : MonoBehaviour
 
     void OnRoomStart(RoomStartMessage msg)
     {
-        NetworkManager.singleton.ServerChangeScene("Labyrinth_Scene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Labyrinth_Scene");
     }
 }
