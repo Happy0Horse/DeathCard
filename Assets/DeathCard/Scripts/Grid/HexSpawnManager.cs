@@ -129,4 +129,34 @@ public class HexSpawnManager : MonoBehaviour
         }
         grid.LinkNeighbors();
     }
+
+    public GameObject SpawnObjectOnNeighborCell(
+    HexCell fromCell,
+    GameObject prefab,
+    float heightOffset = 1f
+)
+    {
+        if (fromCell == null || prefab == null)
+            return null;
+
+        HexCell neighbor = fromCell.neighbors
+            .Find(n => n != null && n.canWalkOn);
+
+        if (neighbor == null)
+        {
+            Debug.LogWarning("No available neighbor cell found");
+            return null;
+        }
+
+        Vector3 spawnPosition = neighbor.transform.position;
+        spawnPosition.y = neighbor.transform.position.y + heightOffset;
+
+        GameObject spawnedObject = Instantiate(
+            prefab,
+            spawnPosition,
+            Quaternion.identity
+        );
+
+        return spawnedObject;
+    }
 }

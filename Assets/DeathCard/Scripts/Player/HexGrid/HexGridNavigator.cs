@@ -22,7 +22,9 @@ public class HexGridNavigator : MonoBehaviour
 
     private List<GameObject> _highlightedCells = new List<GameObject>();
     private Dictionary<GameObject, Material> _originalMaterials = new Dictionary<GameObject, Material>();
+    
 
+    public Vector2Int CurrentCoordinates => _currentCoord;
     private void OnEnable() => GameEvents.OnCancelCurrentAction += ClearSelectionState;
     private void OnDisable() => GameEvents.OnCancelCurrentAction -= ClearSelectionState;
 
