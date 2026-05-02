@@ -5,6 +5,7 @@ public class HexViewManager : MonoBehaviour
 {
     public enum ViewMode { Orbit, TopDown, FirstPerson }
     public ViewMode CurrentView { get; private set; } = ViewMode.Orbit;
+    public bool IsLocked { get; set; }
 
     [Header("Camera References")]
     public Camera worldCamera;
@@ -54,6 +55,8 @@ public class HexViewManager : MonoBehaviour
 
     void LateUpdate()
     {
+        if (IsLocked) return;
+
         if (CurrentView != ViewMode.FirstPerson)
         {
             HandleZoom();
@@ -110,10 +113,10 @@ public class HexViewManager : MonoBehaviour
     {
         _yaw += _lookInput.x * fpSensitivity * Time.deltaTime;
         _pitch -= _lookInput.y * fpSensitivity * Time.deltaTime;
+
         _pitch = Mathf.Clamp(_pitch, fpMinPitch, fpMaxPitch);
 
-        transform.rotation = Quaternion.Euler(0, _yaw, 0);
-        fpCamera.transform.localRotation = Quaternion.Euler(_pitch, 0, 0);
+        transform.rotation = Quaternion.Euler(_pitch, _yaw, 0);
     }
 
     private void SwitchCameraHardware()
@@ -136,7 +139,7 @@ public class HexViewManager : MonoBehaviour
         Cursor.visible = !shouldLock;
     }
 
-    public void ToggleAttackMode()
+    public void ToggleAttackMode(CardData data)
     {
         CurrentView = (CurrentView == ViewMode.FirstPerson) ? ViewMode.Orbit : ViewMode.FirstPerson;
 
@@ -148,7 +151,7 @@ public class HexViewManager : MonoBehaviour
         }
         else
         {
-            _transitionTimer = transitionDuration; 
+            _transitionTimer = transitionDuration;
             ResetOrbitAngles();
         }
 

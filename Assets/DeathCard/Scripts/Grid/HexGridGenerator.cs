@@ -47,17 +47,18 @@ public class HexGridGenerator : MonoBehaviour
 
                 GameObject cellObj;
 
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (!Application.isPlaying)
                 {
                     cellObj = (GameObject)PrefabUtility.InstantiatePrefab(cellPrefab);
                     cellObj.transform.position = pos;
                 }
                 else
-                #endif
+#endif
                 {
                     cellObj = Instantiate(cellPrefab, pos, Quaternion.identity);
                 }
+
                 cellObj.transform.position = pos;
                 cellObj.transform.SetParent(transform);
                 cellObj.name = $"Hex_{q}_{r}";
@@ -78,10 +79,10 @@ public class HexGridGenerator : MonoBehaviour
 
     private void ClearExistingObjects()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (!EditorUtility.DisplayDialog("Clear Grid?", "This will delete all child objects. Proceed?", "Yes", "No"))
             return;
-        #endif
+#endif
 
         for (int i = transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(transform.GetChild(i).gameObject);
