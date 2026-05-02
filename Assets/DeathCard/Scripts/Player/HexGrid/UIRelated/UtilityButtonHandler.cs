@@ -4,6 +4,6 @@ public class UtilityButtonHandler : MonoBehaviour
 {
     public void TriggerUtility()
     {
-        GameEvents.OnRequestUtilityAction?.Invoke();
+        //GameEvents.OnRequestUtilityAction?.Invoke();
     }
 }

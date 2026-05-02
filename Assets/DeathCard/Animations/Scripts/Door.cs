@@ -10,7 +10,7 @@ public class Door : Interactable
         animator = GetComponent<Animator>();
     }
 
-    public override void Interact(bool unlockDoor = false, bool breakFences = false)
+    public override void Interact(PlayerInteract player = null, bool unlockDoor = false, bool breakFences = false)
     {
         if(canOpen)
         {

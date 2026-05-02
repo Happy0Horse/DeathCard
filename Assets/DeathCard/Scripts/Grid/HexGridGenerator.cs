@@ -1,5 +1,7 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [RequireComponent(typeof(HexGrid))]
 public class HexGridGenerator : MonoBehaviour
@@ -43,7 +45,20 @@ public class HexGridGenerator : MonoBehaviour
                 float y = (radius - hexDist) * elevationStep;
                 Vector3 pos = transform.TransformPoint(new Vector3(x * xSpacing + xOffset, y, z * zSpacing));
 
-                GameObject cellObj = PrefabUtility.InstantiatePrefab(cellPrefab) as GameObject;
+                GameObject cellObj;
+
+#if UNITY_EDITOR
+                if (!Application.isPlaying)
+                {
+                    cellObj = (GameObject)PrefabUtility.InstantiatePrefab(cellPrefab);
+                    cellObj.transform.position = pos;
+                }
+                else
+#endif
+                {
+                    cellObj = Instantiate(cellPrefab, pos, Quaternion.identity);
+                }
+
                 cellObj.transform.position = pos;
                 cellObj.transform.SetParent(transform);
                 cellObj.name = $"Hex_{q}_{r}";
@@ -64,8 +79,10 @@ public class HexGridGenerator : MonoBehaviour
 
     private void ClearExistingObjects()
     {
+#if UNITY_EDITOR
         if (!EditorUtility.DisplayDialog("Clear Grid?", "This will delete all child objects. Proceed?", "Yes", "No"))
             return;
+#endif
 
         for (int i = transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(transform.GetChild(i).gameObject);

@@ -13,7 +13,7 @@ public class Chest : Interactable
     }
 
 
-    public override void Interact(bool unlockDoor = false, bool breakFences = false)
+    public override void Interact(PlayerInteract player = null, bool unlockDoor = false, bool breakFences = false)
     {
         bool successful_add = inventory.AddItem(item);
         if (successful_add)

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763dd532aea442f40b142ec373b1128a, type: 3}
+  m_Name: OraAttackCard
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  itemName: Ora Ora Ora!
+  icon: {fileID: 0}
+  category: 1
+  attackMode: 2
+  range: 1
+  damage: 6
+  isMultiHit: 1
+  categoryIcon: {fileID: 21300000, guid: 42ec55f71b4c26f419428f23686edd8e, type: 3}
+  artSprite: {fileID: 21300000, guid: 6c11d6ab17533384fb2c4f7d0778ed9a, type: 3}

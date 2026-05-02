@@ -39,10 +39,16 @@ Material:
     m_Floats:
     - _BrightnessBoost: 1.5
     - _ColorSteps: 300
+    - _DiffusionFocux: 0
     - _HueOffset: 0.05
+    - _LightThreshold: -0.2
+    - _ShadowHardness: 0.8
     m_Colors:
     - _ControlColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DiffusionMinMax: {r: -0.01, g: 2, b: 0, a: 0}
     - _DitherStepEdge: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-    - _Resolution: {r: 420, g: 220, b: 0, a: 0}
+    - _Resolution: {r: 840, g: 440, b: 0, a: 0}
+    - _ShadowColor: {r: 1, g: 0, b: 0, a: 1}
+    - _ShadowTint: {r: 0.32075468, g: 0.27385187, b: 0.27385187, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -13,6 +13,7 @@ public class HexGridNavigator : MonoBehaviour
     public float heightOffset = 2.0f;
     public Material highlightMaterial;
     public LayerMask obstacleLayer;
+    public bool IsMoving => _isMoving;
 
     private Vector2Int _currentCoord;
     private bool _isMoving = false;
@@ -22,7 +23,9 @@ public class HexGridNavigator : MonoBehaviour
 
     private List<GameObject> _highlightedCells = new List<GameObject>();
     private Dictionary<GameObject, Material> _originalMaterials = new Dictionary<GameObject, Material>();
+    
 
+    public Vector2Int CurrentCoordinates => _currentCoord;
     private void OnEnable() => GameEvents.OnCancelCurrentAction += ClearSelectionState;
     private void OnDisable() => GameEvents.OnCancelCurrentAction -= ClearSelectionState;
 
@@ -173,6 +176,7 @@ public class HexGridNavigator : MonoBehaviour
         {
             if (!_originalMaterials.ContainsKey(cell)) _originalMaterials[cell] = rend.sharedMaterial;
             rend.material = highlightMaterial;
+            cell.layer = LayerMask.NameToLayer("Special");
             _highlightedCells.Add(cell);
         }
     }
@@ -187,6 +191,7 @@ public class HexGridNavigator : MonoBehaviour
             {
                 Renderer rend = entry.Key.GetComponentInChildren<Renderer>();
                 if (rend != null) rend.material = entry.Value;
+                entry.Key.layer = LayerMask.NameToLayer("Interactable");
             }
         }
         _highlightedCells.Clear();
