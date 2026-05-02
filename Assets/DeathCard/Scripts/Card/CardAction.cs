@@ -2,7 +2,20 @@ using UnityEngine;
 
 public class CardAction : MonoBehaviour
 {
-    public CardData data;
+    [SerializeField]
+    private CardData _data;
+    public System.Action OnDataChanged;
+
+    public CardData data
+    {
+        get => _data;
+        set
+        {
+            _data = value;
+            OnDataChanged?.Invoke();
+        }
+    }
+
     private DebuffSystem _debuffs;
 
     private void Start()

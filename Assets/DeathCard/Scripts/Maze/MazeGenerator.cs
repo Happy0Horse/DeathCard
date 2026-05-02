@@ -13,6 +13,8 @@ public class MazeGenerator : MonoBehaviour
     public SpawnManager spawner;
     public RoomInteriorDecorator roomDecorator;
     public List<RoomData> activeRooms = new();
+    public string seed = "DefaultSeed";
+    public bool useRandomSeed = false;
 
     [Header("Settings")]
     public int width = 50;
@@ -38,6 +40,7 @@ public class MazeGenerator : MonoBehaviour
     public WeightedRoomSize[] allowedSizes = { new WeightedRoomSize { size = new Vector2Int(3, 3), weight = 10 } };
 
     private MazeCell[,] grid;
+    private System.Random _rng;
 
     private void Start()
     {
@@ -72,29 +75,40 @@ public class MazeGenerator : MonoBehaviour
     public void Generate()
     {
         ClearOldMaze();
+        if (useRandomSeed)
+        {
+            seed = System.Guid.NewGuid().ToString().Substring(0, 8);
+        }
+
+        int seedHash = seed.GetHashCode();
+        _rng = new System.Random(seedHash);
+
+        Debug.Log(seed);
+        Debug.Log(seed.GetHashCode());
+        Debug.Log(seedHash);
 
         activeRooms = RoomGenerator.Generate(width, height, roomAmountMultiplier,
-                    allowedSizes, minSize, maxSize);
+                    allowedSizes, minSize, maxSize, _rng);
 
         GenerateGrid();
 
-        if (erosionAmount > 0) ErosionGenerator.Apply(grid, width, height, erosionAmount, erosionRandomness, RemoveAndEncloseCell);
+        if (erosionAmount > 0) ErosionGenerator.Apply(grid, width, height, erosionAmount, erosionRandomness, RemoveAndEncloseCell, _rng);
 
-        if (useHollows) HollowGenerator.Generate(grid, width, height, hollowAmountMultiplier, allowedSizes, minSize, maxSize, RemoveAndEncloseCell);
+        if (useHollows) HollowGenerator.Generate(grid, width, height, hollowAmountMultiplier, allowedSizes, minSize, maxSize, RemoveAndEncloseCell, _rng);
 
         GenerateMaze();
 
         if (spawner == null) spawner = GetComponent<SpawnManager>();
-        if (spawner != null) spawner.SetupSpawns(grid, width, height, activeRooms);
+        if (spawner != null) spawner.SetupSpawns(grid, width, height, activeRooms, _rng);
 
         CleanUpLonelyPillars();
-        ApplyWallVariations();
+        ApplyWallVariations(_rng);
 
         if (decorator == null) decorator = GetComponent<MazeDecorator>();
-        if (decorator != null) decorator.Decorate(grid, width, height, activeRooms);
+        if (decorator != null) decorator.Decorate(grid, width, height, activeRooms, _rng);
 
         if (roomDecorator != null)
-            roomDecorator.DecorateRooms(activeRooms, grid);
+            roomDecorator.DecorateRooms(activeRooms, grid, _rng);
     }
 
     void ClearOldMaze()
@@ -147,7 +161,7 @@ public class MazeGenerator : MonoBehaviour
         return false;
     }
 
-    private void ApplyWallVariations()
+    private void ApplyWallVariations(System.Random _rng)
     {
         for (int x = 0; x < width; x++)
         {
@@ -159,25 +173,25 @@ public class MazeGenerator : MonoBehaviour
                 if (y < height - 1 && grid[x, y + 1] != null)
                 {
                     if (cell.wallTop && cell.wallTop.activeSelf)
-                        cell.TryReplaceWithVariant(cell.wallTop);
+                        cell.TryReplaceWithVariant(cell.wallTop, _rng);
                 }
 
                 if (x < width - 1 && grid[x + 1, y] != null)
                 {
                     if (cell.wallRight && cell.wallRight.activeSelf)
-                        cell.TryReplaceWithVariant(cell.wallRight);
+                        cell.TryReplaceWithVariant(cell.wallRight, _rng);
                 }
 
                 if (y > 0 && grid[x, y - 1] != null)
                 {
                     if (cell.wallBottom && cell.wallBottom.activeSelf)
-                        cell.TryReplaceWithVariant(cell.wallBottom);
+                        cell.TryReplaceWithVariant(cell.wallBottom, _rng);
                 }
 
                 if (x > 0 && grid[x - 1, y] != null)
                 {
                     if (cell.wallLeft && cell.wallLeft.activeSelf)
-                        cell.TryReplaceWithVariant(cell.wallLeft);
+                        cell.TryReplaceWithVariant(cell.wallLeft, _rng);
                 }
             }
         }
@@ -246,7 +260,7 @@ public class MazeGenerator : MonoBehaviour
             if (neighbors.Count > 0)
             {
                 stack.Push(current);
-                Vector2Int next = neighbors[Random.Range(0, neighbors.Count)];
+                Vector2Int next = neighbors[_rng.Next(0, neighbors.Count)];
                 RemoveWalls(current, next);
                 grid[next.x, next.y].visited = true;
                 stack.Push(next);

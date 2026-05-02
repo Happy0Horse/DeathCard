@@ -9,7 +9,7 @@ public class MazeCellDecor : MonoBehaviour
     private HashSet<Transform> _usedTransforms = new HashSet<Transform>();
     private MazeCell _cell;
 
-    public bool PlaceProp(GameObject prefab, string key)
+    public bool PlaceProp(GameObject prefab, string key, System.Random _rng)
     {
         if (prefab == null) return false;
         if (_cell == null) _cell = GetComponent<MazeCell>();
@@ -31,7 +31,7 @@ public class MazeCellDecor : MonoBehaviour
 
         if (validTransforms.Count == 0) return false;
 
-        Transform target = validTransforms[Random.Range(0, validTransforms.Count)];
+        Transform target = validTransforms[_rng.Next(0, validTransforms.Count)];
         _usedTransforms.Add(target);
 
         Instantiate(prefab, target.position, target.rotation, target);

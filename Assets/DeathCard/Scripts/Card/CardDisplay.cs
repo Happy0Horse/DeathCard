@@ -7,6 +7,7 @@ public class CardDisplay : MonoBehaviour
     [Header("References")]
     [SerializeField] private CardAction actionHandler;
     [SerializeField] private GameObject stunOverlay;
+    [SerializeField] private GameObject noCardOverlay;
 
     [Header("Images")]
     public Image cardArt;
@@ -31,10 +32,7 @@ public class CardDisplay : MonoBehaviour
     {
         _debuffs = GetComponentInParent<DebuffSystem>();
 
-        if (actionHandler != null)
-        {
-            ApplyCardData();
-        }
+        ApplyCardData();
     }
 
     private void Update()
@@ -48,10 +46,31 @@ public class CardDisplay : MonoBehaviour
         }
     }
 
+    //private void OnEnable()
+    //{
+    //    if (actionHandler != null)
+    //    {
+    //        actionHandler.OnDataChanged += ApplyCardData;
+    //    }
+    //}
+
+    //private void OnDisable()
+    //{
+    //    if (actionHandler != null)
+    //    {
+    //        actionHandler.OnDataChanged -= ApplyCardData;
+    //    }
+    //}
+
     public void ApplyCardData()
     {
+        bool hasData = actionHandler != null && actionHandler.data != null;
+        noCardOverlay.SetActive(!hasData);
+
+        if (!hasData) return;
+
+        noCardOverlay.SetActive(false);
         CardData data = actionHandler.data;
-        if (data == null) return;
 
         cardName.text = data.itemName;
         categoryText.text = data.category.ToString();

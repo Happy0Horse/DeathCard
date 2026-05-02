@@ -24,4 +24,4 @@ MonoBehaviour:
   effectDuration: 0
   isMultiHit: 0
   categoryIcon: {fileID: 21300000, guid: c47d26bddb022e04fadc2de3fb926d87, type: 3}
-  artSprite: {fileID: 21300000, guid: 0a47f96ba322ad248bcde591deee4009, type: 3}
+  artSprite: {fileID: 21300000, guid: 9adc62d48725800449fe1f833becce8b, type: 3}

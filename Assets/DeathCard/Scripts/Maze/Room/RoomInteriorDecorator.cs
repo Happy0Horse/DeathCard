@@ -8,7 +8,7 @@ public class RoomInteriorDecorator : MonoBehaviour
     [Header("Doors")]
     public List<WeightedPrefab> doorVariants;
 
-    public void DecorateRooms(List<RoomData> rooms, MazeCell[,] grid)
+    public void DecorateRooms(List<RoomData> rooms, MazeCell[,] grid, System.Random _rng)
     {
         MazeGenerator gen = FindFirstObjectByType<MazeGenerator>();
         if (gen == null) return;
@@ -25,17 +25,17 @@ public class RoomInteriorDecorator : MonoBehaviour
             GameObject roomInstance = Instantiate(prefab, targetPos, Quaternion.identity, transform);
             room.entrances = GetValidPerimeterPoints(room, gen);
             ApplyRotation(room, roomInstance);
-            SpawnDoors(room, roomInstance, gen);
+            SpawnDoors(room, roomInstance, gen, _rng);
         }
     }
 
-    private void SpawnDoors(RoomData room, GameObject roomInstance, MazeGenerator gen)
+    private void SpawnDoors(RoomData room, GameObject roomInstance, MazeGenerator gen, System.Random _rng)
     {
         if (doorVariants == null || doorVariants.Count == 0) return;
 
         float rotationY = roomInstance.transform.eulerAngles.y;
         List<Vector2Int> spawnedDoorCoords = new();
-        int maxDoors = room.isBig ? Random.Range(2, 4) : 1;
+        int maxDoors = room.isBig ? _rng.Next(2, 4) : 1;
         int minGridDistance = 2;
 
         room.finalDoorPositions.Clear();
@@ -61,7 +61,7 @@ public class RoomInteriorDecorator : MonoBehaviour
         for (int i = 0; i < candidates.Count; i++)
         {
             var temp = candidates[i];
-            int randomIndex = Random.Range(i, candidates.Count);
+            int randomIndex = _rng.Next(i, candidates.Count);
             candidates[i] = candidates[randomIndex];
             candidates[randomIndex] = temp;
         }
@@ -86,7 +86,7 @@ public class RoomInteriorDecorator : MonoBehaviour
 
                 candidate.wall.wallObject.SetActive(false);
 
-                GameObject chosenDoor = GetWeightedPrefab(doorVariants);
+                GameObject chosenDoor = GetWeightedPrefab(doorVariants, _rng);
                 if (chosenDoor != null)
                 {
                     Instantiate(chosenDoor, candidate.wall.wallObject.transform.position, candidate.wall.wallObject.transform.rotation, roomInstance.transform);
@@ -99,11 +99,11 @@ public class RoomInteriorDecorator : MonoBehaviour
         }
     }
 
-    private GameObject GetWeightedPrefab(List<WeightedPrefab> list)
+    private GameObject GetWeightedPrefab(List<WeightedPrefab> list, System.Random _rng)
     {
         int totalWeight = 0;
         foreach (var item in list) totalWeight += item.weight;
-        int roll = Random.Range(0, totalWeight);
+        int roll = _rng.Next(0, totalWeight);
         int current = 0;
         foreach (var item in list)
         {

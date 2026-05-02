@@ -421,7 +421,7 @@ MonoBehaviour:
   spawner: {fileID: 824185534}
   roomDecorator: {fileID: 824185535}
   activeRooms: []
-  seed: 79ac69fe
+  seed: DefaultSeed
   useRandomSeed: 0
   width: 30
   height: 30
