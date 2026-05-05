@@ -128,6 +128,8 @@ public class SacrificeDome : MonoBehaviour
             yield return null;
         }
 
+        GlobalEvents.OnDomeBroken?.Invoke();
+
         if (innerDome != null)
         {
             yield return new WaitForSeconds(waitBeforeNextDome);

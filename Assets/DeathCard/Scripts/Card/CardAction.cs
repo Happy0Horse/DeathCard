@@ -25,31 +25,25 @@ public class CardAction : MonoBehaviour
 
     public void UseCard()
     {
-        if (_debuffs != null && _debuffs.IsStunned)
-        {
-            Debug.Log("Blocked: Player is stunned.");
-            return;
-        }
-
-        Debug.Log("It got there");
+        if (_debuffs != null && _debuffs.IsStunned) return;
         if (data == null) return;
+
+        CardManager manager = GetComponentInParent<CardManager>();
+        System.Action onComplete = () => manager.RemoveCard(this);
 
         switch (data.category)
         {
             case CardData.CardCategory.Move:
-                GameEvents.OnRequestMoveSelection?.Invoke(data.range);
+                GameEvents.OnRequestMoveSelection?.Invoke(data.range, onComplete);
                 break;
-
             case CardData.CardCategory.Attack:
-                GameEvents.OnRequestAttackMode?.Invoke(data);
+                GameEvents.OnRequestAttackMode?.Invoke(data, onComplete);
                 break;
-
             case CardData.CardCategory.Trap:
-                GameEvents.OnRequestTrapSelection?.Invoke(data);
+                GameEvents.OnRequestTrapSelection?.Invoke(data, onComplete);
                 break;
-
             case CardData.CardCategory.Utility:
-                GameEvents.OnRequestUtilityAction?.Invoke(data);
+                GameEvents.OnRequestUtilityAction?.Invoke(data, onComplete);
                 break;
         }
     }

@@ -25,6 +25,7 @@ MonoBehaviour:
   isMultiHit: 1
   level: 0
   maxLevel: 3
+  weight: 8
   artSprite: {fileID: 21300000, guid: 8237efc1987ca194fabf343db77907db, type: 3}
   leftStatType: 2
   rightStatType: 1

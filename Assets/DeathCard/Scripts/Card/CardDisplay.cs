@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static event Action<CardDisplay, string, bool> OnRequestDescription;
     public static event Action<CardDisplay> OnHideDescription;
@@ -12,7 +12,7 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [Header("References")]
     [SerializeField] private CardAction actionHandler;
     [SerializeField] private GameObject stunOverlay;
-    [SerializeField] private GameObject noCardOverlay;
+    [SerializeField] private CardBaker cardBaker;
 
     [Header("Card UI Elements")]
     public Image cardArt;
@@ -31,7 +31,7 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Sprite durationIcon;
     public Sprite moveIcon;
 
-    private bool _isSticky = false;
+    private bool _isDissolving = false;
     private DebuffSystem _debuffs;
 
     private void Start()
@@ -45,27 +45,21 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (_debuffs != null)
         {
             if (stunOverlay.activeSelf != _debuffs.IsStunned)
-            {
                 stunOverlay.SetActive(_debuffs.IsStunned);
-            }
         }
     }
 
     private void OnEnable()
     {
         if (actionHandler != null)
-        {
             actionHandler.OnDataChanged += ApplyCardData;
-        }
         ApplyCardData();
     }
 
     private void OnDisable()
     {
         if (actionHandler != null)
-        {
             actionHandler.OnDataChanged -= ApplyCardData;
-        }
     }
 
     public string GetDescriptionText() => actionHandler.data != null ? actionHandler.data.GetFullDescription() : "";
@@ -80,30 +74,67 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         OnHideDescription?.Invoke(this);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            _isSticky = !_isSticky;
-            OnRequestDescription?.Invoke(this, GetDescriptionText(), true);
-        }
-    }
-
     public void ApplyCardData()
     {
         bool hasData = actionHandler != null && actionHandler.data != null;
-        if (noCardOverlay != null) noCardOverlay.SetActive(!hasData);
 
-        if (!hasData) return;
+        if (hasData)
+        {
+            cardBaker.SetBloodyIntensity(0f);
+            cardBaker.SetHolographicIntensity(0f);
 
-        CardData data = actionHandler.data;
-        cardName.text = data.itemName;
-        categoryText.text = data.category.ToString();
-        cardArt.sprite = data.artSprite;
-        levelText.text = $"{data.level}/{data.maxLevel}";
+            CardData data = actionHandler.data;
+            cardName.text = data.itemName;
+            categoryText.text = data.category.ToString();
+            cardArt.sprite = data.artSprite;
+            levelText.text = $"{data.level}/{data.maxLevel}";
+            UpdateStatSlot(data.leftStatType, leftStatText, leftStatIcon, data);
+            UpdateStatSlot(data.rightStatType, rightStatText, rightStatIcon, data);
 
-        UpdateStatSlot(data.leftStatType, leftStatText, leftStatIcon, data);
-        UpdateStatSlot(data.rightStatType, rightStatText, rightStatIcon, data);
+            cardBaker.Bake(() => {
+                var mat = cardBaker.GetDissolveMaterial();
+                if (mat != null) mat.SetFloat("_DissolveAmount", 0f);
+            });
+        }
+        else
+        {
+            if (_isDissolving) return;
+
+            var mat = cardBaker.GetDissolveMaterial();
+            if (mat != null) mat.SetFloat("_DissolveAmount", 1f);
+        }
+    }
+
+    [ContextMenu("Appear Card")]
+    public void AppearCard()
+    {
+        if (actionHandler.data == null) return;
+        var mat = cardBaker.GetDissolveMaterial();
+        if (mat != null) mat.SetFloat("_DissolveAmount", 0f);
+    }
+
+    [ContextMenu("Remove Card")]
+    public void RemoveCard()
+    {
+        if (_isDissolving) return;
+        _isDissolving = true;
+        cardBaker.AnimateDissolve(0f, OnDissolveComplete);
+    }
+
+    public void AddBloody(float intensity)
+    {
+        cardBaker.SetBloodyIntensity(intensity);
+    }
+
+    public void AddHolographic(float intensity)
+    {
+        cardBaker.SetHolographicIntensity(intensity);
+    }
+
+    private void OnDissolveComplete()
+    {
+        _isDissolving = false;
+        actionHandler.data = null;
     }
 
     private void UpdateStatSlot(CardData.StatType type, TextMeshProUGUI text, Image icon, CardData data)
@@ -111,7 +142,6 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         bool isVisible = type != CardData.StatType.None;
         text.gameObject.SetActive(isVisible);
         icon.gameObject.SetActive(isVisible);
-
         if (isVisible)
         {
             text.text = data.GetStatValue(type);

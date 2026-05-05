@@ -1,14 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
     public HexViewManager hexViewManager;
-
     public CardAttackLander lander;
 
     public enum AttackMode { Melee, Spin, Ora, Shot }
@@ -24,6 +22,8 @@ public class PlayerAnimation : MonoBehaviour
     public string oraAnimationTrigger = "";
     public string rangedAttackTrigger = "";
 
+    private System.Action _onAttackConfirmed;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -38,7 +38,7 @@ public class PlayerAnimation : MonoBehaviour
 
         if (hexViewManager.CurrentView == HexViewManager.ViewMode.FirstPerson)
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (Mouse.current.leftButton.wasPressedThisFrame && _onAttackConfirmed != null)
             {
                 StartCoroutine(PlayAttackSequence());
             }
@@ -48,9 +48,12 @@ public class PlayerAnimation : MonoBehaviour
     void OnEnable() => GameEvents.OnRequestAttackMode += SetupAttack;
     void OnDisable() => GameEvents.OnRequestAttackMode -= SetupAttack;
 
-    private void SetupAttack(CardData data)
+    private void SetupAttack(CardData data, System.Action onComplete)
     {
+        if (data.category != CardData.CardCategory.Attack) return;
+
         CurrentMode = data.attackMode;
+        _onAttackConfirmed = onComplete;
 
         if (lander != null)
         {
@@ -58,12 +61,15 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         animator.SetFloat("AttackRange", data.range);
-        Debug.Log($"Prepared {CurrentMode}. Damage: {data.damage}. Multi-Hit: {data.isMultiHit}");
     }
 
     private IEnumerator PlayAttackSequence()
     {
         hexViewManager.IsLocked = true;
+
+        _onAttackConfirmed?.Invoke();
+        _onAttackConfirmed = null;
+
         string trigger = GetAnimationTrigger();
         animator.SetTrigger(trigger);
 
@@ -75,17 +81,22 @@ public class PlayerAnimation : MonoBehaviour
 
         lander.DisableHitbox();
         hexViewManager.IsLocked = false;
+
+        if (hexViewManager != null)
+        {
+            hexViewManager.ExitFirstPerson();
+        }
     }
 
     private string GetAnimationTrigger()
     {
-        switch (CurrentMode)
+        return CurrentMode switch
         {
-            case AttackMode.Melee: return attackAnimationTrigger;
-            case AttackMode.Spin: return spinAnimationTrigger;
-            case AttackMode.Ora: return oraAnimationTrigger;
-            case AttackMode.Shot: return rangedAttackTrigger;
-            default: return attackAnimationTrigger;
-        }
+            AttackMode.Melee => attackAnimationTrigger,
+            AttackMode.Spin => spinAnimationTrigger,
+            AttackMode.Ora => oraAnimationTrigger,
+            AttackMode.Shot => rangedAttackTrigger,
+            _ => attackAnimationTrigger
+        };
     }
 }

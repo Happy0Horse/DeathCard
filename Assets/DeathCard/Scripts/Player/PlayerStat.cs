@@ -5,18 +5,15 @@ public class PlayerStat : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
-    
+
     public UnityEvent<float, float> OnHealthChanged;
 
-    void Awake()
-    {
-        currentHealth = maxHealth;
-    }
+    void Awake() => currentHealth = maxHealth;
 
-    void Start()
-    {
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
-    }
+    void Start() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
+
+    private void OnEnable() => GameManager.OnOvertimeTick += TakeDamage;
+    private void OnDisable() => GameManager.OnOvertimeTick -= TakeDamage;
 
     public void TakeDamage(float damage)
     {
@@ -34,8 +31,5 @@ public class PlayerStat : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    private void Die()
-    {
-        Debug.Log($"{gameObject.name} has perished.");
-    }
+    private void Die() => Debug.Log($"{gameObject.name} has perished.");
 }

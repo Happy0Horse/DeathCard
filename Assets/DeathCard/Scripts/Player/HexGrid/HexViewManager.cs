@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -139,8 +140,10 @@ public class HexViewManager : MonoBehaviour
         Cursor.visible = !shouldLock;
     }
 
-    public void ToggleAttackMode(CardData data)
+    public void ToggleAttackMode(CardData data, Action onComplete)
     {
+        if (data.category != CardData.CardCategory.Attack) return;
+
         CurrentView = (CurrentView == ViewMode.FirstPerson) ? ViewMode.Orbit : ViewMode.FirstPerson;
 
         if (CurrentView == ViewMode.FirstPerson)
@@ -177,6 +180,31 @@ public class HexViewManager : MonoBehaviour
             _currentZoom = maxZoom;
         }
 
+        UpdateCursorState();
+    }
+
+    public void ExitFirstPerson()
+    {
+        if (CurrentView != ViewMode.FirstPerson) return;
+
+        CurrentView = ViewMode.Orbit;
+        _transitionTimer = transitionDuration;
+
+        SwitchCameraHardware();
+        UpdateCursorState();
+    }
+
+    public void EnterFirstPerson()
+    {
+        if (CurrentView == ViewMode.FirstPerson) return;
+
+        GameEvents.OnCancelCurrentAction?.Invoke();
+        CurrentView = ViewMode.FirstPerson;
+
+        _yaw = transform.eulerAngles.y;
+        _pitch = 0f;
+
+        SwitchCameraHardware();
         UpdateCursorState();
     }
 

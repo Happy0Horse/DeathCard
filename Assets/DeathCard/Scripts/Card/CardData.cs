@@ -34,6 +34,9 @@ public class CardData : ItemData
     public int level = 0;
     public int maxLevel = 3;
 
+    [Header("Spawn Settings")]
+    public int weight = 10;
+
     [Header("UI Stat")]
     public Sprite artSprite;
     public StatType leftStatType;
