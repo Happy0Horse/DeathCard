@@ -8,9 +8,9 @@ public class PlayerActionHandler : MonoBehaviour
     private string _currentMode = "";
     private CardUtillityAction _utilityAction;
     private CardTrapAction _trapAction;
+    private System.Action _onFinishCurrentAction;
 
     public Material placedTrapMaterial;
-
 
     private void Awake()
     {
@@ -22,17 +22,26 @@ public class PlayerActionHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnRequestMoveSelection += range => ToggleSelection(range, "Move", ExecuteMove);
-        GameEvents.OnRequestTrapSelection += RequestTrap;
-        GameEvents.OnRequestUtilityAction += ExecuteUtility;
+        GameEvents.OnRequestMoveSelection += (range, callback) => {
+            _onFinishCurrentAction = callback;
+            ToggleSelection(range, "Move", ExecuteMove);
+        };
+        GameEvents.OnRequestTrapSelection += (data, callback) => {
+            _onFinishCurrentAction = callback;
+            RequestTrap(data);
+        };
+        GameEvents.OnRequestUtilityAction += (data, callback) => {
+            ExecuteUtility(data);
+            callback?.Invoke();
+        };
         GameEvents.OnCancelCurrentAction += ResetMode;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnRequestMoveSelection -= range => ToggleSelection(range, "Move", ExecuteMove);
-        GameEvents.OnRequestTrapSelection -= RequestTrap;
-        GameEvents.OnRequestUtilityAction -= ExecuteUtility;
+        GameEvents.OnRequestMoveSelection -= (range, callback) => { };
+        GameEvents.OnRequestTrapSelection -= (data, callback) => { };
+        GameEvents.OnRequestUtilityAction -= (data, callback) => { };
         GameEvents.OnCancelCurrentAction -= ResetMode;
     }
 
@@ -58,25 +67,29 @@ public class PlayerActionHandler : MonoBehaviour
         }
     }
 
-    private void ResetMode() => _currentMode = "";
+    private void ResetMode()
+    {
+        _currentMode = "";
+        _onFinishCurrentAction = null;
+    }
 
     private void ExecuteMove(HexCell target)
     {
         _navigator.MoveTo(target);
+        _onFinishCurrentAction?.Invoke();
         ResetMode();
     }
 
     private void ExecuteTrap(HexCell target)
     {
-        // Modify logic here as needed
         _navigator.ClearSelectionState();
         if (_trapAction != null) _trapAction.Execute(target);
+        _onFinishCurrentAction?.Invoke();
         ResetMode();
     }
 
     private void ExecuteUtility(CardData data)
     {
-        // Modify logic here as needed
         if (_animator != null) _animator.SetTrigger("UtilityTrigger");
 
         if (_utilityAction != null)

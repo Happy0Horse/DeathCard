@@ -10,7 +10,8 @@ public static class RoomGenerator
         float multiplier,
         WeightedRoomSize[] allowedSizes,
         int min,
-        int max)
+        int max,
+        System.Random _rng)
     {
         List<RoomData> rooms = new();
         int attempts = Mathf.RoundToInt(Mathf.Max(3, (width * height) / 100) * multiplier);
@@ -31,10 +32,10 @@ public static class RoomGenerator
 
         for (int i = 0; i < attempts; i++)
         {
-            Vector2Int size = GetWeightedSize(validPool, totalWeight);
+            Vector2Int size = GetWeightedSize(validPool, totalWeight, _rng);
 
-            int sx = Random.Range(1, width - size.x - 1);
-            int sy = Random.Range(1, height - size.y - 1);
+            int sx = _rng.Next(1, width - size.x - 1);
+            int sy = _rng.Next(1, height - size.y - 1);
 
             if (IsAreaAvailable(rooms, sx, sy, size.x, size.y))
             {
@@ -46,9 +47,9 @@ public static class RoomGenerator
         return rooms;
     }
 
-    private static Vector2Int GetWeightedSize(List<WeightedRoomSize> pool, int totalWeight)
+    private static Vector2Int GetWeightedSize(List<WeightedRoomSize> pool, int totalWeight, System.Random _rng)
     {
-        int roll = Random.Range(0, totalWeight);
+        int roll = _rng.Next(0, totalWeight);
         int current = 0;
         foreach (var item in pool)
         {

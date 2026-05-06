@@ -3,9 +3,9 @@ using UnityEngine;
 
 public static class GameEvents
 {
-    public static Action<int> OnRequestMoveSelection;
-    public static Action<CardData> OnRequestTrapSelection;
-    public static Action<CardData> OnRequestUtilityAction; 
-    public static Action<CardData> OnRequestAttackMode;
+    public static Action<int, Action> OnRequestMoveSelection;
+    public static Action<CardData, Action> OnRequestTrapSelection;
+    public static Action<CardData, Action> OnRequestAttackMode;
+    public static Action<CardData, Action> OnRequestUtilityAction;
     public static Action OnCancelCurrentAction;
 }

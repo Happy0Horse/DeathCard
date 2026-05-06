@@ -40,7 +40,7 @@ public class CardData : ItemData
     [Header("UI Stat")]
     public Sprite artSprite;
     public StatType leftStatType;
-    public StatType rightStatType;
+    public StatType rightStatType; 
     public List<DescriptionLine> descriptionLayout;
 
     public string GetStatValue(StatType type)

@@ -16,8 +16,33 @@ MonoBehaviour:
   icon: {fileID: 0}
   category: 1
   attackMode: 1
+  utilityType: 0
+  trapType: 0
   range: 3
   damage: 3
+  effectiveRange: 0
+  effectDuration: 0
   isMultiHit: 1
-  categoryIcon: {fileID: 21300000, guid: 42ec55f71b4c26f419428f23686edd8e, type: 3}
+  level: 0
+  maxLevel: 3
+  weight: 8
   artSprite: {fileID: 21300000, guid: 8237efc1987ca194fabf343db77907db, type: 3}
+  leftStatType: 2
+  rightStatType: 1
+  descriptionLayout:
+  - stat: 1
+    labelOverride: 
+    suffix: 
+    customText: 
+  - stat: 2
+    labelOverride: 
+    suffix: 
+    customText: 
+  - stat: 5
+    labelOverride: 
+    suffix: 
+    customText: Covers tiles around the player (range stat)
+  - stat: 5
+    labelOverride: 
+    suffix: 
+    customText: Attack hits trice for displayed damage each

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This needs seed random
 public class MazeCell : MonoBehaviour
 {
     public int gridX;
@@ -43,12 +44,12 @@ public class MazeCell : MonoBehaviour
         }
     }
 
-    public void TryReplaceWithVariant(GameObject originalWall)
+    public void TryReplaceWithVariant(GameObject originalWall, System.Random _rng)
     {
         if (originalWall == null || !originalWall.activeSelf) return;
         if (wallVariants == null || wallVariants.Count == 0) return;
 
-        GameObject variantPrefab = GetWeightedVariant();
+        GameObject variantPrefab = GetWeightedVariant(_rng);
 
         if (variantPrefab != null)
         {
@@ -57,9 +58,9 @@ public class MazeCell : MonoBehaviour
         }
     }
 
-    private GameObject GetWeightedVariant()
+    private GameObject GetWeightedVariant(System.Random _rng)
     {
-        int roll = Random.Range(0, 100);
+        int roll = _rng.Next(0, 100);
         int current = 0;
 
         foreach (var v in wallVariants)

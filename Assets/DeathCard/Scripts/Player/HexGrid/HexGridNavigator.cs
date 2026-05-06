@@ -14,6 +14,7 @@ public class HexGridNavigator : MonoBehaviour
     public Material highlightMaterial;
     public LayerMask obstacleLayer;
     public bool IsMoving => _isMoving;
+    public bool IgnoreCancelAction { get; set; }
 
     private Vector2Int _currentCoord;
     private bool _isMoving = false;
@@ -23,17 +24,18 @@ public class HexGridNavigator : MonoBehaviour
 
     private List<GameObject> _highlightedCells = new List<GameObject>();
     private Dictionary<GameObject, Material> _originalMaterials = new Dictionary<GameObject, Material>();
-    
+    private DebuffSystem _debuffs;
 
     public Vector2Int CurrentCoordinates => _currentCoord;
-    private void OnEnable() => GameEvents.OnCancelCurrentAction += ClearSelectionState;
-    private void OnDisable() => GameEvents.OnCancelCurrentAction -= ClearSelectionState;
+    private void OnEnable() => GameEvents.OnCancelCurrentAction += TryCancel;
+    private void OnDisable() => GameEvents.OnCancelCurrentAction -= TryCancel;
 
     public void Initialize(HexGrid grid, Vector2Int startCoord, HexViewManager viewManager)
     {
         this.grid = grid;
         _currentCoord = startCoord;
         _viewManager = viewManager;
+        _debuffs = GetComponent<DebuffSystem>();
     }
 
     private void Update()
@@ -71,12 +73,26 @@ public class HexGridNavigator : MonoBehaviour
                 Vector3 sPos = current.transform.position + Vector3.up * 0.5f;
                 Vector3 ePos = neighbor.transform.position + Vector3.up * 0.5f;
 
-                if (!Physics.Linecast(sPos, ePos, obstacleLayer))
+                if (Physics.Linecast(sPos, ePos, obstacleLayer)) continue;
+
+                Vector3 cellTop = neighbor.transform.position + Vector3.up * 1.0f;
+                LayerMask excludeHex = ~LayerMask.GetMask("Interactable", "Special");
+                Collider[] hits = Physics.OverlapSphere(cellTop, 0.3f, excludeHex, QueryTriggerInteraction.Collide);
+
+                bool blocked = false;
+                foreach (Collider hit in hits)
                 {
-                    distance[neighbor] = distance[current] + 1;
-                    HighlightCell(neighbor.gameObject);
-                    frontier.Enqueue(neighbor);
+                    if (!hit.CompareTag("Trap"))
+                    {
+                        blocked = true;
+                        break;
+                    }
                 }
+                if (blocked) continue;
+
+                distance[neighbor] = distance[current] + 1;
+                HighlightCell(neighbor.gameObject);
+                frontier.Enqueue(neighbor);
             }
         }
     }
@@ -125,16 +141,28 @@ public class HexGridNavigator : MonoBehaviour
 
             foreach (HexCell next in current.neighbors)
             {
-                if (next.canWalkOn && !cameFrom.ContainsKey(next))
+                if (!next.canWalkOn || cameFrom.ContainsKey(next)) continue;
+
+                Vector3 sPos = current.transform.position + Vector3.up * 0.5f;
+                Vector3 ePos = next.transform.position + Vector3.up * 0.5f;
+                if (Physics.Linecast(sPos, ePos, obstacleLayer)) continue;
+
+                Vector3 cellTop = next.transform.position + Vector3.up * 1.0f;
+                LayerMask excludeHex = ~LayerMask.GetMask("Interactable", "Special");
+                Collider[] hits = Physics.OverlapSphere(cellTop, 0.3f, excludeHex, QueryTriggerInteraction.Collide);
+                bool blocked = false;
+                foreach (Collider hit in hits)
                 {
-                    Vector3 sPos = current.transform.position + Vector3.up * 0.5f;
-                    Vector3 ePos = next.transform.position + Vector3.up * 0.5f;
-                    if (!Physics.Linecast(sPos, ePos, obstacleLayer))
+                    if (!hit.CompareTag("Trap"))
                     {
-                        frontier.Enqueue(next);
-                        cameFrom[next] = current;
+                        blocked = true;
+                        break;
                     }
                 }
+                if (blocked) continue;
+
+                frontier.Enqueue(next);
+                cameFrom[next] = current;
             }
         }
 
@@ -150,6 +178,12 @@ public class HexGridNavigator : MonoBehaviour
         _isMoving = true;
         for (int i = 1; i < path.Count; i++)
         {
+            if (_debuffs != null && _debuffs.IsStunned)
+            {
+                _isMoving = false;
+                yield break;
+            }
+
             Vector3 targetPos = path[i].transform.position + Vector3.up * heightOffset;
             Vector3 targetDir = (targetPos - transform.position);
             targetDir.y = 0;
@@ -158,6 +192,11 @@ public class HexGridNavigator : MonoBehaviour
                 Quaternion targetRot = Quaternion.LookRotation(targetDir);
                 while (Vector3.Distance(transform.position, targetPos) > 0.01f)
                 {
+                    if (_debuffs != null && _debuffs.IsStunned)
+                    {
+                        _isMoving = false;
+                        yield break;
+                    }
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
                     yield return null;
@@ -181,6 +220,11 @@ public class HexGridNavigator : MonoBehaviour
         }
     }
 
+    private void TryCancel()
+    {
+        if (!IgnoreCancelAction) ClearSelectionState();
+
+    }
     public void ClearSelectionState()
     {
         _isSelecting = false;
