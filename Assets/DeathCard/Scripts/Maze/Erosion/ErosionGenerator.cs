@@ -2,11 +2,11 @@ using UnityEngine;
 
 public static class ErosionGenerator
 {
-    public static void Apply(MazeCell[,] grid, int width, int height, float amount, float randomness, System.Action<int, int> removeCell)
+    public static void Apply(MazeCell[,] grid, int width, int height, float amount, float randomness, System.Action<int, int> removeCell, System.Random _rng)
     {
         Vector2 center = new Vector2(width / 2f, height / 2f);
         float maxDist = Vector2.Distance(Vector2.zero, center);
-        float seed = Random.Range(0f, 100f);
+        float seed = (float)(_rng.NextDouble() * 100.0);
 
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)

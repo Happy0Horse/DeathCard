@@ -10,10 +10,10 @@ public class MazeDecorator : MonoBehaviour
     [Header("Ruleset")]
     public List<DecorationRule> rules = new List<DecorationRule>();
 
-    public void Decorate(MazeCell[,] grid, int width, int height, List<RoomData> rooms)
+    public void Decorate(MazeCell[,] grid, int width, int height, List<RoomData> rooms, System.Random _rng)
     {
         if (grid == null || !enableDecorations) return;
-        ResetRuleCounters();
+        ResetRuleCounters(_rng);
 
         for (int x = 0; x < width; x++)
         {
@@ -29,7 +29,7 @@ public class MazeDecorator : MonoBehaviour
 
                 if (!isInRoom)
                 {
-                    ApplyRules(cell, decor);
+                    ApplyRules(cell, decor, _rng);
                 }
 
                 if (hideEmptyMounts)
@@ -40,16 +40,16 @@ public class MazeDecorator : MonoBehaviour
         }
     }
 
-    private void ResetRuleCounters()
+    private void ResetRuleCounters(System.Random _rng)
     {
         foreach (var rule in rules)
         {
             rule.stepsSinceLast = 0;
-            rule.currentTargetInterval = rule.interval + Random.Range(-rule.intervalRandomness, rule.intervalRandomness + 1);
+            rule.currentTargetInterval = rule.interval + _rng.Next(-rule.intervalRandomness, rule.intervalRandomness + 1);
         }
     }
 
-    private void ApplyRules(MazeCell cell, MazeCellDecor decor)
+    private void ApplyRules(MazeCell cell, MazeCellDecor decor, System.Random _rng)
     {
         bool isDeadEnd = IsDeadEnd(cell);
 
@@ -62,7 +62,7 @@ public class MazeDecorator : MonoBehaviour
 
             if (rule.interval <= 0)
             {
-                if (Random.Range(0, 100) < rule.chance) shouldSpawn = true;
+                if (_rng.Next(0, 100) < rule.chance) shouldSpawn = true;
             }
             else
             {
@@ -75,11 +75,11 @@ public class MazeDecorator : MonoBehaviour
 
             if (shouldSpawn)
             {
-                bool success = decor.PlaceProp(rule.prefab, rule.mountKey);
+                bool success = decor.PlaceProp(rule.prefab, rule.mountKey, _rng);
                 if (success)
                 {
                     rule.stepsSinceLast = 0;
-                    rule.currentTargetInterval = rule.interval + Random.Range(-rule.intervalRandomness, rule.intervalRandomness + 1);
+                    rule.currentTargetInterval = rule.interval + _rng.Next(-rule.intervalRandomness, rule.intervalRandomness + 1);
                 }
             }
         }

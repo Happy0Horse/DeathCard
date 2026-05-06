@@ -23,5 +23,21 @@ MonoBehaviour:
   effectiveRange: 2
   effectDuration: 0
   isMultiHit: 0
-  categoryIcon: {fileID: 21300000, guid: e263759e87b1c1240bbd461d4997b8f7, type: 3}
+  level: 2
+  maxLevel: 3
   artSprite: {fileID: 21300000, guid: 012cc9b715551e5478a947e8978830e7, type: 3}
+  leftStatType: 2
+  rightStatType: 3
+  descriptionLayout:
+  - stat: 2
+    labelOverride: 
+    suffix: 
+    customText: 
+  - stat: 1
+    labelOverride: 
+    suffix: 
+    customText: 
+  - stat: 3
+    labelOverride: 
+    suffix: 
+    customText: 

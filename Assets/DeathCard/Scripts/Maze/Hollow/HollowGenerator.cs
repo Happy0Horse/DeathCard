@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class HollowGenerator
 {
-    public static void Generate(MazeCell[,] grid, int width, int height, float multiplier, WeightedRoomSize[] allowedSizes, int min, int max, System.Action<int, int> removeCell)
+    public static void Generate(MazeCell[,] grid, int width, int height, float multiplier, WeightedRoomSize[] allowedSizes, int min, int max, System.Action<int, int> removeCell, System.Random _rng)
     {
         int attempts = Mathf.RoundToInt(Mathf.Max(1, (width * height) / 150) * multiplier);
 
@@ -27,15 +27,15 @@ public static class HollowGenerator
             Vector2Int size;
             if (validPool.Count > 0)
             {
-                size = GetWeightedSize(validPool, totalWeight);
+                size = GetWeightedSize(validPool, totalWeight, _rng);
             }
             else
             {
-                size = new Vector2Int(Random.Range(min, max + 1), Random.Range(min, max + 1));
+                size = new Vector2Int(_rng.Next(min, max + 1), _rng.Next(min, max + 1));
             }
 
-            int sx = Random.Range(2, width - size.x - 2);
-            int sy = Random.Range(2, height - size.y - 2);
+            int sx = _rng.Next(2, width - size.x - 2);
+            int sy = _rng.Next(2, height - size.y - 2);
 
             if (IsAreaAvailable(grid, width, height, sx, sy, size.x, size.y))
             {
@@ -54,9 +54,9 @@ public static class HollowGenerator
         }
     }
 
-    private static Vector2Int GetWeightedSize(List<WeightedRoomSize> pool, int totalWeight)
+    private static Vector2Int GetWeightedSize(List<WeightedRoomSize> pool, int totalWeight, System.Random _rng)
     {
-        int roll = Random.Range(0, totalWeight);
+        int roll = _rng.Next(0, totalWeight);
         int current = 0;
         foreach (var item in pool)
         {

@@ -28,6 +28,7 @@ public class CardTrapAction : MonoBehaviour
         }
 
         GameObject trapObj = new GameObject($"Trap_{_lastRequestedCard.trapType}");
+        trapObj.tag = "Trap";
         trapObj.transform.position = target.transform.position + new Vector3(0, hexSurfaceY, 0);
 
         BoxCollider col = trapObj.AddComponent<BoxCollider>();

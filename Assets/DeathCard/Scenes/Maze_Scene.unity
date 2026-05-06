@@ -421,6 +421,8 @@ MonoBehaviour:
   spawner: {fileID: 824185534}
   roomDecorator: {fileID: 824185535}
   activeRooms: []
+  seed: 79ac69fe
+  useRandomSeed: 0
   width: 30
   height: 30
   cellSize: 8
@@ -500,6 +502,16 @@ MonoBehaviour:
     deadEndsOnly: 0
     stepsSinceLast: 19
     currentTargetInterval: 2
+  - ruleName: Lone Chest
+    isEnabled: 1
+    mountKey: lonechest
+    prefab: {fileID: 5300300372664439530, guid: a2ce2c9817042c44e9b8e449adb5c984, type: 3}
+    chance: 10
+    interval: 0
+    intervalRandomness: 0
+    deadEndsOnly: 0
+    stepsSinceLast: 19
+    currentTargetInterval: 2
 --- !u!114 &824185534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,7 +553,9 @@ MonoBehaviour:
   - prefab: {fileID: 3158240731587253908, guid: d17b80d959f71344abe1df4e5ee250e5, type: 3}
     weight: 0
   - prefab: {fileID: 7607122260873624434, guid: 25e7106219cb13149bc007eebb953357, type: 3}
-    weight: 100
+    weight: 70
+  - prefab: {fileID: 2511132293514088477, guid: 12607a250dcdad14cb4dd8fdda4e5dbf, type: 3}
+    weight: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

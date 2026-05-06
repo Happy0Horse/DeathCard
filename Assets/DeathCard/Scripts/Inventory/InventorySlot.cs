@@ -33,11 +33,16 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
             return;
         }
 
+        if (contextMenu.IsMergeMode && eventData.button == PointerEventData.InputButton.Left)
+        {
+            contextMenu.TryMergeWith(currentItem);
+            return;
+        }
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("Right click on: " + currentItem.name);
             contextMenu.Show(currentItem, eventData.position);
         }
+
     }
 }

@@ -5,6 +5,7 @@ public class CardUtillityAction : MonoBehaviour
 {
     [Header("Galaxy Settings")]
     public Material galaxyMaterial;
+    public GameObject uiCameraObject;
     public float growthSpeed = 0.5f;
     public float returnSpeed = 0.2f;
     public float stayDuration = 5.0f;
@@ -12,8 +13,11 @@ public class CardUtillityAction : MonoBehaviour
     [Header("Heal Settings")]
     public GameObject healEffectPrefab;
 
+    [Header("Network")]
+    public bool isLocalPlayer = true;
+
     [Header("Testing")]
-    public bool stunSelfForTest = true;
+    public bool stunSelfForTest = false;
 
     private Coroutine _activeRoutine;
     private HexGridNavigator _navigator;
@@ -31,6 +35,7 @@ public class CardUtillityAction : MonoBehaviour
 
     public void Execute(CardData data)
     {
+        if (!isLocalPlayer) return;
         if (_activeRoutine != null) StopCoroutine(_activeRoutine);
 
         switch (data.utilityType)
@@ -63,10 +68,15 @@ public class CardUtillityAction : MonoBehaviour
 
     private IEnumerator GalaxySequence(CardData data)
     {
+        if (GameManager.Instance != null) GameManager.Instance.SetTimerFreeze(true);
+
         float totalStunTime = (1f / growthSpeed) + stayDuration + (1f / returnSpeed);
         ApplyGlobalStun(totalStunTime);
+        _navigator.IgnoreCancelAction = true;
 
+        if (uiCameraObject != null) uiCameraObject.SetActive(false);
         yield return StartCoroutine(AnimateProperty(1f, growthSpeed));
+        if (uiCameraObject != null) uiCameraObject.SetActive(true);
 
         float elapsed = 0;
         while (elapsed < stayDuration)
@@ -98,9 +108,11 @@ public class CardUtillityAction : MonoBehaviour
             yield return null;
         }
 
+        _navigator.IgnoreCancelAction = false;
         _navigator.ClearSelectionState();
         yield return StartCoroutine(AnimateProperty(0f, returnSpeed));
 
+        if (GameManager.Instance != null) GameManager.Instance.SetTimerFreeze(false);
         _activeRoutine = null;
     }
 
@@ -119,7 +131,8 @@ public class CardUtillityAction : MonoBehaviour
         DebuffSystem[] allPlayers = FindObjectsByType<DebuffSystem>(FindObjectsSortMode.None);
         foreach (var p in allPlayers)
         {
-            if (p == _myDebuffs && !stunSelfForTest) continue;
+            if (p == _myDebuffs) continue;
+            if (!stunSelfForTest && p == _myDebuffs) continue;
             p.AddDebuff(DebuffSystem.DebuffType.Stun, duration);
         }
     }
@@ -133,6 +146,7 @@ public class CardUtillityAction : MonoBehaviour
             galaxyMaterial.SetFloat("_Growth", current);
             yield return null;
         }
+        galaxyMaterial.SetFloat("_Growth", target);
     }
 
     private void ResetGalaxy()

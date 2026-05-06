@@ -17,18 +17,18 @@ public class SpawnManager : MonoBehaviour
 
     private List<GameObject> _spawnedObjects = new List<GameObject>();
 
-    public void SetupSpawns(MazeCell[,] grid, int width, int height, List<RoomData> rooms)
+    public void SetupSpawns(MazeCell[,] grid, int width, int height, List<RoomData> rooms, System.Random _rng)
     {
         ClearSpawns();
 
         List<Vector2Int> spawnPoints = new List<Vector2Int>();
 
-        Vector2Int first = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
+        Vector2Int first = new Vector2Int(_rng.Next(0, width), _rng.Next(0, height));
         int safetyNet = 0;
 
         while ((grid[first.x, first.y] == null || RoomGenerator.IsInsideRoom(first.x, first.y, rooms)) && safetyNet < 1000)
         {
-            first = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
+            first = new Vector2Int(_rng.Next(0, width), _rng.Next(0, height));
             safetyNet++;
         }
 

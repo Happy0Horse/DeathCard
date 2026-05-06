@@ -6,7 +6,7 @@ public class MoveButtonHandler : MonoBehaviour
 
     public void TriggerMoveSelection()
     {
-        Debug.Log($"[MoveButtonHandler] Button clicked. Range: {range}");
-        GameEvents.OnRequestMoveSelection?.Invoke(range);
+        //Debug.Log($"[MoveButtonHandler] Button clicked. Range: {range}");
+        //GameEvents.OnRequestMoveSelection?.Invoke(range);
     }
 }

@@ -47,7 +47,7 @@ Material:
     - _ControlColor: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionMinMax: {r: -0.01, g: 2, b: 0, a: 0}
     - _DitherStepEdge: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-    - _Resolution: {r: 840, g: 440, b: 0, a: 0}
+    - _Resolution: {r: 1480, g: 990, b: 0, a: 0}
     - _ShadowColor: {r: 1, g: 0, b: 0, a: 1}
     - _ShadowTint: {r: 0.32075468, g: 0.27385187, b: 0.27385187, a: 1}
   m_BuildTextureStacks: []
