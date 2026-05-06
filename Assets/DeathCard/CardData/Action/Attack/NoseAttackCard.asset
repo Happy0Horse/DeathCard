@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NoseAttackCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Nose Slash
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 62a6bc75617448c4099998b7bdb9ab83, type: 3}
   category: 1
   attackMode: 0
   utilityType: 0

@@ -6875,8 +6875,7 @@ MonoBehaviour:
   - {fileID: 313470107370339911}
   - {fileID: 7666675151197994656}
   - {fileID: 7942548788720222947}
-  selectedCards:
-  - {fileID: 11400000, guid: eaa95ae8dd55a434cb580d3d28f6dafc, type: 2}
+  selectedCards: []
 --- !u!1 &8677384308116901877
 GameObject:
   m_ObjectHideFlags: 0

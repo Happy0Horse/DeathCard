@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Nose Care
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2039fea0e0e9924429657f1cd801c41f, type: 3}
   category: 3
   attackMode: 0
   utilityType: 1
@@ -23,8 +23,9 @@ MonoBehaviour:
   effectiveRange: 1
   effectDuration: 0
   isMultiHit: 0
-  level: 1
+  level: 0
   maxLevel: 3
+  weight: 10
   artSprite: {fileID: 21300000, guid: 9adc62d48725800449fe1f833becce8b, type: 3}
   leftStatType: 2
   rightStatType: 3

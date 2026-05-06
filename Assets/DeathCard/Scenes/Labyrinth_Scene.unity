@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5d11ef0f3f08b408c11812d0a23afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoosterPack
+  items: []
   item: {fileID: 11400000, guid: 2759380a5fce3fb49b23da6a5aa86318, type: 2}
 --- !u!114 &55715847
 MonoBehaviour:
@@ -877,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5d11ef0f3f08b408c11812d0a23afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoosterPack
+  items: []
   item: {fileID: 11400000, guid: 2759380a5fce3fb49b23da6a5aa86318, type: 2}
 --- !u!114 &448195171
 MonoBehaviour:
@@ -1070,7 +1072,7 @@ MonoBehaviour:
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 8188624983818404496, guid: 4944a99b770b785439655cf5b2b06c7b, type: 3}
-  autoCreatePlayer: 1
+  autoCreatePlayer: 0
   playerSpawnMethod: 0
   spawnPrefabs: []
   exceptionsDisconnect: 1
@@ -1662,6 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5d11ef0f3f08b408c11812d0a23afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoosterPack
+  items: []
   item: {fileID: 11400000, guid: 2759380a5fce3fb49b23da6a5aa86318, type: 2}
 --- !u!114 &1012653305
 MonoBehaviour:
@@ -2048,6 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5d11ef0f3f08b408c11812d0a23afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoosterPack
+  items: []
   item: {fileID: 11400000, guid: 2759380a5fce3fb49b23da6a5aa86318, type: 2}
 --- !u!114 &1283748891
 MonoBehaviour:
@@ -2789,6 +2793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5d11ef0f3f08b408c11812d0a23afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoosterPack
+  items: []
   item: {fileID: 11400000, guid: 2759380a5fce3fb49b23da6a5aa86318, type: 2}
 --- !u!114 &1784323253
 MonoBehaviour:
