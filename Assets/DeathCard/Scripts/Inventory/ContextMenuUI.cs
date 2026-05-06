@@ -23,8 +23,7 @@ public class ContextMenuUI : MonoBehaviour
     private bool isMergeMode = false;
     private ItemData currentItem;
     private CardData firstMergeCard;
-
-
+    private bool _canCheckOutsideClick = false;
 
     public void OnEquip()
     {
@@ -52,11 +51,22 @@ public class ContextMenuUI : MonoBehaviour
     }
 
 
-    public void Show(ItemData item, Vector2 position)
+    public void Show(ItemData item, Vector2 screenPosition)
     {
         currentItem = item;
         panel.SetActive(true);
-        panel.transform.position = position + new Vector2(90f, -100f);
+
+        Canvas canvas = panel.GetComponentInParent<Canvas>();
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect,
+            screenPosition,
+            canvas.worldCamera,
+            out Vector2 localPoint
+        );
+
+        panel.GetComponent<RectTransform>().localPosition = localPoint;
     }
 
     public void Hide()
@@ -64,9 +74,16 @@ public class ContextMenuUI : MonoBehaviour
         panel.SetActive(false);
     }
 
+    private System.Collections.IEnumerator EnableOutsideClickNextFrame()
+    {
+        yield return null;
+        _canCheckOutsideClick = true;
+    }
+
     void Update()
     {
         if (!panel.activeSelf) return;
+        if (!_canCheckOutsideClick) return;
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
@@ -74,11 +91,7 @@ public class ContextMenuUI : MonoBehaviour
                 menuRect,
                 Mouse.current.position.ReadValue()
             );
-
-            if (!clickedInsideMenu)
-            {
-                Hide();
-            }
+            if (!clickedInsideMenu) Hide();
         }
         else if (Keyboard.current.escapeKey.wasPressedThisFrame || Keyboard.current.tabKey.wasPressedThisFrame)
         {
@@ -88,7 +101,7 @@ public class ContextMenuUI : MonoBehaviour
 
     public void OnInteract()
     {
-
+        Debug.Log("Fuck");
         if (currentItem == null || currentPlayer == null || currentItem.itemName != "BoosterPack") return;
         inventory.RemoveItem(currentItem);
 
