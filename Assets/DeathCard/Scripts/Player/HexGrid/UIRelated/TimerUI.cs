@@ -138,9 +138,9 @@ public class TimerUI : MonoBehaviour
 
     private void UpdateActiveDisplay(float timeRemaining)
     {
-        if (GameManager.Instance == null || _isOvertime) return;
+        if (GameManager.Instance == null) return;
 
-        if (timerText != null)
+        if (!_isOvertime && timerText != null)
         {
             TimeSpan time = TimeSpan.FromSeconds(timeRemaining);
             timerText.text = string.Format("{0:D2}:{1:D2}", time.Minutes, time.Seconds);

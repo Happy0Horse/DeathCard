@@ -10,11 +10,24 @@ public class CardManager : MonoBehaviour
     private void OnEnable()
     {
         GameManager.OnDistributeCards += HandleGlobalCardDistribution;
+        GameManager.OnRoundOver += HandleRoundOver;
     }
 
     private void OnDisable()
     {
         GameManager.OnDistributeCards -= HandleGlobalCardDistribution;
+        GameManager.OnRoundOver -= HandleRoundOver;
+    }
+
+    private void HandleRoundOver(int domeIndex)
+    {
+        foreach (CardAction slot in cardSlots)
+        {
+            if (slot != null && slot.data != null)
+            {
+                RemoveCard(slot);
+            }
+        }
     }
 
     private void HandleGlobalCardDistribution(int count)
@@ -39,9 +52,9 @@ public class CardManager : MonoBehaviour
             totalWeight += Mathf.Max(0, card.weight);
         }
 
-        if (totalWeight <= 0) return selectedCards[Random.Range(0, selectedCards.Count)];
+        if (totalWeight <= 0) return selectedCards[UnityEngine.Random.Range(0, selectedCards.Count)];
 
-        int rnd = Random.Range(0, totalWeight);
+        int rnd = UnityEngine.Random.Range(0, totalWeight);
         int processedWeight = 0;
 
         foreach (var card in selectedCards)
@@ -59,11 +72,8 @@ public class CardManager : MonoBehaviour
     public void AddCard(CardData data)
     {
         CardAction slot = GetEmptySlot();
-        if (slot == null)
-        {
-            Debug.LogWarning("[CardManager] No empty slots available.");
-            return;
-        }
+        if (slot == null) return;
+
         slot.data = data;
         StartCoroutine(ApplyEffectsDelayed(slot, data));
     }
@@ -97,6 +107,7 @@ public class CardManager : MonoBehaviour
     public void RemoveCard(CardAction slot)
     {
         if (slot == null || slot.data == null) return;
+
         CardDisplay display = slot.GetComponent<CardDisplay>();
         if (display != null)
             display.RemoveCard();

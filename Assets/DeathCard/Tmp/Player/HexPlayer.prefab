@@ -1415,7 +1415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -276.99994, y: 167.5}
+  m_AnchoredPosition: {x: -277, y: 167.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6894589515476524803
@@ -3153,7 +3153,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 3933981041638521237}
   m_HandleRect: {fileID: 0}
@@ -6227,6 +6227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardUtillityAction
   galaxyMaterial: {fileID: 2100000, guid: 35df24044e70a8e419388a78f2a9a2a2, type: 2}
+  uiCameraObject: {fileID: 8677384308116901877}
   growthSpeed: 0.1
   returnSpeed: 0.6
   stayDuration: 5
@@ -6352,11 +6353,10 @@ MonoBehaviour:
   - {fileID: 7666675151197994656}
   - {fileID: 7942548788720222947}
   selectedCards:
-  - {fileID: 11400000, guid: 13cf191bb38c5934db9909f1f8f712d6, type: 2}
-  - {fileID: 11400000, guid: fa44820d8bfa5964f9d9d4df5396f0ae, type: 2}
   - {fileID: 11400000, guid: 9f2438d3dd1a22c46a073f676b5b3302, type: 2}
-  - {fileID: 11400000, guid: a34dea6237f9f7649a402374d44114c2, type: 2}
+  - {fileID: 11400000, guid: 13cf191bb38c5934db9909f1f8f712d6, type: 2}
   - {fileID: 11400000, guid: eaa95ae8dd55a434cb580d3d28f6dafc, type: 2}
+  - {fileID: 11400000, guid: 99a4da7232376ca4d98976929644998a, type: 2}
 --- !u!1 &8677384308116901877
 GameObject:
   m_ObjectHideFlags: 0

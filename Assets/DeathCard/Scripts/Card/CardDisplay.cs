@@ -31,6 +31,8 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Sprite durationIcon;
     public Sprite moveIcon;
 
+    public bool IsDissolving => _isDissolving;
+
     private bool _isDissolving = false;
     private DebuffSystem _debuffs;
 

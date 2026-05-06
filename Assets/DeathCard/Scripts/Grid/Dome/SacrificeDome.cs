@@ -132,10 +132,15 @@ public class SacrificeDome : MonoBehaviour
 
         if (innerDome != null)
         {
-            yield return new WaitForSeconds(waitBeforeNextDome);
-            innerDome.EnableDome();
+            innerDome.StartCoroutine(innerDome.DelayedEnable(waitBeforeNextDome));
         }
 
         Destroy(gameObject);
+    }
+
+    public IEnumerator DelayedEnable(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        EnableDome();
     }
 }

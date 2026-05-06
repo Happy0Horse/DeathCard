@@ -28,6 +28,9 @@ public class CardAction : MonoBehaviour
         if (_debuffs != null && _debuffs.IsStunned) return;
         if (data == null) return;
 
+        CardDisplay display = GetComponent<CardDisplay>();
+        if (display != null && display.IsDissolving) return;
+
         CardManager manager = GetComponentInParent<CardManager>();
         System.Action onComplete = () => manager.RemoveCard(this);
 

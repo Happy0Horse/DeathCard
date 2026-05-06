@@ -68,9 +68,12 @@ public class GameManager : MonoBehaviour
 
         if (_timersFrozen) return;
 
+        HandleCardDistribution();
+
         if (_isOvertime)
         {
             HandleOvertime();
+            OnTimerUpdated?.Invoke(_timeRemaining);
         }
         else
         {
@@ -78,7 +81,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void RunStandardTimers()
+    private void HandleCardDistribution()
     {
         if (!_firstDistributionDone)
         {
@@ -86,19 +89,22 @@ public class GameManager : MonoBehaviour
             OnDistributeCards?.Invoke(cardsPerInterval);
         }
 
+        _cardTimer -= Time.deltaTime;
+        if (_cardTimer <= 0)
+        {
+            _cardTimer = cardDistributionInterval;
+            OnDistributeCards?.Invoke(cardsPerInterval);
+        }
+    }
+
+    private void RunStandardTimers()
+    {
         _timeRemaining -= Time.deltaTime;
         if (_timeRemaining <= 0)
         {
             _timeRemaining = 0;
             _isOvertime = true;
             OnDeadlineReached?.Invoke();
-        }
-
-        _cardTimer -= Time.deltaTime;
-        if (_cardTimer <= 0)
-        {
-            _cardTimer = cardDistributionInterval;
-            OnDistributeCards?.Invoke(cardsPerInterval);
         }
 
         OnTimerUpdated?.Invoke(_timeRemaining);
