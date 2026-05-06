@@ -25,7 +25,7 @@ public class CardData : ItemData
 
     [Header("Stats")]
     public int range;
-    public int damage; 
+    public int damage;
     public int effectiveRange;
     public float effectDuration;
     public bool isMultiHit;

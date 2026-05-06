@@ -128,4 +128,19 @@ public class CardManager : MonoBehaviour
         if (slot == null) return;
         RemoveCard(slot);
     }
+    
+    public bool AddSelectedCard(CardData card)
+    {
+        if (card == null) return false;
+        if (selectedCards.Count >= 5) return false;
+
+        selectedCards.Add(card);
+        Debug.Log($"Added card: {card.name}. Total selected cards: {selectedCards.Count}");
+        return true;
+    }
+
+    public void RemoveSelectedCard(CardData card)
+    {
+        selectedCards.Remove(card);
+    }
 }

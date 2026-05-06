@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoosterPack : Interactable
@@ -7,6 +8,7 @@ public class BoosterPack : Interactable
     public ItemData[] items;
 
     public ItemData item;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,11 +29,14 @@ public class BoosterPack : Interactable
         {
             if (items.Length >= 5)
             {
+                gameObject.layer = LayerMask.NameToLayer("Default");
+
                 System.Random random = new System.Random();
 
                 for (int i = 0; i < 5; ++i)
                 {
-                    player.inventory.AddItem(items[random.Next(0, items.Length)]);
+                    ItemData itemCopy = Instantiate(items[random.Next(0, items.Length)]);
+                    player.inventory.AddItem(itemCopy);
                 }
 
                 int rand = random.Next(0, 3);

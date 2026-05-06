@@ -7,13 +7,16 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        Debug.Log($"Len {slots.Length} ");
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < inventory.items.Count)
+            {
+                Debug.Log($"Slot {inventory.items[i].itemName}");
                 slots[i].SetItem(inventory.items[i]);
+            }
             else
-                break;
+                slots[i].Clear();
+            //break;
             //slots[i].Clear();
         }
     }
