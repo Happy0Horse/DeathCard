@@ -1,4 +1,5 @@
-using Unity.Multiplayer.PlayMode;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -23,7 +24,131 @@ public class ContextMenuUI : MonoBehaviour
     private bool isMergeMode = false;
     private ItemData currentItem;
     private CardData firstMergeCard;
+
     private bool _canCheckOutsideClick = false;
+    private Canvas _canvas;
+    private Coroutine _outsideClickCoroutine;
+
+    public void Show(ItemData item, Vector2 screenPosition)
+    {
+        currentItem = item;
+
+        panel.SetActive(true);
+
+        _canvas = panel.GetComponentInParent<Canvas>();
+
+        RectTransform canvasRect = _canvas.GetComponent<RectTransform>();
+        RectTransform panelRect = panel.GetComponent<RectTransform>();
+
+        Camera uiCamera = GetUICamera();
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect,
+            screenPosition,
+            uiCamera,
+            out Vector2 localPoint
+        );
+
+        panelRect.anchoredPosition = localPoint + new Vector2(90f, 0f);
+
+        _canCheckOutsideClick = false;
+
+        if (_outsideClickCoroutine != null)
+            StopCoroutine(_outsideClickCoroutine);
+
+        _outsideClickCoroutine = StartCoroutine(EnableOutsideClickAfterOpeningClick());
+    }
+
+    private IEnumerator EnableOutsideClickAfterOpeningClick()
+    {
+        yield return null;
+
+        while (Mouse.current != null && Mouse.current.leftButton.isPressed)
+        {
+            yield return null;
+        }
+
+        yield return null;
+
+        _canCheckOutsideClick = true;
+    }
+
+    void Update()
+    {
+        if (!panel.activeSelf) return;
+
+        if (Keyboard.current != null &&
+            (Keyboard.current.escapeKey.wasPressedThisFrame ||
+             Keyboard.current.tabKey.wasPressedThisFrame))
+        {
+            Hide();
+            return;
+        }
+
+        if (!_canCheckOutsideClick) return;
+
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            if (IsPointerOverMenu())
+                return;
+
+            Hide();
+        }
+    }
+
+    private bool IsPointerOverMenu()
+    {
+        if (EventSystem.current == null)
+            return IsPointerInsideMenuRect();
+
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            Transform hitTransform = result.gameObject.transform;
+
+            if (hitTransform == menuRect || hitTransform.IsChildOf(menuRect))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsPointerInsideMenuRect()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            menuRect,
+            mousePosition,
+            GetUICamera()
+        );
+    }
+
+    private Camera GetUICamera()
+    {
+        if (_canvas == null)
+            _canvas = panel.GetComponentInParent<Canvas>();
+
+        if (_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+            return null;
+
+        return _canvas.worldCamera;
+    }
+
+    public void Hide()
+    {
+        panel.SetActive(false);
+        _canCheckOutsideClick = false;
+    }
 
     public void OnEquip()
     {
@@ -50,59 +175,13 @@ public class ContextMenuUI : MonoBehaviour
         Hide();
     }
 
-
-    public void Show(ItemData item, Vector2 screenPosition)
-    {
-        currentItem = item;
-        panel.SetActive(true);
-
-        Canvas canvas = panel.GetComponentInParent<Canvas>();
-        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            canvasRect,
-            screenPosition,
-            canvas.worldCamera,
-            out Vector2 localPoint
-        );
-
-        panel.GetComponent<RectTransform>().localPosition = localPoint;
-    }
-
-    public void Hide()
-    {
-        panel.SetActive(false);
-    }
-
-    private System.Collections.IEnumerator EnableOutsideClickNextFrame()
-    {
-        yield return null;
-        _canCheckOutsideClick = true;
-    }
-
-    void Update()
-    {
-        if (!panel.activeSelf) return;
-        if (!_canCheckOutsideClick) return;
-
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            bool clickedInsideMenu = RectTransformUtility.RectangleContainsScreenPoint(
-                menuRect,
-                Mouse.current.position.ReadValue()
-            );
-            if (!clickedInsideMenu) Hide();
-        }
-        else if (Keyboard.current.escapeKey.wasPressedThisFrame || Keyboard.current.tabKey.wasPressedThisFrame)
-        {
-            Hide();
-        }
-    }
-
     public void OnInteract()
     {
-        Debug.Log("Fuck");
-        if (currentItem == null || currentPlayer == null || currentItem.itemName != "BoosterPack") return;
+        Debug.Log("Interact");
+
+        if (currentItem == null || currentPlayer == null || currentItem.itemName != "BoosterPack")
+            return;
+
         inventory.RemoveItem(currentItem);
 
         var navigator = currentPlayer.GetComponent<HexGridNavigator>();
@@ -169,17 +248,21 @@ public class ContextMenuUI : MonoBehaviour
         if (!isMergeMode) return;
 
         CardData secondCard = secondItem as CardData;
-        if (secondCard == firstMergeCard)
+
+        if (secondCard == null)
             return;
-        else if (secondCard.level != firstMergeCard.level)
+
+        if (ReferenceEquals(secondCard, firstMergeCard))
             return;
-        else if (secondCard.name != firstMergeCard.name)
+
+        if (secondCard.level != firstMergeCard.level)
             return;
-        else if (secondCard == null)
+
+        if (secondCard.name != firstMergeCard.name)
             return;
-        else if (secondCard.level >= secondCard.maxLevel)
+
+        if (secondCard.level >= secondCard.maxLevel)
             return;
-        
 
         firstMergeCard.level++;
 
