@@ -55,7 +55,7 @@ public class CardDisplay : MonoBehaviour
 
         cardName.text = data.itemName;
         categoryText.text = data.category.ToString();
-        categoryIcon.sprite = data.categoryIcon;
+        //categoryIcon.sprite = data.categoryIcon;
         cardArt.sprite = data.artSprite;
 
         if (data.category == CardData.CardCategory.Attack)

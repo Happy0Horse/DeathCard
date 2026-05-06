@@ -3,7 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InventoryManager : NetworkBehaviour
-{
+{    
+    public PlayerAnimation playerAnimation;
+
     public GameObject panel;
 
     public HexViewManager manager;
@@ -41,10 +43,8 @@ public class InventoryManager : NetworkBehaviour
     {
         int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 3);
 
-        Debug.Log($"Loading {boosterPacks} booster packs into inventory.");
         for (int i = 0; i < 3; ++i)
         {
-            Debug.Log($"Loading {i} booster packs into inventory.");
             inventory.AddItem(boosterPackItem);
         }
 
@@ -54,31 +54,25 @@ public class InventoryManager : NetworkBehaviour
 
     private void Start()
     {
-
         LoadBoosterPacksToInventory();
-
     }
 
     public void OnInventory(InputValue value)
     {
         //if (!isLocalPlayer) return;
 
-        int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 3);
-        if (boosterPacks != 0)
-        {
-
-        }
-
         isOpen = !isOpen;
         panel.SetActive(isOpen);
 
         if (isOpen)
         {
+            playerAnimation.enabled = false;
             manager.enabled = false;
             checkPosition();
         }
         else
         {
+            playerAnimation.enabled = true;
             manager.enabled = true;
             checkPosition();
         }
