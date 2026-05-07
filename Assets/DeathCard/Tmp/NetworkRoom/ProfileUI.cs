@@ -34,7 +34,6 @@ public class ProfileUI : MonoBehaviour
 
     public void OnSelectAvatarClicked()
     {
-        // Открываем файловый диалог
         string path = OpenFileDialog();
         if (string.IsNullOrEmpty(path)) return;
 
@@ -96,7 +95,6 @@ public class ProfileUI : MonoBehaviour
             return result;
         }
         catch { return ""; }
-        return "";
 #else
         return "";
 #endif

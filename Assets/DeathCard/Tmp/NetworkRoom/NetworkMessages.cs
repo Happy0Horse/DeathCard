@@ -57,3 +57,5 @@ public struct SendChatMessage : NetworkMessage
 {
     public string text;
 }
+
+public struct SpawnRequestMessage : NetworkMessage { }

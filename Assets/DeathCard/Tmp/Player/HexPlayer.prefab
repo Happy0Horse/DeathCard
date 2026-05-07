@@ -1801,7 +1801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -276.99994, y: 167.5}
+  m_AnchoredPosition: {x: -277, y: 167.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6894589515476524803
@@ -6567,6 +6567,7 @@ GameObject:
   - component: {fileID: 1098124125385994447}
   - component: {fileID: 7249115982891871916}
   - component: {fileID: 9134074690669104170}
+  - component: {fileID: -7594205540946170630}
   m_Layer: 3
   m_Name: HexPlayer
   m_TagString: Untagged
@@ -6879,6 +6880,23 @@ MonoBehaviour:
   - {fileID: 7942548788720222947}
   selectedCards:
   - {fileID: 11400000, guid: eaa95ae8dd55a434cb580d3d28f6dafc, type: 2}
+--- !u!114 &-7594205540946170630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188624983818404496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mirror::Mirror.NetworkIdentity
+  sceneId: 0
+  _assetId: 3479747798
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &8677384308116901877
 GameObject:
   m_ObjectHideFlags: 0
