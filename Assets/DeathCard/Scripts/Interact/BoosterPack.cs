@@ -49,7 +49,7 @@ public class BoosterPack : Interactable
                     if(items[j] is CardData && (items[j] as CardData).category == CardData.CardCategory.Move)
                         cardPool.Add(items[j] as CardData);
                 }
-                itemList.Add(cardPool[random.Next(0, cardPool.Count)]);
+                itemList.Add(Instantiate(cardPool[random.Next(0, cardPool.Count)]));
             }
             else if (rand >= 3 && rand <= 6)
             {
@@ -59,7 +59,7 @@ public class BoosterPack : Interactable
                     if (items[j] is CardData && (items[j] as CardData).category == CardData.CardCategory.Attack)
                         cardPool.Add(items[j] as CardData);
                 }
-                itemList.Add(cardPool[random.Next(0, cardPool.Count)]);
+                itemList.Add(Instantiate(cardPool[random.Next(0, cardPool.Count)]));
             }
             else if (rand > 6 && rand <= 9)
             {
@@ -69,7 +69,7 @@ public class BoosterPack : Interactable
                     if (items[j] is CardData && (items[j] as CardData).category == CardData.CardCategory.Trap)
                         cardPool.Add(items[j] as CardData);
                 }
-                itemList.Add(cardPool[random.Next(0, cardPool.Count)]);
+                itemList.Add(Instantiate(cardPool[random.Next(0, cardPool.Count)]));
             }
             else if (rand == 10)
             {
@@ -79,7 +79,7 @@ public class BoosterPack : Interactable
                     if (items[j] is CardData && (items[j] as CardData).category == CardData.CardCategory.Utility)
                         cardPool.Add(items[j] as CardData);
                 }
-                itemList.Add(cardPool[random.Next(0, cardPool.Count)]);
+                itemList.Add(Instantiate(cardPool[random.Next(0, cardPool.Count)]));
             }
         }
         for (int q = 0; q < itemList.Count; ++q)

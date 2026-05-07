@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -32,6 +33,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
             Debug.Log("Slot empty");
             return;
         }
+
 
         if (contextMenu.IsMergeMode && eventData.button == PointerEventData.InputButton.Left)
         {

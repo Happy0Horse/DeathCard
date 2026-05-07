@@ -35583,9 +35583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d568b97f3077e4d8732691d056abfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  deadlineDuration: 5
+  deadlineDuration: 15
   cardDistributionInterval: 10
-  preGameWaitDuration: 15
+  preGameWaitDuration: 60
   cardsPerInterval: 3
   overtimeDamagePerSecond: 5
 --- !u!4 &1781434922
