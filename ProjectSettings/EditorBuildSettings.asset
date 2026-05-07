@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/DeathCard/Scenes/ServerOnlyScene.unity
     guid: fc906e7b4c6dbbd7690c568a914c393e
   - enabled: 1
-    path: Assets/DeathCard/Scenes/Main_Menu.unity
+    path: Assets/DeathCard/Prefabs/Scenes/Main_Menu.unity
     guid: feeaa8c52d2dcef42aa183e298fc3a8d
   - enabled: 1
-    path: Assets/DeathCard/Scenes/Labyrinth_Scene.unity
+    path: Assets/DeathCard/Prefabs/Scenes/Labyrinth_Scene.unity
     guid: 5adac61fc1361674cbced347a206741e
   - enabled: 1
     path: Assets/DeathCard/Scenes/Maze_Scene.unity

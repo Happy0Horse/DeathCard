@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763dd532aea442f40b142ec373b1128a, type: 3}
   m_Name: SpikeTrapCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  itemName: Spike Trap Card
-  icon: {fileID: 0}
+  itemName: Spike Trap
+  icon: {fileID: 21300000, guid: 138af825d3eae5e47a1474fa5e5f331b, type: 3}
   category: 2
   attackMode: 1
   utilityType: 0
@@ -25,6 +25,7 @@ MonoBehaviour:
   isMultiHit: 0
   level: 0
   maxLevel: 3
+  weight: 10
   artSprite: {fileID: 21300000, guid: 95b74114f047d7a4191531e172f323a9, type: 3}
   leftStatType: 2
   rightStatType: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotAttackCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Nose Shot
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 774508c7919c49a4f8566a045dfa5694, type: 3}
   category: 1
   attackMode: 3
   utilityType: 0
