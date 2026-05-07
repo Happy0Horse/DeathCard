@@ -177,8 +177,6 @@ public class ContextMenuUI : MonoBehaviour
 
     public void OnInteract()
     {
-        Debug.Log("Interact");
-
         if (currentItem == null || currentPlayer == null || currentItem.itemName != "BoosterPack")
             return;
 
