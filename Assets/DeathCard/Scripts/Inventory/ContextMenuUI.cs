@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -177,8 +178,6 @@ public class ContextMenuUI : MonoBehaviour
 
     public void OnInteract()
     {
-        Debug.Log("Interact");
-
         if (currentItem == null || currentPlayer == null || currentItem.itemName != "BoosterPack")
             return;
 
@@ -246,20 +245,32 @@ public class ContextMenuUI : MonoBehaviour
     public void TryMergeWith(ItemData secondItem)
     {
         if (!isMergeMode) return;
+        Debug.Log("It gets here first");
 
         CardData secondCard = secondItem as CardData;
 
         if (secondCard == null)
             return;
 
-        if (ReferenceEquals(secondCard, firstMergeCard))
+        Debug.Log("Then its not null");
+
+        if (secondCard == firstMergeCard)
             return;
+
+        Debug.Log("Then they arent the same");
+
 
         if (secondCard.level != firstMergeCard.level)
             return;
 
+        Debug.Log("Then they are the same level");
+
+
         if (secondCard.name != firstMergeCard.name)
             return;
+
+
+        Debug.Log("Then they are of the same name");
 
         if (secondCard.level >= secondCard.maxLevel)
             return;

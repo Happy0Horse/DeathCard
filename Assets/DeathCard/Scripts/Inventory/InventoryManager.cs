@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,37 @@ public class InventoryManager : NetworkBehaviour
     public ItemData boosterPackItem;
 
     private bool isOpen = false;
+    private bool canOpen = true;
+
+    private void OnEnable()
+    {
+        GameManager.OnGameStarted += DisableInventory;
+        GameManager.OnRoundOver += EnableInventory;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStarted -= DisableInventory;
+        GameManager.OnRoundOver -= EnableInventory;
+    }
+
+    private void DisableInventory()
+    {
+        canOpen = false;
+        if (isOpen)
+        {
+            isOpen = false;
+            panel.SetActive(false);
+            playerAnimation.enabled = true;
+            manager.enabled = true;
+            checkPosition();
+        }
+    }
+
+    private void EnableInventory(int domeIndex)
+    {
+        canOpen = true;
+    }
 
     void checkPosition()
     {
@@ -41,7 +73,7 @@ public class InventoryManager : NetworkBehaviour
 
     void LoadBoosterPacksToInventory()
     {
-        int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 3);
+        int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 1);
 
         for (int i = 0; i < 3; ++i)
         {
@@ -59,7 +91,7 @@ public class InventoryManager : NetworkBehaviour
 
     public void OnInventory(InputValue value)
     {
-        //if (!isLocalPlayer) return;
+        if (!canOpen) return;
 
         isOpen = !isOpen;
         panel.SetActive(isOpen);
