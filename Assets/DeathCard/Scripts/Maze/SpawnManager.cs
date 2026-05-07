@@ -14,13 +14,12 @@ public class SpawnManager : MonoBehaviour
 
     public void SetupSpawns(MazeCell[,] grid, int width, int height, List<RoomData> rooms, System.Random rng)
     {
-        // Удаляем старые спавнпоинты
         foreach (var sp in FindObjectsOfType<NetworkStartPosition>())
             Destroy(sp.gameObject);
+        NetworkManager.startPositions.Clear();
 
         List<Vector2Int> spawnPoints = new List<Vector2Int>();
 
-        // Первая точка
         Vector2Int first = new Vector2Int(rng.Next(0, width), rng.Next(0, height));
         int safety = 0;
         while ((grid[first.x, first.y] == null || RoomGenerator.IsInsideRoom(first.x, first.y, rooms)) && safety < 1000)
@@ -30,19 +29,19 @@ public class SpawnManager : MonoBehaviour
         }
         spawnPoints.Add(first);
 
-        // Остальные точки
         float targetDist = Mathf.Sqrt(width * width + height * height) * distanceBetweenPlayers;
         for (int i = 1; i < playerCount; i++)
             spawnPoints.Add(GetPointAtApproxDistance(grid, width, height, spawnPoints, targetDist, rooms));
 
-        // Создаём NetworkStartPosition на каждой точке
         foreach (Vector2Int sp in spawnPoints)
         {
             if (grid[sp.x, sp.y] == null) continue;
 
             grid[sp.x, sp.y].SetFloorMaterial(spawnMaterial);
 
+            // Берём позицию прямо из трансформа клетки
             Vector3 pos = grid[sp.x, sp.y].transform.position + Vector3.up * playerHeight;
+
             GameObject spawnPoint = new GameObject("SpawnPoint");
             spawnPoint.transform.position = pos;
             spawnPoint.AddComponent<NetworkStartPosition>();

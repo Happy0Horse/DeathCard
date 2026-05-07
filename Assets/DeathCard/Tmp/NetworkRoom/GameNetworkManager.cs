@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using Mirror;
 
 public class GameNetworkManager : NetworkManager
@@ -26,18 +27,36 @@ public class GameNetworkManager : NetworkManager
 
     void OnSpawnRequest(NetworkConnectionToClient conn, SpawnRequestMessage msg)
     {
-        Debug.Log("СЕРВЕР: OnSpawnRequest получен!");
+        StartCoroutine(SpawnWhenReady(conn));
+    }
 
-        if (conn.identity != null)
+    IEnumerator SpawnWhenReady(NetworkConnectionToClient conn)
+    {
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        Debug.Log($"СЕРВЕР: SpawnWhenReady, сцена={currentScene}");
+
+        if (currentScene == "Maze_Scene")
         {
-            Debug.Log("Уничтожаем старый identity");
-            NetworkServer.RemovePlayerForConnection(conn, true);
+            MazeGenerator maze = null;
+
+            while (maze == null || !maze.isReady)
+            {
+                maze = FindObjectOfType<MazeGenerator>();
+                Debug.Log($"СЕРВЕР: Ждём лабиринт, maze={maze}, isReady={maze?.isReady}");
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            Debug.Log($"СЕРВЕР: Лабиринт готов, спавнпоинтов={NetworkManager.startPositions.Count}");
         }
 
-        Debug.Log($"Спавним игрока на {GetSpawnPoint()}");
-        GameObject player = Instantiate(playerPrefab, GetSpawnPoint(), Quaternion.identity);
+        Vector3 spawnPos = GetSpawnPoint();
+        Debug.Log($"СЕРВЕР: Спавним на {spawnPos}, всего спавнпоинтов={NetworkManager.startPositions.Count}");
+
+        if (conn.identity != null)
+            NetworkServer.RemovePlayerForConnection(conn, true);
+
+        GameObject player = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, player);
-        Debug.Log($"Игрок заспавнен: {player}");
 
         string matchId = RoomManager.instance.GetRoomId(conn);
         if (matchId != null)
