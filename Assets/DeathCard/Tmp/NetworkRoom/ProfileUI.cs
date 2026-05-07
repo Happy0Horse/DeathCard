@@ -34,7 +34,6 @@ public class ProfileUI : MonoBehaviour
 
     public void OnSelectAvatarClicked()
     {
-        // Открываем файловый диалог
         string path = OpenFileDialog();
         if (string.IsNullOrEmpty(path)) return;
 
@@ -79,9 +78,23 @@ public class ProfileUI : MonoBehaviour
         }
         catch { return ""; }
 #elif UNITY_STANDALONE_WIN
-        // На Windows используем встроенный диалог
-        // Можно подключить плагин или использовать NativeFileDialogSharp
-        return "";
+        try
+        {
+            var process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "powershell";
+            process.StartInfo.Arguments = "-Command \"Add-Type -AssemblyName System.Windows.Forms; " +
+                "$f = New-Object System.Windows.Forms.OpenFileDialog; " +
+                "$f.Filter = 'Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg'; " +
+                "if ($f.ShowDialog() -eq 'OK') { $f.FileName }\"";
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            string result = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit();
+            return result;
+        }
+        catch { return ""; }
 #else
         return "";
 #endif
