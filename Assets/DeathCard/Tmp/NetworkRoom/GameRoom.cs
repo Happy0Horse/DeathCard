@@ -10,6 +10,7 @@ public class PlayerInfo
 public class GameRoom
 {
     public string roomId;
+    public UnityEngine.SceneManagement.Scene scene;
     public List<NetworkConnectionToClient> players = new List<NetworkConnectionToClient>();
     public HashSet<NetworkConnectionToClient> readyPlayers = new HashSet<NetworkConnectionToClient>();
     public Dictionary<NetworkConnectionToClient, PlayerInfo> playerInfos

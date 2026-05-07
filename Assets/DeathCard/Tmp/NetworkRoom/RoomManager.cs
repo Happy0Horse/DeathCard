@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using Mirror;
 
@@ -133,17 +134,33 @@ public class RoomManager : MonoBehaviour
         StartRoom(room);
     }
 
-    void StartRoom(GameRoom room)
+    IEnumerator StartRoomCoroutine(GameRoom room)
     {
         room.isStarted = true;
+        Debug.Log("СЕРВЕР: Загружаем Maze_Scene аддитивно");
+
+        AsyncOperation op = SceneManager.LoadSceneAsync("Maze_Scene", LoadSceneMode.Additive);
+        yield return op;
+
+        Debug.Log($"СЕРВЕР: Сцена загружена, сцен всего={SceneManager.sceneCount}");
+
+        room.scene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
 
         foreach (var conn in room.players)
         {
             if (conn.identity != null)
+            {
+                SceneManager.MoveGameObjectToScene(conn.identity.gameObject, room.scene);
                 conn.identity.SetMatchId(room.roomId);
+            }
 
             conn.Send(new RoomStartMessage { roomId = room.roomId });
         }
+    }
+
+    void StartRoom(GameRoom room)
+    {
+        StartCoroutine(StartRoomCoroutine(room));
     }
 
     public void OnPlayerDisconnected(NetworkConnectionToClient conn)

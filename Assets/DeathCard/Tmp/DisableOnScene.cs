@@ -6,7 +6,7 @@ public class DisableOnScene : NetworkBehaviour
 {
     public string sceneName;
 
-    public override void OnStartLocalPlayer()
+    public override void OnStartClient()
     {
         if (SceneManager.GetActiveScene().name == sceneName)
             gameObject.SetActive(false);
