@@ -15,6 +15,7 @@ public class MazeGenerator : MonoBehaviour
     public List<RoomData> activeRooms = new();
     public string seed = "DefaultSeed";
     public bool useRandomSeed = false;
+    public bool isReady = false;
 
     [Header("Settings")]
     public int width = 50;
@@ -74,6 +75,8 @@ public class MazeGenerator : MonoBehaviour
 
     public void Generate()
     {
+        isReady = false;
+
         ClearOldMaze();
         if (useRandomSeed)
         {
@@ -109,6 +112,8 @@ public class MazeGenerator : MonoBehaviour
 
         if (roomDecorator != null)
             roomDecorator.DecorateRooms(activeRooms, grid, _rng);
+        
+        isReady = true;
     }
 
     void ClearOldMaze()

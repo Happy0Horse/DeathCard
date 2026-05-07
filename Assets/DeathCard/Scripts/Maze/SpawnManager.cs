@@ -1,64 +1,58 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Testing fields")]
-    public int playerCount = 1;
-    public float distanceBetweenPlayers = 0.25f;
-
     [Header("Spawn Settings")]
-    public GameObject player;
+    public float distanceBetweenPlayers = 0.25f;
     public float playerHeight = 1f;
+    public int playerCount = 4;
 
     [Header("Materials")]
     public Material spawnMaterial;
-    public Material defaultMaterial;
 
-    private List<GameObject> _spawnedObjects = new List<GameObject>();
-
-    public void SetupSpawns(MazeCell[,] grid, int width, int height, List<RoomData> rooms, System.Random _rng)
+    public void SetupSpawns(MazeCell[,] grid, int width, int height, List<RoomData> rooms, System.Random rng)
     {
-        ClearSpawns();
+        foreach (var sp in FindObjectsOfType<NetworkStartPosition>())
+            Destroy(sp.gameObject);
+        NetworkManager.startPositions.Clear();
 
         List<Vector2Int> spawnPoints = new List<Vector2Int>();
 
-        Vector2Int first = new Vector2Int(_rng.Next(0, width), _rng.Next(0, height));
-        int safetyNet = 0;
-
-        while ((grid[first.x, first.y] == null || RoomGenerator.IsInsideRoom(first.x, first.y, rooms)) && safetyNet < 1000)
+        Vector2Int first = new Vector2Int(rng.Next(0, width), rng.Next(0, height));
+        int safety = 0;
+        while ((grid[first.x, first.y] == null || RoomGenerator.IsInsideRoom(first.x, first.y, rooms)) && safety < 1000)
         {
-            first = new Vector2Int(_rng.Next(0, width), _rng.Next(0, height));
-            safetyNet++;
+            first = new Vector2Int(rng.Next(0, width), rng.Next(0, height));
+            safety++;
         }
-
         spawnPoints.Add(first);
 
-        float maxDiagonal = Mathf.Sqrt(width * width + height * height);
-        float targetDist = maxDiagonal * distanceBetweenPlayers;
-
+        float targetDist = Mathf.Sqrt(width * width + height * height) * distanceBetweenPlayers;
         for (int i = 1; i < playerCount; i++)
-        {
             spawnPoints.Add(GetPointAtApproxDistance(grid, width, height, spawnPoints, targetDist, rooms));
-        }
 
         foreach (Vector2Int sp in spawnPoints)
         {
-            if (grid[sp.x, sp.y] != null)
-                grid[sp.x, sp.y].SetFloorMaterial(spawnMaterial);
-        }
+            if (grid[sp.x, sp.y] == null) continue;
 
-        if (spawnPoints.Count > 0 && grid[spawnPoints[0].x, spawnPoints[0].y] != null)
-        {
-            Vector3 startPos = grid[spawnPoints[0].x, spawnPoints[0].y].transform.position + Vector3.up * playerHeight;
-            GameObject newPlayer = Instantiate(player, startPos, Quaternion.identity);
-            _spawnedObjects.Add(newPlayer);
+            grid[sp.x, sp.y].SetFloorMaterial(spawnMaterial);
+
+            // Берём позицию прямо из трансформа клетки
+            Vector3 pos = grid[sp.x, sp.y].transform.position + Vector3.up * playerHeight;
+
+            GameObject spawnPoint = new GameObject("SpawnPoint");
+            spawnPoint.transform.position = pos;
+            spawnPoint.AddComponent<NetworkStartPosition>();
+
+            NetworkManager.startPositions.Add(spawnPoint.transform);
         }
     }
 
     private Vector2Int GetPointAtApproxDistance(MazeCell[,] grid, int width, int height, List<Vector2Int> existing, float target, List<RoomData> rooms)
     {
-        Vector2Int bestCandidate = existing[0];
+        Vector2Int best = existing[0];
         float bestScore = float.MaxValue;
 
         for (int x = 0; x < width; x++)
@@ -72,33 +66,17 @@ public class SpawnManager : MonoBehaviour
 
                 float avgDist = 0;
                 foreach (Vector2Int sp in existing)
-                {
                     avgDist += Vector2Int.Distance(current, sp);
-                }
                 avgDist /= existing.Count;
 
                 float score = Mathf.Abs(avgDist - target);
                 if (score < bestScore)
                 {
                     bestScore = score;
-                    bestCandidate = current;
+                    best = current;
                 }
             }
         }
-        return bestCandidate;
-    }
-
-    public void ClearSpawns()
-    {
-        for (int i = _spawnedObjects.Count - 1; i >= 0; i--)
-        {
-            if (_spawnedObjects[i] == null) continue;
-
-            if (Application.isPlaying)
-                Destroy(_spawnedObjects[i]);
-            else
-                DestroyImmediate(_spawnedObjects[i]);
-        }
-        _spawnedObjects.Clear();
+        return best;
     }
 }
