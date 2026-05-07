@@ -2019,6 +2019,7 @@ GameObject:
   - component: {fileID: 2316894256959697880}
   - component: {fileID: 6575660432405259986}
   - component: {fileID: 4453114924745362383}
+  - component: {fileID: 8158642793167799997}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2255,6 +2256,39 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   sceneName: Game_Scene
+--- !u!114 &8158642793167799997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2159765669007953925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f63ea2e505fd484193fb31c5c55ca73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mirror.Components::Mirror.NetworkTransformHybrid
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0.033333335
+  baselineRate: 1
+  unreliableRedundancy: 0
+  baselineIsDelta: 1
+  debugLog: 0
+  useFixedUpdate: 0
+  target: {fileID: 8053205278072415922}
+  bufferSizeLimit: 64
+  sendRate: 30
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 1
+  debugDraw: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1 &2198306714798468324
 GameObject:
   m_ObjectHideFlags: 0
