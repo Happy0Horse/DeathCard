@@ -26,6 +26,10 @@
 *.vs/
 *.vscode/
 
+# Recovery
+Assets/_Recovery/
+*/_Recovery/
+
 # Unity3D generated file on crash reports
 sysinfo.txt
 
