@@ -35589,7 +35589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   deadlineDuration: 15
   cardDistributionInterval: 10
-  preGameWaitDuration: 2312
+  preGameWaitDuration: 60
   cardsPerInterval: 3
   overtimeDamagePerSecond: 5
 --- !u!4 &1781434922

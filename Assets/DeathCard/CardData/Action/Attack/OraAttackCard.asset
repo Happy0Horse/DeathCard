@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OraAttackCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Ora Ora Ora!
-  icon: {fileID: 21300000, guid: 82e8a84bbe88b9145ba3ca32d096a94d, type: 3}
+  icon: {fileID: 0}
   category: 1
   attackMode: 2
   utilityType: 0

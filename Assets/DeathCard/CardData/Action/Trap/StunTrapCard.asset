@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StunTrapCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Stun Trap
-  icon: {fileID: 21300000, guid: cb29d4fd02e25d64da5d7240f01fd93c, type: 3}
+  icon: {fileID: 0}
   category: 2
   attackMode: 1
   utilityType: 0
