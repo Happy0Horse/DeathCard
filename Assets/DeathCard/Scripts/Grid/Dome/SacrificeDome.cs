@@ -6,7 +6,7 @@ public class SacrificeDome : MonoBehaviour
     [Header("Chain Reference")]
     public bool isFirstDome = false;
     public SacrificeDome innerDome;
-
+    public int domeIndex = 0;
     public float threshold = 500f;
     public float currentPoints = 0f;
 
@@ -22,29 +22,32 @@ public class SacrificeDome : MonoBehaviour
     private Material _domeMat;
     private bool _isShattering = false;
     private bool _isActive = false;
+    private bool _isSkipped = false;
 
     void Start()
     {
         _renderer = GetComponent<Renderer>();
         _domeMat = _renderer.material;
-
         UpdateInactiveAlpha();
 
         if (isFirstDome)
         {
-            EnableDome();
+            DomeInitializer.RegisterFirstDome(this);
         }
+    }
+
+    public void MarkSkipped()
+    {
+        _isSkipped = true;
     }
 
     public void EnableDome()
     {
         if (_isActive) return;
         _isActive = true;
-
         GlobalEvents.OnAnyDamageTaken -= AccumulateDamage;
         GlobalEvents.OnAnyDamageTaken += AccumulateDamage;
-
-        UpdateDomeVisuals();
+        if (_domeMat != null) UpdateDomeVisuals();
     }
 
     void OnDestroy() => GlobalEvents.OnAnyDamageTaken -= AccumulateDamage;
@@ -52,7 +55,6 @@ public class SacrificeDome : MonoBehaviour
     void Update()
     {
         if (!_isActive || _isShattering) return;
-
         if (flashIntencity > 0)
         {
             flashIntencity = Mathf.MoveTowards(flashIntencity, 0, Time.deltaTime * flashSpeed);
@@ -63,11 +65,9 @@ public class SacrificeDome : MonoBehaviour
     void AccumulateDamage(float damage)
     {
         if (!_isActive || _isShattering) return;
-
         currentPoints += damage;
         flashIntencity = 1.0f;
         UpdateDomeVisuals();
-
         if (currentPoints >= threshold)
         {
             currentPoints = threshold;
@@ -84,7 +84,6 @@ public class SacrificeDome : MonoBehaviour
             col.a = 0.2f;
             _domeMat.SetColor("_DomeColor", col);
         }
-
         if (_domeMat.HasProperty("_FlashIntencity"))
         {
             _domeMat.SetFloat("_FlashIntencity", 0f);
@@ -95,23 +94,19 @@ public class SacrificeDome : MonoBehaviour
     {
         float percent = Mathf.Clamp01(currentPoints / threshold);
         float visualAlpha = Mathf.Lerp(0.2f, 1.0f, percent);
-
         if (_domeMat.HasProperty("_DomeColor"))
         {
             Color col = _domeMat.GetColor("_DomeColor");
             col.a = visualAlpha;
             _domeMat.SetColor("_DomeColor", col);
         }
-
         if (_domeMat.HasProperty("_FlashColor"))
         {
             Color baseFlash = _domeMat.GetColor("_FlashColor");
             float h, s, v;
             Color.RGBToHSV(baseFlash, out h, out s, out v);
-
             float intensityBoost = Mathf.Lerp(1f, 3f, percent);
             Color finalFlash = Color.HSVToRGB(h, s, Mathf.Clamp(v * intensityBoost, 0, 5f));
-
             _domeMat.SetColor("_FlashColor", finalFlash);
         }
     }
@@ -119,7 +114,6 @@ public class SacrificeDome : MonoBehaviour
     IEnumerator ShatterSequence()
     {
         GlobalEvents.OnAnyDamageTaken -= AccumulateDamage;
-
         float dissolve = 0;
         while (dissolve < 1.0f)
         {
@@ -128,11 +122,13 @@ public class SacrificeDome : MonoBehaviour
             yield return null;
         }
 
-        GlobalEvents.OnDomeBroken?.Invoke();
-
-        if (innerDome != null)
+        if (!_isSkipped)
         {
-            innerDome.StartCoroutine(innerDome.DelayedEnable(waitBeforeNextDome));
+            GlobalEvents.OnDomeBroken?.Invoke();
+            if (innerDome != null)
+            {
+                innerDome.StartCoroutine(innerDome.DelayedEnable(waitBeforeNextDome));
+            }
         }
 
         Destroy(gameObject);

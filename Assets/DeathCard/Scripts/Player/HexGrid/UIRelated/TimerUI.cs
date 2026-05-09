@@ -23,11 +23,8 @@ public class TimerUI : MonoBehaviour
     [Header("Round End Elements")]
     [SerializeField] private TextMeshProUGUI roundStatusText;
     [SerializeField] private TextMeshProUGUI roundCountdownText;
-    [SerializeField] private float transitionDelay = 5f;
 
     private HexViewManager _viewManager;
-    private float _transitionTimer;
-    private bool _isTransitioning;
     private bool _isOvertime;
 
     private void Awake()
@@ -42,6 +39,7 @@ public class TimerUI : MonoBehaviour
         GameManager.OnGameStarted += ShowActiveTimer;
         GameManager.OnRoundOver += ShowRoundEnd;
         GameManager.OnDeadlineReached += EnableOvertimeDisplay;
+        GameManager.OnRoundTransitionTick += UpdateRoundCountdown;
 
         if (startButton != null)
             startButton.onClick.AddListener(OnStartButtonClicked);
@@ -57,6 +55,7 @@ public class TimerUI : MonoBehaviour
         GameManager.OnGameStarted -= ShowActiveTimer;
         GameManager.OnRoundOver -= ShowRoundEnd;
         GameManager.OnDeadlineReached -= EnableOvertimeDisplay;
+        GameManager.OnRoundTransitionTick -= UpdateRoundCountdown;
     }
 
     private void Start()
@@ -64,23 +63,6 @@ public class TimerUI : MonoBehaviour
         waitingPanel.SetActive(true);
         activeTimerPanel.SetActive(false);
         roundEndPanel.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (!_isTransitioning) return;
-
-        _transitionTimer -= Time.deltaTime;
-        if (roundCountdownText != null)
-        {
-            roundCountdownText.text = $"Next round in: {Mathf.CeilToInt(_transitionTimer)}s";
-        }
-
-        if (_transitionTimer <= 0)
-        {
-            _isTransitioning = false;
-            Debug.Log("Initiating Scene Transition...");
-        }
     }
 
     private void OnStartButtonClicked()
@@ -107,9 +89,7 @@ public class TimerUI : MonoBehaviour
     {
         _isOvertime = true;
         if (timerText != null)
-        {
             timerText.text = "Overtime. Everyone takes damage overtime";
-        }
     }
 
     private void ShowRoundEnd(int domeIndex)
@@ -120,20 +100,19 @@ public class TimerUI : MonoBehaviour
         _isOvertime = false;
 
         if (roundStatusText != null)
-        {
             roundStatusText.text = $"DOME {domeIndex} HAS FALLEN";
-        }
+    }
 
-        _transitionTimer = transitionDelay;
-        _isTransitioning = true;
+    private void UpdateRoundCountdown(float timeRemaining)
+    {
+        if (roundCountdownText != null)
+            roundCountdownText.text = $"Next round in: {Mathf.CeilToInt(timeRemaining)}s";
     }
 
     private void UpdateWaitingDisplay(float timeUntilStart)
     {
         if (autoStartText != null)
-        {
             autoStartText.text = $"Auto-starting in: {Mathf.CeilToInt(timeUntilStart)}s";
-        }
     }
 
     private void UpdateActiveDisplay(float timeRemaining)
@@ -153,8 +132,6 @@ public class TimerUI : MonoBehaviour
         }
 
         if (cardAmountText != null)
-        {
             cardAmountText.text = $"Card amount per distribution: {GameManager.Instance.GetCardsPerInterval()}";
-        }
     }
 }
