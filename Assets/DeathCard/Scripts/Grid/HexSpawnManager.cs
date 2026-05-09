@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 
 public class HexSpawnManager : MonoBehaviour
 {
     public HexGrid grid;
-    public GameObject playerPrefab;
     public Material spawnPointMaterial;
     public float playerHeightOffset = 2.5f;
 
@@ -13,30 +13,56 @@ public class HexSpawnManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnPlayerAtStart();
+        StartCoroutine(SetupNextFrame());
     }
 
-    public void SetupSpawns()
+    private System.Collections.IEnumerator SetupNextFrame()
     {
+        yield return null;
+        SetupSpawnPoints();
+    }
+
+    public void SetupSpawnPoints()
+    {
+        // Удаляем старые спавнпоинты
+        foreach (var sp in FindObjectsOfType<NetworkStartPosition>())
+            Destroy(sp.gameObject);
+        NetworkManager.startPositions.Clear();
+
         List<GameObject> points = CalculateSpawnPoints();
+        if (points == null || points.Count == 0)
+        {
+            Debug.LogError("[HexSpawnManager] No spawn points found!");
+            return;
+        }
+
         HighlightPoints(points);
+
+        foreach (var point in points)
+        {
+            Vector3 spawnPos = point.transform.position + Vector3.up * playerHeightOffset;
+            GameObject spawnPoint = new GameObject("SpawnPoint");
+            spawnPoint.transform.position = spawnPos;
+            spawnPoint.AddComponent<NetworkStartPosition>();
+            NetworkManager.startPositions.Add(spawnPoint.transform);
+        }
+
+        Debug.Log($"[HexSpawnManager] Создано {points.Count} спавнпоинтов");
     }
 
     private List<GameObject> CalculateSpawnPoints()
     {
-        var generator = Object.FindFirstObjectByType<HexGridGenerator>();
+        var generator = FindFirstObjectByType<HexGridGenerator>();
         if (generator == null) return new List<GameObject>();
 
         if (grid == null) grid = generator.GetComponent<HexGrid>();
         int currentRadius = generator.radius;
 
         List<HexCell> allCells = grid.Cells.Values.ToList();
-
         if (allCells.Count == 0) return new List<GameObject>();
 
         List<HexCell> edgeCells = allCells.Where(cell =>
             GetHexDistance(cell.coordinates, Vector2Int.zero) == currentRadius).ToList();
-
         if (edgeCells.Count == 0) return new List<GameObject>();
 
         List<HexCell> corners = new List<HexCell> { edgeCells[0] };
@@ -69,9 +95,7 @@ public class HexSpawnManager : MonoBehaviour
         {
             Renderer r = point.GetComponentInChildren<Renderer>();
             if (r != null && spawnPointMaterial != null)
-            {
                 r.sharedMaterial = spawnPointMaterial;
-            }
         }
     }
 
@@ -80,83 +104,18 @@ public class HexSpawnManager : MonoBehaviour
         return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.x + a.y - (b.x + b.y)) + Mathf.Abs(a.y - b.y)) / 2;
     }
 
-    private void SpawnPlayerAtStart()
+    public GameObject SpawnObjectOnNeighborCell(HexCell fromCell, GameObject prefab, float heightOffset = 1f)
     {
-        var generator = Object.FindFirstObjectByType<HexGridGenerator>();
-        if (generator == null) return;
+        if (fromCell == null || prefab == null) return null;
 
-        if (grid == null) grid = generator.GetComponent<HexGrid>();
-
-        if (grid.Cells.Count == 0)
-        {
-            PopulateGridFromChildren(generator.transform);
-        }
-
-        List<GameObject> points = CalculateSpawnPoints();
-
-        if (points != null && points.Count > 0 && playerPrefab != null)
-        {
-            Vector3 spawnPos = points[0].transform.position + Vector3.up * playerHeightOffset;
-            GameObject p = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
-
-            var viewManager = p.GetComponent<HexViewManager>();
-            var navigator = p.GetComponent<HexGridNavigator>();
-
-            if (viewManager != null) viewManager.SetGridCenter(generator.transform);
-
-            if (navigator != null && viewManager != null)
-            {
-                HexCell startCell = points[0].GetComponent<HexCell>();
-                navigator.Initialize(grid, startCell.coordinates, viewManager);
-            }
-        }
-        else
-        {
-            Debug.LogError("[HexSpawnManager] No spawn points found! Check if HexCells are attached to prefabs.");
-        }
-    }
-
-    private void PopulateGridFromChildren(Transform root)
-    {
-        grid.Clear();
-        foreach (Transform child in root)
-        {
-            HexCell cell = child.GetComponent<HexCell>();
-            if (cell != null)
-            {
-                grid.AddCell(cell.coordinates, child.gameObject);
-            }
-        }
-        grid.LinkNeighbors();
-    }
-
-    public GameObject SpawnObjectOnNeighborCell(
-    HexCell fromCell,
-    GameObject prefab,
-    float heightOffset = 1f
-)
-    {
-        if (fromCell == null || prefab == null)
-            return null;
-
-        HexCell neighbor = fromCell.neighbors
-            .Find(n => n != null && n.canWalkOn);
-
+        HexCell neighbor = fromCell.neighbors.Find(n => n != null && n.canWalkOn);
         if (neighbor == null)
         {
             Debug.LogWarning("No available neighbor cell found");
             return null;
         }
 
-        Vector3 spawnPosition = neighbor.transform.position;
-        spawnPosition.y = neighbor.transform.position.y + heightOffset;
-
-        GameObject spawnedObject = Instantiate(
-            prefab,
-            spawnPosition,
-            Quaternion.identity
-        );
-
-        return spawnedObject;
+        Vector3 spawnPosition = neighbor.transform.position + Vector3.up * heightOffset;
+        return Instantiate(prefab, spawnPosition, Quaternion.identity);
     }
 }

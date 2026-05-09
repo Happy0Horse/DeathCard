@@ -34,6 +34,7 @@ public struct CountdownMessage : NetworkMessage
 public struct RoomStartMessage : NetworkMessage
 {
     public string roomId;
+    public string sceneName;
 }
 
 public static class StringExtensions

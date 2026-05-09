@@ -4,8 +4,9 @@ using UnityEngine.EventSystems;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 
-public class HexGridNavigator : MonoBehaviour
+public class HexGridNavigator : NetworkBehaviour
 {
     public HexGrid grid;
     public float moveSpeed = 8f;
@@ -16,6 +17,7 @@ public class HexGridNavigator : MonoBehaviour
     public bool IsMoving => _isMoving;
     public bool IgnoreCancelAction { get; set; }
 
+    private Transform _root;
     private Vector2Int _currentCoord;
     private bool _isMoving = false;
     private bool _isSelecting = false;
@@ -30,24 +32,30 @@ public class HexGridNavigator : MonoBehaviour
     private void OnEnable() => GameEvents.OnCancelCurrentAction += TryCancel;
     private void OnDisable() => GameEvents.OnCancelCurrentAction -= TryCancel;
 
+    public bool IsInitialized { get; private set; } = false;
+
     public void Initialize(HexGrid grid, Vector2Int startCoord, HexViewManager viewManager)
     {
         this.grid = grid;
         _currentCoord = startCoord;
         _viewManager = viewManager;
         _debuffs = GetComponent<DebuffSystem>();
+        _root = transform.root;
+        IsInitialized = true;
     }
 
     private void Update()
     {
+        if (!isLocalPlayer) return;
+        
         if (_isSelecting && !_isMoving && Mouse.current.leftButton.wasPressedThisFrame)
-        {
             HandleSelectionClick();
-        }
     }
 
     public void BeginSelection(int range, Action<HexCell> callback)
     {
+        if (!isLocalPlayer) return;
+
         if (_isMoving || grid == null) return;
 
         ClearSelectionState();
@@ -116,6 +124,7 @@ public class HexGridNavigator : MonoBehaviour
 
     public void MoveTo(HexCell target)
     {
+        if (!isLocalPlayer) return;
         List<HexCell> path = FindPath(_currentCoord, target.coordinates);
         if (path.Count > 0)
         {
@@ -185,20 +194,21 @@ public class HexGridNavigator : MonoBehaviour
             }
 
             Vector3 targetPos = path[i].transform.position + Vector3.up * heightOffset;
-            Vector3 targetDir = (targetPos - transform.position);
+            Vector3 targetDir = (targetPos - _root.position);
             targetDir.y = 0;
+
             if (targetDir.sqrMagnitude > 0.001f)
             {
                 Quaternion targetRot = Quaternion.LookRotation(targetDir);
-                while (Vector3.Distance(transform.position, targetPos) > 0.01f)
+                while (Vector3.Distance(_root.position, targetPos) > 0.01f)
                 {
                     if (_debuffs != null && _debuffs.IsStunned)
                     {
                         _isMoving = false;
                         yield break;
                     }
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+                    _root.rotation = Quaternion.RotateTowards(_root.rotation, targetRot, rotationSpeed * Time.deltaTime);
+                    _root.position = Vector3.MoveTowards(_root.position, targetPos, moveSpeed * Time.deltaTime);
                     yield return null;
                 }
             }
@@ -240,5 +250,50 @@ public class HexGridNavigator : MonoBehaviour
         }
         _highlightedCells.Clear();
         _originalMaterials.Clear();
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        StartCoroutine(InitializeWhenReady());
+    }
+
+    private IEnumerator InitializeWhenReady()
+    {
+        HexGrid grid = null;
+        while (grid == null || grid.Cells.Count == 0)
+        {
+            grid = FindObjectOfType<HexGrid>();
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        HexViewManager viewManager = GetComponentInParent<HexViewManager>();
+        if (viewManager == null) viewManager = GetComponent<HexViewManager>();
+        
+        HexGridGenerator generator = FindObjectOfType<HexGridGenerator>();
+
+        HexCell startCell = null;
+        float minDist = float.MaxValue;
+        foreach (var cell in grid.Cells.Values)
+        {
+            float dist = Vector3.Distance(cell.transform.position, transform.root.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                startCell = cell;
+            }
+        }
+
+        if (startCell == null)
+        {
+            Debug.LogError("HexGridNavigator: не удалось найти стартовую клетку");
+            yield break;
+        }
+
+        if (generator != null && viewManager != null)
+            viewManager.SetGridCenter(generator.transform);
+
+        Initialize(grid, startCell.coordinates, viewManager);
+        Debug.Log($"HexGridNavigator: инициализирован на клетке {startCell.coordinates}");
+        Debug.Log($"HexGridNavigator готов, grid.Cells={grid.Cells.Count}, startCell={startCell.coordinates}");
     }
 }

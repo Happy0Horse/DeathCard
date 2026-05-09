@@ -11,7 +11,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float standHeight = 2.0f;
     [SerializeField] private float crouchSpeed = 8f;
 
-
+    public Transform cameraTransform;
     public float speed = 5f;
     public float sprintSpeed = 8f;
     public float jumpForce = 5f;
@@ -36,6 +36,7 @@ public class PlayerMovement : NetworkBehaviour
 
 
     private CharacterController controller;
+    private Transform _root;
 
     private Vector2 moveInput;
     private float yVelocity;
@@ -49,6 +50,7 @@ public class PlayerMovement : NetworkBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        _root = transform.root;
 
         stamina = maxStamina;
 
@@ -91,7 +93,14 @@ public class PlayerMovement : NetworkBehaviour
 
     void Move()
     {
-        Vector3 inputDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 inputDirection = (right * moveInput.x + forward * moveInput.y).normalized;
 
         bool isGrounded = controller.isGrounded;
 
@@ -172,11 +181,11 @@ public class PlayerMovement : NetworkBehaviour
             showStaminaBar = true;
 
             float currentSpeed = isSprinting ? sprintSpeed : speed;
-
-            airVelocity = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized
-                          * currentSpeed;
+            airVelocity = (cameraTransform.right * moveInput.x + cameraTransform.forward * moveInput.y).normalized * currentSpeed;
+            airVelocity.y = 0f;
         }
     }
+    
     public void OnCrouch(InputValue value)
     {
         if (canCrouch)
