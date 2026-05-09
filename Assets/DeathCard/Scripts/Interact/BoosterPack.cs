@@ -40,7 +40,7 @@ public class BoosterPack : Interactable
         }
         for (int i = itemList.Count; i < 5; ++i)
         {
-            int rand = random.Next(0, 10);
+            int rand = random.Next(0, 11);
             if (rand < 3)
             {
                 List<CardData> cardPool = new List<CardData>();

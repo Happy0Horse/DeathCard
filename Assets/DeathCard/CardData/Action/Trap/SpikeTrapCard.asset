@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpikeTrapCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Spike Trap
-  icon: {fileID: 21300000, guid: 138af825d3eae5e47a1474fa5e5f331b, type: 3}
+  icon: {fileID: 0}
   category: 2
   attackMode: 1
   utilityType: 0
