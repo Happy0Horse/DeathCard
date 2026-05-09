@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Nose Care
-  icon: {fileID: 21300000, guid: 2039fea0e0e9924429657f1cd801c41f, type: 3}
+  icon: {fileID: 0}
   category: 3
   attackMode: 0
   utilityType: 1

@@ -5,6 +5,18 @@ public class HexGrid : MonoBehaviour
 {
     public Dictionary<Vector2Int, HexCell> Cells = new Dictionary<Vector2Int, HexCell>();
 
+    void Awake()
+    {
+        Cells.Clear();
+        foreach (Transform child in transform)
+        {
+            HexCell cell = child.GetComponent<HexCell>();
+            if (cell != null && !Cells.ContainsKey(cell.coordinates))
+                Cells.Add(cell.coordinates, cell);
+        }
+        LinkNeighbors();
+    }
+
     public void Clear() => Cells.Clear();
 
     public void AddCell(Vector2Int coord, GameObject obj)

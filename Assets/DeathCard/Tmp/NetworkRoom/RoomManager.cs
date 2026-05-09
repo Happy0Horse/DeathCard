@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
 {
     public static RoomManager instance;
 
-    public string gameSceneName = "Labyrinth_Scene";
+    public string gameSceneName = "Game_Scene";
 
     private List<GameRoom> rooms = new List<GameRoom>();
     private Dictionary<NetworkConnectionToClient, GameRoom> playerRoomMap
@@ -137,12 +137,9 @@ public class RoomManager : MonoBehaviour
     IEnumerator StartRoomCoroutine(GameRoom room)
     {
         room.isStarted = true;
-        Debug.Log("СЕРВЕР: Загружаем Maze_Scene аддитивно");
 
-        AsyncOperation op = SceneManager.LoadSceneAsync("Maze_Scene", LoadSceneMode.Additive);
+        AsyncOperation op = SceneManager.LoadSceneAsync(gameSceneName, LoadSceneMode.Additive);
         yield return op;
-
-        Debug.Log($"СЕРВЕР: Сцена загружена, сцен всего={SceneManager.sceneCount}");
 
         room.scene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
 
@@ -154,7 +151,7 @@ public class RoomManager : MonoBehaviour
                 conn.identity.SetMatchId(room.roomId);
             }
 
-            conn.Send(new RoomStartMessage { roomId = room.roomId });
+            conn.Send(new RoomStartMessage { roomId = room.roomId, sceneName = gameSceneName });
         }
     }
 

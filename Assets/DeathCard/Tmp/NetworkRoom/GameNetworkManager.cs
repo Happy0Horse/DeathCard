@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 using Mirror;
 
 public class GameNetworkManager : NetworkManager
@@ -33,30 +34,60 @@ public class GameNetworkManager : NetworkManager
     IEnumerator SpawnWhenReady(NetworkConnectionToClient conn)
     {
         string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        Debug.Log($"СЕРВЕР: SpawnWhenReady, сцена={currentScene}");
 
         if (currentScene == "Maze_Scene")
         {
             MazeGenerator maze = null;
-
             while (maze == null || !maze.isReady)
             {
                 maze = FindObjectOfType<MazeGenerator>();
-                Debug.Log($"СЕРВЕР: Ждём лабиринт, maze={maze}, isReady={maze?.isReady}");
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        else if (currentScene == "Game_Scene") // замените на название вашей хекс сцены
+        {
+            HexSpawnManager hexSpawn = null;
+            while (hexSpawn == null)
+            {
+                hexSpawn = FindObjectOfType<HexSpawnManager>();
                 yield return new WaitForSeconds(0.1f);
             }
 
-            Debug.Log($"СЕРВЕР: Лабиринт готов, спавнпоинтов={NetworkManager.startPositions.Count}");
+            while (NetworkManager.startPositions.Count == 0)
+                yield return new WaitForSeconds(0.1f);
         }
-
-        Vector3 spawnPos = GetSpawnPoint();
-        Debug.Log($"СЕРВЕР: Спавним на {spawnPos}, всего спавнпоинтов={NetworkManager.startPositions.Count}");
 
         if (conn.identity != null)
             NetworkServer.RemovePlayerForConnection(conn, true);
 
+        Vector3 spawnPos = GetSpawnPoint();
+        Debug.Log($"[GameNetworkManager] GetSpawnPoint вернул: {spawnPos}, всего позиций: {NetworkManager.startPositions.Count}");
         GameObject player = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+        Debug.Log($"[GameNetworkManager] Игрок заспавнен на {player.transform.position}");
         NetworkServer.AddPlayerForConnection(conn, player);
+
+        // Инициализируем HexGridNavigator если на хекс сцене
+        if (currentScene == "Game_Scene")
+        {
+            HexGridNavigator navigator = player.GetComponentInChildren<HexGridNavigator>();
+            HexViewManager viewManager = player.GetComponentInChildren<HexViewManager>();
+            HexGrid grid = FindObjectOfType<HexGrid>();
+            HexGridGenerator generator = FindObjectOfType<HexGridGenerator>();
+
+            if (navigator != null && viewManager != null && grid != null)
+            {
+                // Находим ближайшую клетку к позиции спавна
+                HexCell startCell = grid.Cells.Values
+                    .OrderBy(c => Vector3.Distance(c.transform.position, player.transform.position))
+                    .FirstOrDefault();
+
+                if (startCell != null)
+                {
+                    viewManager.SetGridCenter(generator.transform);
+                    navigator.Initialize(grid, startCell.coordinates, viewManager);
+                }
+            }
+        }
 
         string matchId = RoomManager.instance.GetRoomId(conn);
         if (matchId != null)

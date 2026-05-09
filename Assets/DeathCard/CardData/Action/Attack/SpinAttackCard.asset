@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpinAttackCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Nose Spin
-  icon: {fileID: 21300000, guid: 100e0ce9f298c5d4ab7d28990a58cb9f, type: 3}
+  icon: {fileID: 0}
   category: 1
   attackMode: 1
   utilityType: 0

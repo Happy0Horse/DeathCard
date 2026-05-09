@@ -96,6 +96,6 @@ public class MatchmakingUI : MonoBehaviour
 
     void OnRoomStart(RoomStartMessage msg)
     {
-        ((GameNetworkManager)NetworkManager.singleton).ChangeToScene("Maze_Scene");
+        ((GameNetworkManager)NetworkManager.singleton).ChangeToScene(msg.sceneName);
     }
 }

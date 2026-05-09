@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MemeUtillityCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Nosed One
-  icon: {fileID: 21300000, guid: b966c2b4f4a616d4491e6832ea0678ab, type: 3}
+  icon: {fileID: 0}
   category: 3
   attackMode: 0
   utilityType: 0

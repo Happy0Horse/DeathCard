@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExplodeTrapCard
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   itemName: Explosive Trap
-  icon: {fileID: 21300000, guid: 8df4430081bd6e34cb29df7d1695e7cc, type: 3}
+  icon: {fileID: 0}
   category: 2
   attackMode: 1
   utilityType: 0
