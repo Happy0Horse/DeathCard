@@ -34,7 +34,6 @@ public struct CountdownMessage : NetworkMessage
 public struct RoomStartMessage : NetworkMessage
 {
     public string roomId;
-    public string sceneName;
 }
 
 public static class StringExtensions
@@ -60,3 +59,44 @@ public struct SendChatMessage : NetworkMessage
 }
 
 public struct SpawnRequestMessage : NetworkMessage { }
+
+public struct GameStateMessage : NetworkMessage
+{
+    public int state;
+    public int round;
+    public string sceneName;
+}
+
+public struct TimerUpdateMessage : NetworkMessage
+{
+    public float timeRemaining;
+    public float nextDistribution;
+    public int cardsPerInterval;
+}
+
+public struct StartWaitMessage : NetworkMessage
+{
+    public float timeUntilStart;
+}
+
+public struct GameStartedMessage : NetworkMessage { }
+
+public struct RoundOverMessage : NetworkMessage
+{
+    public int round;
+    public float transitionTime;
+}
+
+public struct DeadlineReachedMessage : NetworkMessage { }
+
+public struct OvertimeTickMessage : NetworkMessage
+{
+    public float damage;
+}
+
+public struct ManualStartMessage : NetworkMessage { }
+
+public struct MazeTimerMessage : NetworkMessage
+{
+    public float timeRemaining;
+}

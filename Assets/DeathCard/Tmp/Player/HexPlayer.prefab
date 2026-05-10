@@ -2063,7 +2063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -276.99994, y: 167.5}
+  m_AnchoredPosition: {x: -277, y: 167.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6894589515476524803
@@ -7306,8 +7306,10 @@ GameObject:
   - component: {fileID: 1098124125385994447}
   - component: {fileID: 7249115982891871916}
   - component: {fileID: 9134074690669104170}
-  - component: {fileID: -7594205540946170630}
   - component: {fileID: 8882515331431569513}
+  - component: {fileID: 4142322403925653646}
+  - component: {fileID: 3052723885215989269}
+  - component: {fileID: 1083951344001377902}
   m_Layer: 3
   m_Name: HexPlayer
   m_TagString: Untagged
@@ -7401,6 +7403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292acbfac4492ee40a08ea0e648cebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HexGridNavigator
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   grid: {fileID: 0}
   moveSpeed: 8
   rotationSpeed: 720
@@ -7619,7 +7624,53 @@ MonoBehaviour:
   - {fileID: 7666675151197994656}
   - {fileID: 7942548788720222947}
   selectedCards: []
---- !u!114 &-7594205540946170630
+--- !u!114 &8882515331431569513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188624983818404496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d627f0e5afa9247a992447df895537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndgameHandler
+  moveRange: 3
+  winCanvas: {fileID: 1056768598888532839}
+--- !u!114 &4142322403925653646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188624983818404496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07776cd91c7d7b37491defc72b5ecb98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableOnScene
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  sceneName: Labyrinth_Scene
+--- !u!114 &3052723885215989269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188624983818404496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07776cd91c7d7b37491defc72b5ecb98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableOnScene
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  sceneName: Maze_Scene
+--- !u!114 &1083951344001377902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7636,20 +7687,6 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &8882515331431569513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8188624983818404496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d627f0e5afa9247a992447df895537, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EndgameHandler
-  moveRange: 3
-  winCanvas: {fileID: 1056768598888532839}
 --- !u!1 &8677384308116901877
 GameObject:
   m_ObjectHideFlags: 0
