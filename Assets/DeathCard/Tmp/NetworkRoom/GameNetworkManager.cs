@@ -17,6 +17,7 @@ public class GameNetworkManager : NetworkManager
         NetworkServer.RegisterHandler<DomeBrokenMessage>(OnDomeBroken);
         NetworkServer.RegisterHandler<GameOverMessage>(OnGameOver);
         NetworkServer.RegisterHandler<TimerFreezeMessage>(OnTimerFreeze);
+        NetworkServer.RegisterHandler<PlayerDiedMessage>(OnPlayerDied);
     }
 
     void OnManualStart(NetworkConnectionToClient conn, ManualStartMessage msg)
@@ -37,6 +38,12 @@ public class GameNetworkManager : NetworkManager
     void OnSpawnRequest(NetworkConnectionToClient conn, SpawnRequestMessage msg)
     {
         StartCoroutine(SpawnWhenReady(conn));
+    }
+
+    void OnPlayerDied(NetworkConnectionToClient conn, PlayerDiedMessage msg)
+    {
+        Debug.Log($"[Server] Игрок умер, дисконнектим");
+        conn.Disconnect();
     }
 
     IEnumerator SpawnWhenReady(NetworkConnectionToClient conn)

@@ -1,7 +1,8 @@
+using Mirror;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerStat : MonoBehaviour
+public class PlayerStat : NetworkBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
@@ -26,5 +27,12 @@ public class PlayerStat : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    private void Die() => Debug.Log($"{gameObject.name} has perished.");
+    private void Die()
+    {
+        Debug.Log($"{gameObject.name} has perished.");
+
+        if (!isLocalPlayer) return;
+
+        NetworkClient.Send(new PlayerDiedMessage());
+    }
 }

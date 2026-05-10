@@ -5,6 +5,7 @@ using Mirror;
 public class PlayerLook : NetworkBehaviour
 {
     public Transform cameraTransform;
+    public Transform playerModel;
     public float mouseSensitivity = 200f;
 
     private Vector2 lookInput;
