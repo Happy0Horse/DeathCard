@@ -477,7 +477,7 @@ MonoBehaviour:
     isEnabled: 1
     mountKey: torch
     prefab: {fileID: 4110817267414035329, guid: 0313b6ea05b15eb479be842fa93f5c26, type: 3}
-    chance: 11
+    chance: 0
     interval: 2
     intervalRandomness: 1
     deadEndsOnly: 0
@@ -507,8 +507,8 @@ MonoBehaviour:
     isEnabled: 1
     mountKey: lonechest
     prefab: {fileID: 5300300372664439530, guid: a2ce2c9817042c44e9b8e449adb5c984, type: 3}
-    chance: 25
-    interval: 5
+    chance: 15
+    interval: 8
     intervalRandomness: 1
     deadEndsOnly: 0
     stepsSinceLast: 19

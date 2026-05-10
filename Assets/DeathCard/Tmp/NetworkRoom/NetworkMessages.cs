@@ -113,3 +113,5 @@ public struct EndgameStartedMessage : NetworkMessage { }
 public struct TimerFreezeMessage : NetworkMessage { public bool freeze; }
 
 public struct GameOverMessage : NetworkMessage { }
+
+public struct PlayerDiedMessage : NetworkMessage { }
