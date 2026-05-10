@@ -19,6 +19,12 @@ public class PlayerInteract : NetworkBehaviour
     }
     public PlayerType playerType;
 
+    private void Awake()
+    {
+        unlockDoor = LocalStorage.Instance.unlockDoor;
+        breakFences = LocalStorage.Instance.breakFences;
+    }
+
     void Update()
     {
         //if (!isLocalPlayer) return;
@@ -53,7 +59,7 @@ public class PlayerInteract : NetworkBehaviour
 
         if (obj != null)
         {
-            obj.Interact(this);
+            obj.Interact(this, unlockDoor, breakFences);
         }
     }
 }

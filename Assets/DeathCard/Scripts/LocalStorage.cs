@@ -9,6 +9,10 @@ public class LocalStorage : MonoBehaviour
 
     public int boosterPackCount = 0;
 
+    public bool unlockDoor = false;
+    public bool breakFences = false;
+    public bool canCrouch = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

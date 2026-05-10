@@ -69,6 +69,10 @@ public class PlayerMovement : NetworkBehaviour
         controller.height = standHeight;
     }
 
+    private void Awake()
+    {
+        canCrouch = LocalStorage.Instance.canCrouch;
+    }
     void Update()
     {
         if (!isLocalPlayer) return;

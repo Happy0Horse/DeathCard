@@ -77,11 +77,15 @@ public class InventoryManager : NetworkBehaviour
     void LoadBoosterPacksToInventory()
     {
         //int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 1);
-        Debug.LogAssertion("Loading " + LocalStorage.Instance.boosterPackCount + " booster packs to inventory.");
 
-        for (int i = 0; i < LocalStorage.Instance.boosterPackCount - 1; ++i)
+        //for (int i = 0; i < LocalStorage.Instance.boosterPackCount; ++i)
+        //{
+        //    inventory.AddItem(Instantiate(boosterPackItem));
+        //}
+        Debug.LogAssertion($"{inventory.items.Count}");
+        while (inventory.items.Count < LocalStorage.Instance.boosterPackCount)
         {
-            inventory.AddItem(boosterPackItem);
+            inventory.AddItem(Instantiate(boosterPackItem));
         }
 
         //PlayerPrefs.SetInt("BoosterPacks", 0);
@@ -99,12 +103,24 @@ public class InventoryManager : NetworkBehaviour
         }
     }
 
+    void fixInventory()
+    {
+        if(inventory.items.Count == 1 && inventory.items[0] == boosterPackItem)
+        {
+           inventory.items.Clear();
+        }
+    }
+
     private void Awake()
     {
         if(LocalStorage.Instance.items.Count != 0)
             LoadItemsToInventory();
-        if (LocalStorage.Instance.boosterPackCount > 0)
-            LoadBoosterPacksToInventory();
+        if (LocalStorage.Instance.boosterPackCount <= 1)
+        {
+            fixInventory();
+            LocalStorage.Instance.boosterPackCount = 1;
+        }
+        LoadBoosterPacksToInventory();
     }
 
     public void OnInventory(InputValue value)

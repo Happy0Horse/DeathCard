@@ -21,22 +21,23 @@ public class BoosterPack : Interactable
         List<ItemData> itemList = new List<ItemData>();
         System.Random random = new System.Random();
 
-        if (PlayerPrefs.GetInt("BreakFences", 0) == 0)
+        if (!LocalStorage.Instance.breakFences)
         {
             if (random.Next(0, 10) < 1)
-                PlayerPrefs.SetInt("BreakFences", 1);
-              
+                LocalStorage.Instance.breakFences = true;
+            
         }
-        if (PlayerPrefs.GetInt("UnlockDoor", 0) == 0)
+        if (!LocalStorage.Instance.unlockDoor)
         {
-            if (random.Next(0, 10) < 2)
-                PlayerPrefs.SetInt("UnlockDoor", 1);
-
+            if (random.Next(0, 10) < 1) 
+                LocalStorage.Instance.unlockDoor = true;
+            
         }
-        if (PlayerPrefs.GetInt("CanCrouch", 0) == 0)
+        if (!LocalStorage.Instance.canCrouch)
         {
-            if (random.Next(0, 10) < 3)
-                PlayerPrefs.SetInt("CanCrouch", 1); 
+            if (random.Next(0, 10) < 1)
+                LocalStorage.Instance.canCrouch = true;
+            
         }
         for (int i = itemList.Count; i < 5; ++i)
         {
@@ -88,7 +89,6 @@ public class BoosterPack : Interactable
             player.inventory.AddItem(itemList[q]);
 
             LocalStorage.Instance.items.Add(itemList[q]);
-            Debug.LogAssertion("Added " + LocalStorage.Instance.items[q] + " to LocalStorage from booster pack");
         }
     }
 

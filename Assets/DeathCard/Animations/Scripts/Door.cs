@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Door : Interactable
 {
-   
     public bool canOpen = true;
     private Animator animator;
     void Awake()
