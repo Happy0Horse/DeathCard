@@ -77,16 +77,16 @@ public class InventoryManager : NetworkBehaviour
     void LoadBoosterPacksToInventory()
     {
         //int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 1);
-        int boosterPacks = LocalStorage.Instance.boosterPackCount;
+        Debug.LogAssertion("Loading " + LocalStorage.Instance.boosterPackCount + " booster packs to inventory.");
 
-        for (int i = 0; i < boosterPacks; ++i)
+        for (int i = 0; i < LocalStorage.Instance.boosterPackCount - 1; ++i)
         {
             inventory.AddItem(boosterPackItem);
         }
 
         //PlayerPrefs.SetInt("BoosterPacks", 0);
         LocalStorage.Instance.boosterPackCount = 0;
-        PlayerPrefs.Save();
+        //PlayerPrefs.Save();
     }
 
     void LoadItemsToInventory()
@@ -95,10 +95,11 @@ public class InventoryManager : NetworkBehaviour
         foreach (ItemData item in items)
         {
             inventory.AddItem(item);
+            Debug.Log("Loaded " + item + " to inventory from LocalStorage");
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if(LocalStorage.Instance.items.Count != 0)
             LoadItemsToInventory();

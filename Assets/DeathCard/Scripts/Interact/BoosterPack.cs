@@ -86,6 +86,9 @@ public class BoosterPack : Interactable
         for (int q = 0; q < itemList.Count; ++q)
         {
             player.inventory.AddItem(itemList[q]);
+
+            LocalStorage.Instance.items.Add(itemList[q]);
+            Debug.LogAssertion("Added " + LocalStorage.Instance.items[q] + " to LocalStorage from booster pack");
         }
     }
 
@@ -93,11 +96,11 @@ public class BoosterPack : Interactable
     {
         if (player.playerType == PlayerInteract.PlayerType.MazePlayer)
         {
-            bool successfulAdd = player.inventory.AddItem(item);
-            if (successfulAdd)
+            if (player.inventory.AddItem(item))
             {
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 //PlayerPrefs.SetInt("BoosterPacks", PlayerPrefs.GetInt("BoosterPacks", 0) + 1);
+                Debug.Log("Booster Packs in storage : " + LocalStorage.Instance.boosterPackCount + " We added + 1");
                 LocalStorage.Instance.boosterPackCount++;
                 animator.SetTrigger("PickUp");
                 Destroy(gameObject, 1f);

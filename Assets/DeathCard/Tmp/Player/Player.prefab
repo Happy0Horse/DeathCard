@@ -1242,6 +1242,7 @@ MonoBehaviour:
   crouchHeight: 1
   standHeight: 2
   crouchSpeed: 5
+  cameraTransform: {fileID: 0}
   speed: 8
   sprintSpeed: 16
   jumpForce: 5
@@ -1271,7 +1272,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   cameraTransform: {fileID: 6633855351203743899}
-  mouseSensitivity: 50
+  mouseSensitivity: 1
 --- !u!114 &6562354805991952124
 MonoBehaviour:
   m_ObjectHideFlags: 0
