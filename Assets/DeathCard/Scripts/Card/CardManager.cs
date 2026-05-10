@@ -121,6 +121,7 @@ public class CardManager : MonoBehaviour
         if (selectedCards.Count >= 5) return false;
 
         selectedCards.Add(card);
+        LocalStorage.Instance.items.Add(card);
         Debug.Log($"Added card: {card.name}. Total selected cards: {selectedCards.Count}");
         return true;
     }
@@ -128,5 +129,7 @@ public class CardManager : MonoBehaviour
     public void RemoveSelectedCard(CardData card)
     {
         selectedCards.Remove(card);
+        LocalStorage.Instance.items.Remove(card);
+
     }
 }

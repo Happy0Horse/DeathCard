@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
             return false;
         }
         items.Add(item);
-        LocalStorage.Instance.items.Add(item);
+        //LocalStorage.Instance.items.Add(item);
         Debug.Log($"Added {item.name} to inventory. Total items: {items.Count}/{maxSlots}");
         inventoryUI.UpdateUI();
         return true;
