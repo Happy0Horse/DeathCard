@@ -100,3 +100,10 @@ public struct MazeTimerMessage : NetworkMessage
 {
     public float timeRemaining;
 }
+
+public struct DistributeCardsMessage : NetworkMessage
+{
+    public int count;
+}
+
+public struct DomeBrokenMessage : NetworkMessage { }

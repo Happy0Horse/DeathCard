@@ -1,4 +1,5 @@
 using UnityEngine;
+using Mirror;
 
 public class DomeInitializer : MonoBehaviour
 {
@@ -7,15 +8,11 @@ public class DomeInitializer : MonoBehaviour
     public static void RegisterFirstDome(SacrificeDome dome)
     {
         _pendingFirstDome = dome;
-        TryInitialize();
     }
 
-    private static void TryInitialize()
+    public static void InitializeForRound(int round)
     {
         if (_pendingFirstDome == null) return;
-        if (GameManager.Instance == null) return;
-
-        int round = GameManager.Instance.GetCurrentRound();
         SkipDomes(_pendingFirstDome, round);
         _pendingFirstDome = null;
     }

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public float cardDistributionInterval = 10f;
     public float preGameWaitDuration = 60f;
     public float mazeTimerDuration = 60f;
-    public int cardsPerInterval = 4;
+    public int cardsPerInterval = 3;
 
     [Header("Overtime Settings")]
     public float overtimeDamagePerSecond = 5f;
@@ -200,22 +200,15 @@ public class GameManager : MonoBehaviour
         if (!_firstDistributionDone)
         {
             _firstDistributionDone = true;
-            OnDistributeCards?.Invoke(cardsPerInterval);
+            RoomManager.instance.SendToRoom(_roomId, new DistributeCardsMessage { count = cardsPerInterval });
         }
 
         _cardTimer -= Time.deltaTime;
         if (_cardTimer <= 0)
         {
             _cardTimer = cardDistributionInterval;
-            OnDistributeCards?.Invoke(cardsPerInterval);
+            RoomManager.instance.SendToRoom(_roomId, new DistributeCardsMessage { count = cardsPerInterval });
         }
-
-        RoomManager.instance.SendToRoom(_roomId, new TimerUpdateMessage
-        {
-            timeRemaining = _timeRemaining,
-            nextDistribution = _cardTimer,
-            cardsPerInterval = cardsPerInterval
-        });
     }
 
     private void RunStandardTimers()
@@ -282,4 +275,9 @@ public class GameManager : MonoBehaviour
     public int GetCardsPerInterval() => cardsPerInterval;
     public int GetCurrentRound() => CurrentRound;
     public float GetMazeTimerDuration() => mazeTimerDuration;
+
+    public void TriggerDomeBroken()
+    {
+        HandleDomeBroken();
+    }
 }
