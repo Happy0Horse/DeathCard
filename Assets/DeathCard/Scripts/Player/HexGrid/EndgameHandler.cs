@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Mirror;
 
 public class EndgameHandler : MonoBehaviour
 {
@@ -16,13 +17,26 @@ public class EndgameHandler : MonoBehaviour
         _navigator = GetComponent<HexGridNavigator>();
     }
 
-    private void OnEnable() => GameManager.OnEndgameStarted += StartEndgame;
-    private void OnDisable() => GameManager.OnEndgameStarted -= StartEndgame;
+    private void OnEnable() => NetworkClient.RegisterHandler<EndgameStartedMessage>(OnEndgameStarted);
+    private void OnDisable() => NetworkClient.UnregisterHandler<EndgameStartedMessage>();
 
-    private void StartEndgame()
+    private void OnEndgameStarted(EndgameStartedMessage msg)
     {
         _endgameActive = true;
         StartCoroutine(EndgameMovementLoop());
+    }
+
+    private void TriggerWin()
+    {
+        _hasWon = true;
+        _endgameActive = false;
+        _navigator.ClearSelectionState();
+
+        if (winCanvas != null)
+            winCanvas.SetActive(true);
+
+        // Сообщаем серверу что игра окончена
+        NetworkClient.Send(new GameOverMessage());
     }
 
     private IEnumerator EndgameMovementLoop()
@@ -60,17 +74,5 @@ public class EndgameHandler : MonoBehaviour
 
         if (_navigator.CurrentCoordinates == Vector2Int.zero)
             TriggerWin();
-    }
-
-    private void TriggerWin()
-    {
-        _hasWon = true;
-        _endgameActive = false;
-        _navigator.ClearSelectionState();
-
-        if (winCanvas != null)
-            winCanvas.SetActive(true);
-
-        GameManager.Instance.EnterGameOver();
     }
 }

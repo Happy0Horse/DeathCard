@@ -20,15 +20,18 @@ public class InventoryManager : NetworkBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnGameStarted += DisableInventory;
-        GameManager.OnRoundOver += EnableInventory;
+        NetworkClient.RegisterHandler<GameStartedMessage>(OnGameStarted);
+        NetworkClient.RegisterHandler<RoundOverMessage>(OnRoundOver);
     }
 
     private void OnDisable()
     {
-        GameManager.OnGameStarted -= DisableInventory;
-        GameManager.OnRoundOver -= EnableInventory;
+        NetworkClient.UnregisterHandler<GameStartedMessage>();
+        NetworkClient.UnregisterHandler<RoundOverMessage>();
     }
+
+    private void OnGameStarted(GameStartedMessage msg) => DisableInventory();
+    private void OnRoundOver(RoundOverMessage msg) => EnableInventory(msg.round);
 
     private void DisableInventory()
     {
