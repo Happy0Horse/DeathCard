@@ -1288,8 +1288,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  unlockDoor: 1
-  breakFences: 1
+  unlockDoor: 0
+  breakFences: 0
   cameraTransform: {fileID: 6633855351203743899}
   interactDistance: 3
   debuffSystem: {fileID: 4828428243867892708}

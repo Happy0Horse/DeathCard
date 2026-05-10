@@ -10,24 +10,17 @@ public class MazeSlot : MonoBehaviour
 
     void Update()
     {
-        if(PlayerPrefs.GetInt("BreakFences") == 1 && skillType == SkillType.BreakFences)
+        if( LocalStorage.Instance.breakFences && skillType == SkillType.BreakFences)
         {
             icon.color = Color.limeGreen;
         }
-        else if (PlayerPrefs.GetInt("UnlockDoor") == 1 && skillType == SkillType.UnlockDoor)
+        else if (LocalStorage.Instance.unlockDoor && skillType == SkillType.UnlockDoor)
         {
             icon.color = Color.limeGreen;
         }
-        else if (PlayerPrefs.GetInt("Crouch") == 1 && skillType == SkillType.Crouch)
+        else if (LocalStorage.Instance.canCrouch && skillType == SkillType.Crouch)
         {
             icon.color = Color.limeGreen;
         }
-    }
-
-    private void OnDestroy()
-    {
-        PlayerPrefs.SetInt("BreakFences", 0);
-        PlayerPrefs.SetInt("UnlockDoor", 0);
-        PlayerPrefs.SetInt("Crouch", 0);
     }
 }

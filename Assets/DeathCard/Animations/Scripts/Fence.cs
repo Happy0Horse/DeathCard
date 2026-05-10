@@ -10,11 +10,14 @@ public class Fence : Interactable
 
     public override void Interact(PlayerInteract player = null, bool unlockDoor = false, bool breakFences = false)
     {
-        if (animator.GetBool("IsFenced"))
+        if (breakFences)
         {
-            animator.SetBool("IsFenced", false);
-        }
+            if (animator.GetBool("IsFenced"))
+            {
+                animator.SetBool("IsFenced", false);
+            }
 
-        Destroy(gameObject, 1f);
+            Destroy(gameObject, 1f);
+        }
     }
 }
