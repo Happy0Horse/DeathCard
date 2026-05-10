@@ -507,9 +507,9 @@ MonoBehaviour:
     isEnabled: 1
     mountKey: lonechest
     prefab: {fileID: 5300300372664439530, guid: a2ce2c9817042c44e9b8e449adb5c984, type: 3}
-    chance: 10
-    interval: 0
-    intervalRandomness: 0
+    chance: 25
+    interval: 5
+    intervalRandomness: 1
     deadEndsOnly: 0
     stepsSinceLast: 19
     currentTargetInterval: 2
@@ -962,9 +962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f96a5ecf965a646bce15f7e698572a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MazeTimer
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   timerText: {fileID: 1248074606}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

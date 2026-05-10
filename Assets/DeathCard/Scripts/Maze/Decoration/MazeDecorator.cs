@@ -52,26 +52,19 @@ public class MazeDecorator : MonoBehaviour
     private void ApplyRules(MazeCell cell, MazeCellDecor decor, System.Random _rng)
     {
         bool isDeadEnd = IsDeadEnd(cell);
-
         foreach (var rule in rules)
         {
             if (!rule.isEnabled || rule.prefab == null) continue;
             if (rule.deadEndsOnly && !isDeadEnd) continue;
 
             bool shouldSpawn = false;
-
-            if (rule.interval <= 0)
-            {
-                if (_rng.Next(0, 100) < rule.chance) shouldSpawn = true;
-            }
-            else
+            if (rule.interval > 0)
             {
                 rule.stepsSinceLast++;
-                if (rule.stepsSinceLast >= rule.currentTargetInterval)
-                {
-                    shouldSpawn = true;
-                }
+                if (rule.stepsSinceLast < rule.currentTargetInterval) continue;
             }
+
+            if (rule.chance <= 0 || _rng.Next(0, 100) < rule.chance) shouldSpawn = true;
 
             if (shouldSpawn)
             {
