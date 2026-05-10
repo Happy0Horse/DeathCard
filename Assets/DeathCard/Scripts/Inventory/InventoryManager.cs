@@ -73,20 +73,34 @@ public class InventoryManager : NetworkBehaviour
 
     void LoadBoosterPacksToInventory()
     {
-        int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 1);
+        //int boosterPacks = PlayerPrefs.GetInt("BoosterPacks", 1);
+        int boosterPacks = LocalStorage.Instance.boosterPackCount;
 
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < boosterPacks; ++i)
         {
             inventory.AddItem(boosterPackItem);
         }
 
-        PlayerPrefs.SetInt("BoosterPacks", 0);
+        //PlayerPrefs.SetInt("BoosterPacks", 0);
+        LocalStorage.Instance.boosterPackCount = 0;
         PlayerPrefs.Save();
+    }
+
+    void LoadItemsToInventory()
+    {
+        List<ItemData> items = LocalStorage.Instance.items;
+        foreach (ItemData item in items)
+        {
+            inventory.AddItem(item);
+        }
     }
 
     private void Start()
     {
-        LoadBoosterPacksToInventory();
+        if(LocalStorage.Instance.items.Count != 0)
+            LoadItemsToInventory();
+        if (LocalStorage.Instance.boosterPackCount > 0)
+            LoadBoosterPacksToInventory();
     }
 
     public void OnInventory(InputValue value)
