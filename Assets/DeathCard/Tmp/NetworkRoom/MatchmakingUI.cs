@@ -96,6 +96,7 @@ public class MatchmakingUI : MonoBehaviour
 
     void OnRoomStart(RoomStartMessage msg)
     {
-        ((GameNetworkManager)NetworkManager.singleton).ChangeToScene(msg.sceneName);
+        if (lobbyPanel != null)
+            lobbyPanel.SetActive(false);
     }
 }

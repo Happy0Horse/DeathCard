@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Mirror;
 using System;
 
 public class TimerUI : MonoBehaviour
@@ -34,12 +35,11 @@ public class TimerUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnTimerUpdated += UpdateActiveDisplay;
-        GameManager.OnStartWaitUpdated += UpdateWaitingDisplay;
-        GameManager.OnGameStarted += ShowActiveTimer;
-        GameManager.OnRoundOver += ShowRoundEnd;
-        GameManager.OnDeadlineReached += EnableOvertimeDisplay;
-        GameManager.OnRoundTransitionTick += UpdateRoundCountdown;
+        NetworkClient.RegisterHandler<TimerUpdateMessage>(OnTimerUpdate);
+        NetworkClient.RegisterHandler<StartWaitMessage>(OnStartWait);
+        NetworkClient.RegisterHandler<GameStartedMessage>(OnGameStarted);
+        NetworkClient.RegisterHandler<RoundOverMessage>(OnRoundOver);
+        NetworkClient.RegisterHandler<DeadlineReachedMessage>(OnDeadlineReached);
 
         if (startButton != null)
             startButton.onClick.AddListener(OnStartButtonClicked);
@@ -50,12 +50,11 @@ public class TimerUI : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.OnTimerUpdated -= UpdateActiveDisplay;
-        GameManager.OnStartWaitUpdated -= UpdateWaitingDisplay;
-        GameManager.OnGameStarted -= ShowActiveTimer;
-        GameManager.OnRoundOver -= ShowRoundEnd;
-        GameManager.OnDeadlineReached -= EnableOvertimeDisplay;
-        GameManager.OnRoundTransitionTick -= UpdateRoundCountdown;
+        NetworkClient.UnregisterHandler<TimerUpdateMessage>();
+        NetworkClient.UnregisterHandler<StartWaitMessage>();
+        NetworkClient.UnregisterHandler<GameStartedMessage>();
+        NetworkClient.UnregisterHandler<RoundOverMessage>();
+        NetworkClient.UnregisterHandler<DeadlineReachedMessage>();
     }
 
     private void Start()
@@ -68,7 +67,7 @@ public class TimerUI : MonoBehaviour
     private void OnStartButtonClicked()
     {
         if (_viewManager != null) _viewManager.ExitFirstPerson();
-        GameManager.Instance.StartGame();
+        NetworkClient.Send(new ManualStartMessage());
     }
 
     private void OnFPButtonClicked()
@@ -76,7 +75,7 @@ public class TimerUI : MonoBehaviour
         if (_viewManager != null) _viewManager.EnterFirstPerson();
     }
 
-    private void ShowActiveTimer()
+    private void OnGameStarted(GameStartedMessage msg)
     {
         waitingPanel.SetActive(false);
         roundEndPanel.SetActive(false);
@@ -85,14 +84,14 @@ public class TimerUI : MonoBehaviour
         if (_viewManager != null) _viewManager.ExitFirstPerson();
     }
 
-    private void EnableOvertimeDisplay()
+    private void OnDeadlineReached(DeadlineReachedMessage msg)
     {
         _isOvertime = true;
         if (timerText != null)
             timerText.text = "Overtime. Everyone takes damage overtime";
     }
 
-    private void ShowRoundEnd(int domeIndex)
+    private void OnRoundOver(RoundOverMessage msg)
     {
         activeTimerPanel.SetActive(false);
         waitingPanel.SetActive(false);
@@ -100,38 +99,30 @@ public class TimerUI : MonoBehaviour
         _isOvertime = false;
 
         if (roundStatusText != null)
-            roundStatusText.text = $"DOME {domeIndex} HAS FALLEN";
-    }
+            roundStatusText.text = $"DOME {msg.round} HAS FALLEN";
 
-    private void UpdateRoundCountdown(float timeRemaining)
-    {
         if (roundCountdownText != null)
-            roundCountdownText.text = $"Next round in: {Mathf.CeilToInt(timeRemaining)}s";
+            roundCountdownText.text = $"Next round in: {Mathf.CeilToInt(msg.transitionTime)}s";
     }
 
-    private void UpdateWaitingDisplay(float timeUntilStart)
+    private void OnStartWait(StartWaitMessage msg)
     {
         if (autoStartText != null)
-            autoStartText.text = $"Auto-starting in: {Mathf.CeilToInt(timeUntilStart)}s";
+            autoStartText.text = $"Auto-starting in: {Mathf.CeilToInt(msg.timeUntilStart)}s";
     }
 
-    private void UpdateActiveDisplay(float timeRemaining)
+    private void OnTimerUpdate(TimerUpdateMessage msg)
     {
-        if (GameManager.Instance == null) return;
-
         if (!_isOvertime && timerText != null)
         {
-            TimeSpan time = TimeSpan.FromSeconds(timeRemaining);
+            TimeSpan time = TimeSpan.FromSeconds(msg.timeRemaining);
             timerText.text = string.Format("{0:D2}:{1:D2}", time.Minutes, time.Seconds);
         }
 
         if (nextDistributionText != null)
-        {
-            float nextDist = GameManager.Instance.GetTimeUntilNextDistribution();
-            nextDistributionText.text = $"Until next card distribution: {Mathf.CeilToInt(nextDist)}";
-        }
+            nextDistributionText.text = $"Until next card distribution: {Mathf.CeilToInt(msg.nextDistribution)}";
 
         if (cardAmountText != null)
-            cardAmountText.text = $"Card amount per distribution: {GameManager.Instance.GetCardsPerInterval()}";
+            cardAmountText.text = $"Card amount per distribution: {msg.cardsPerInterval}";
     }
 }

@@ -16,6 +16,8 @@ public class RoomManager : MonoBehaviour
 
     private int roomCounter = 0;
 
+    private Dictionary<string, GameManager> _gameManagers = new Dictionary<string, GameManager>();
+
     void Awake()
     {
         instance = this;
@@ -134,11 +136,48 @@ public class RoomManager : MonoBehaviour
         StartRoom(room);
     }
 
-    IEnumerator StartRoomCoroutine(GameRoom room)
+    void StartRoom(GameRoom room)
     {
         room.isStarted = true;
 
-        AsyncOperation op = SceneManager.LoadSceneAsync(gameSceneName, LoadSceneMode.Additive);
+        foreach (var conn in room.players)
+            conn.Send(new RoomStartMessage { roomId = room.roomId });
+
+        // Даём клиентам время получить сообщение
+        StartCoroutine(InitGameManagerDelayed(room));
+    }
+
+    IEnumerator InitGameManagerDelayed(GameRoom room)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject gmObj = new GameObject($"GameManager_{room.roomId}");
+        GameManager gm = gmObj.AddComponent<GameManager>();
+        DontDestroyOnLoad(gmObj);
+        _gameManagers[room.roomId] = gm;
+        gm.Initialize(room.roomId);
+    }
+
+    public void ManualStart(string roomId)
+    {
+        if (_gameManagers.TryGetValue(roomId, out GameManager gm))
+            gm.StartGame();
+    }
+
+    public void ChangeRoomScene(string roomId, string sceneName)
+    {
+        GameRoom room = rooms.Find(r => r.roomId == roomId);
+        if (room == null) return;
+
+        StartCoroutine(ChangeRoomSceneCoroutine(room, sceneName));
+    }
+
+    IEnumerator ChangeRoomSceneCoroutine(GameRoom room, string sceneName)
+    {
+        if (room.scene.IsValid())
+            yield return SceneManager.UnloadSceneAsync(room.scene);
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         yield return op;
 
         room.scene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
@@ -146,20 +185,19 @@ public class RoomManager : MonoBehaviour
         foreach (var conn in room.players)
         {
             if (conn.identity != null)
-            {
                 SceneManager.MoveGameObjectToScene(conn.identity.gameObject, room.scene);
-                conn.identity.SetMatchId(room.roomId);
-            }
-
-            conn.Send(new RoomStartMessage { roomId = room.roomId, sceneName = gameSceneName });
         }
     }
 
-    void StartRoom(GameRoom room)
+    public void SendToRoom<T>(string roomId, T msg) where T : struct, NetworkMessage
     {
-        StartCoroutine(StartRoomCoroutine(room));
-    }
+        GameRoom room = rooms.Find(r => r.roomId == roomId);
+        if (room == null) return;
 
+        foreach (var conn in room.players)
+            conn.Send(msg);
+    }
+    
     public void OnPlayerDisconnected(NetworkConnectionToClient conn)
     {
         LeaveMatchmaking(conn);

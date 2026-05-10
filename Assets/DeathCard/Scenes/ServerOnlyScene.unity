@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21483d8f0a6e17d5da0cb2a006478c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
-  gameSceneName: Labyrinth_Scene
+  gameSceneName: Maze_Scene
 --- !u!4 &636191046
 Transform:
   m_ObjectHideFlags: 0
