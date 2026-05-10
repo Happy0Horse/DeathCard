@@ -56,9 +56,16 @@ public class RoomManager : MonoBehaviour
         playerRoomMap.Remove(conn);
 
         if (room.players.Count == 0)
-            rooms.Remove(room);
+        {
+            if (room.isStarted)
+                DestroyRoom(room);
+            else
+                rooms.Remove(room);
+        }
         else
+        {
             SendLobbyUpdate(room);
+        }
     }
 
     public void SetReady(NetworkConnectionToClient conn, bool ready)
@@ -200,7 +207,45 @@ public class RoomManager : MonoBehaviour
     
     public void OnPlayerDisconnected(NetworkConnectionToClient conn)
     {
-        LeaveMatchmaking(conn);
+        if (!playerRoomMap.ContainsKey(conn)) return;
+
+        GameRoom room = playerRoomMap[conn];
+        room.RemovePlayer(conn);
+        playerRoomMap.Remove(conn);
+
+        if (room.players.Count == 0)
+        {
+            DestroyRoom(room);
+        }
+        else
+        {
+            SendLobbyUpdate(room);
+        }
+    }
+    
+    void DestroyRoom(GameRoom room)
+    {
+        Debug.Log($"[RoomManager] Уничтожаем комнату {room.roomId}");
+
+        // Уничтожаем GameManager
+        if (_gameManagers.TryGetValue(room.roomId, out GameManager gm))
+        {
+            if (gm != null)
+                Destroy(gm.gameObject);
+            _gameManagers.Remove(room.roomId);
+        }
+
+        // Выгружаем сцену
+        if (room.scene.IsValid())
+            StartCoroutine(UnloadRoomScene(room));
+
+        rooms.Remove(room);
+    }
+
+    IEnumerator UnloadRoomScene(GameRoom room)
+    {
+        yield return SceneManager.UnloadSceneAsync(room.scene);
+        Debug.Log($"[RoomManager] Сцена комнаты {room.roomId} выгружена");
     }
 
     public void SendChat(NetworkConnectionToClient conn, string text)
@@ -229,5 +274,11 @@ public class RoomManager : MonoBehaviour
     {
         if (_gameManagers.TryGetValue(roomId, out GameManager gm))
             gm.TriggerDomeBroken();
+    }
+
+    public GameManager GetGameManager(string roomId)
+    {
+        _gameManagers.TryGetValue(roomId, out GameManager gm);
+        return gm;
     }
 }

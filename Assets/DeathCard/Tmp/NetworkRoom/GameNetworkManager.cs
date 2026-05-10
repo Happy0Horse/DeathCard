@@ -15,6 +15,8 @@ public class GameNetworkManager : NetworkManager
         NetworkServer.RegisterHandler<SpawnRequestMessage>(OnSpawnRequest);
         NetworkServer.RegisterHandler<ManualStartMessage>(OnManualStart);
         NetworkServer.RegisterHandler<DomeBrokenMessage>(OnDomeBroken);
+        NetworkServer.RegisterHandler<GameOverMessage>(OnGameOver);
+        NetworkServer.RegisterHandler<TimerFreezeMessage>(OnTimerFreeze);
     }
 
     void OnManualStart(NetworkConnectionToClient conn, ManualStartMessage msg)
@@ -162,6 +164,20 @@ public class GameNetworkManager : NetworkManager
         method?.Invoke(this, new object[] { sceneName, SceneOperation.Normal, false });
     }
 
+    void OnGameOver(NetworkConnectionToClient conn, GameOverMessage msg)
+    {
+        string roomId = RoomManager.instance.GetRoomId(conn);
+        if (roomId != null)
+            RoomManager.instance.GetGameManager(roomId)?.EnterGameOver();
+    }
+
+    void OnTimerFreeze(NetworkConnectionToClient conn, TimerFreezeMessage msg)
+    {
+        string roomId = RoomManager.instance.GetRoomId(conn);
+        if (roomId != null)
+            RoomManager.instance.GetGameManager(roomId)?.SetTimerFreeze(msg.freeze);
+    }
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -175,6 +191,9 @@ public class GameNetworkManager : NetworkManager
         NetworkClient.RegisterHandler<StartWaitMessage>(msg => { });
         NetworkClient.RegisterHandler<GameStartedMessage>(msg => { });
         NetworkClient.RegisterHandler<DeadlineReachedMessage>(msg => { });
+        NetworkClient.RegisterHandler<EndgameStartedMessage>(msg => { });
+        NetworkClient.RegisterHandler<TimerFreezeMessage>(msg => { });
+        NetworkClient.RegisterHandler<GameOverMessage>(msg => { });
     }
 
     void OnGameStateReceived(GameStateMessage msg)

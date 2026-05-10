@@ -107,3 +107,9 @@ public struct DistributeCardsMessage : NetworkMessage
 }
 
 public struct DomeBrokenMessage : NetworkMessage { }
+
+public struct EndgameStartedMessage : NetworkMessage { }
+
+public struct TimerFreezeMessage : NetworkMessage { public bool freeze; }
+
+public struct GameOverMessage : NetworkMessage { }
