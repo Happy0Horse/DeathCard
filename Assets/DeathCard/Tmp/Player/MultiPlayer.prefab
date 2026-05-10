@@ -203,6 +203,8 @@ GameObject:
   - component: {fileID: 829651814889265904}
   - component: {fileID: 5312830326172187159}
   - component: {fileID: 6529092996735777932}
+  - component: {fileID: 5776582167713341378}
+  - component: {fileID: 8242052221088282615}
   m_Layer: 3
   m_Name: HexPlayer
   m_TagString: Untagged
@@ -563,6 +565,38 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   sceneName: Maze_Scene
+--- !u!114 &5776582167713341378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100588024268161033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43b11f4cb9339f34a740a0ac08feb95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  playerCamera: {fileID: 1495046489669093055}
+--- !u!114 &8242052221088282615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100588024268161033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43b11f4cb9339f34a740a0ac08feb95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  playerCamera: {fileID: 7819650001625621363}
 --- !u!1 &607380013098720448
 GameObject:
   m_ObjectHideFlags: 0

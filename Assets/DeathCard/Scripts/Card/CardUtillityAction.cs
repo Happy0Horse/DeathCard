@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Mirror;
 
 public class CardUtillityAction : MonoBehaviour
 {
@@ -68,7 +69,7 @@ public class CardUtillityAction : MonoBehaviour
 
     private IEnumerator GalaxySequence(CardData data)
     {
-        if (GameManager.Instance != null) GameManager.Instance.SetTimerFreeze(true);
+        NetworkClient.Send(new TimerFreezeMessage { freeze = true });
 
         float totalStunTime = (1f / growthSpeed) + stayDuration + (1f / returnSpeed);
         ApplyGlobalStun(totalStunTime);
@@ -112,7 +113,7 @@ public class CardUtillityAction : MonoBehaviour
         _navigator.ClearSelectionState();
         yield return StartCoroutine(AnimateProperty(0f, returnSpeed));
 
-        if (GameManager.Instance != null) GameManager.Instance.SetTimerFreeze(false);
+        NetworkClient.Send(new TimerFreezeMessage { freeze = false });
         _activeRoutine = null;
     }
 
