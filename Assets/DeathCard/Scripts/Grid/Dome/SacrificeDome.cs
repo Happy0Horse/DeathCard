@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Mirror;
 
 public class SacrificeDome : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class SacrificeDome : MonoBehaviour
         _isActive = true;
         GlobalEvents.OnAnyDamageTaken -= AccumulateDamage;
         GlobalEvents.OnAnyDamageTaken += AccumulateDamage;
+        Debug.Log($"[SacrificeDome] Дом {domeIndex} активирован");
         if (_domeMat != null) UpdateDomeVisuals();
     }
 
@@ -64,6 +66,7 @@ public class SacrificeDome : MonoBehaviour
 
     void AccumulateDamage(float damage)
     {
+        Debug.Log($"[SacrificeDome] Получен урон {damage}, текущие очки={currentPoints}");
         if (!_isActive || _isShattering) return;
         currentPoints += damage;
         flashIntencity = 1.0f;
@@ -124,11 +127,10 @@ public class SacrificeDome : MonoBehaviour
 
         if (!_isSkipped)
         {
-            GlobalEvents.OnDomeBroken?.Invoke();
+            GlobalEvents.OnDomeBroken?.Invoke(); // локально для UI
+            NetworkClient.Send(new DomeBrokenMessage()); // серверу
             if (innerDome != null)
-            {
                 innerDome.StartCoroutine(innerDome.DelayedEnable(waitBeforeNextDome));
-            }
         }
 
         Destroy(gameObject);

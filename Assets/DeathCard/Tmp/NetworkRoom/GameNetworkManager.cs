@@ -14,6 +14,7 @@ public class GameNetworkManager : NetworkManager
         NetworkServer.RegisterHandler<SendChatMessage>(OnChatMessage);
         NetworkServer.RegisterHandler<SpawnRequestMessage>(OnSpawnRequest);
         NetworkServer.RegisterHandler<ManualStartMessage>(OnManualStart);
+        NetworkServer.RegisterHandler<DomeBrokenMessage>(OnDomeBroken);
     }
 
     void OnManualStart(NetworkConnectionToClient conn, ManualStartMessage msg)
@@ -23,16 +24,13 @@ public class GameNetworkManager : NetworkManager
         // GameManager хранится per-room — нужно добавить в RoomManager
         RoomManager.instance.ManualStart(roomId);
     }
-    // public override void OnServerSceneChanged(string sceneName)
-    // {
-    //     base.OnServerSceneChanged(sceneName);
-    //     NetworkServer.RegisterHandler<JoinMatchmakingMessage>(OnJoinMatchmaking);
-    //     NetworkServer.RegisterHandler<LeaveMatchmakingMessage>(OnLeaveMatchmaking);
-    //     NetworkServer.RegisterHandler<PlayerReadyMessage>(OnPlayerReady);
-    //     NetworkServer.RegisterHandler<SendChatMessage>(OnChatMessage);
-    //     NetworkServer.RegisterHandler<SpawnRequestMessage>(OnSpawnRequest);
-    //     Debug.Log($"Сервер сменил сцену на {sceneName}, обработчики перерегистрированы");
-    // }
+
+    void OnDomeBroken(NetworkConnectionToClient conn, DomeBrokenMessage msg)
+    {
+        string roomId = RoomManager.instance.GetRoomId(conn);
+        if (roomId != null)
+            RoomManager.instance.HandleDomeBroken(roomId);
+    }
 
     void OnSpawnRequest(NetworkConnectionToClient conn, SpawnRequestMessage msg)
     {
@@ -170,19 +168,45 @@ public class GameNetworkManager : NetworkManager
         // Только клиентские обработчики
         NetworkClient.RegisterHandler<GameStateMessage>(OnGameStateReceived);
         NetworkClient.RegisterHandler<MazeTimerMessage>(OnMazeTimerUpdate);
+        NetworkClient.RegisterHandler<OvertimeTickMessage>(OnOvertimeTick);
+        NetworkClient.RegisterHandler<RoundOverMessage>(OnRoundOver);
+        NetworkClient.RegisterHandler<DistributeCardsMessage>(OnDistributeCards);
         NetworkClient.RegisterHandler<TimerUpdateMessage>(msg => { });
         NetworkClient.RegisterHandler<StartWaitMessage>(msg => { });
         NetworkClient.RegisterHandler<GameStartedMessage>(msg => { });
-        NetworkClient.RegisterHandler<RoundOverMessage>(msg => { });
         NetworkClient.RegisterHandler<DeadlineReachedMessage>(msg => { });
-        NetworkClient.RegisterHandler<OvertimeTickMessage>(msg => { });
     }
 
     void OnGameStateReceived(GameStateMessage msg)
     {
-        Debug.Log($"[Client] GameState={msg.state}, Round={msg.round}, Scene={msg.sceneName}");
+        Debug.Log($"[Client] GameState={msg.state}, Round={msg.round}");
+        
         if (!string.IsNullOrEmpty(msg.sceneName))
             ((GameNetworkManager)NetworkManager.singleton).ChangeToScene(msg.sceneName);
+
+        if (msg.state == 1)
+        {
+            Debug.Log($"[Client] Вызываем InitializeForRound({msg.round})");
+            StartCoroutine(InitializeDomesWhenReady(msg.round));
+        }
+    }
+
+    IEnumerator InitializeDomesWhenReady(int round)
+    {
+        float timeout = 10f;
+        while (timeout > 0)
+        {
+            var dome = FindObjectOfType<SacrificeDome>();
+            Debug.Log($"[Client] Ищем дом... dome={dome}");
+            if (dome != null)
+            {
+                DomeInitializer.InitializeForRound(round);
+                yield break;
+            }
+            timeout -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Debug.LogError("[Client] Дом не найден за 10 секунд!");
     }
 
     void OnMazeTimerUpdate(MazeTimerMessage msg)
@@ -190,5 +214,23 @@ public class GameNetworkManager : NetworkManager
         MazeTimer timer = FindObjectOfType<MazeTimer>();
         if (timer != null)
             timer.UpdateTimer(msg.timeRemaining);
+    }
+
+    void OnOvertimeTick(OvertimeTickMessage msg)
+    {
+        foreach (var stat in FindObjectsOfType<PlayerStat>())
+            stat.TakeDamage(msg.damage);
+    }
+
+    void OnRoundOver(RoundOverMessage msg)
+    {
+        foreach (var manager in FindObjectsOfType<CardManager>())
+            manager.HandleRoundOver(msg.round);
+    }
+
+    void OnDistributeCards(DistributeCardsMessage msg)
+    {
+        foreach (var manager in FindObjectsOfType<CardManager>())
+            manager.HandleGlobalCardDistribution(msg.count);
     }
 }

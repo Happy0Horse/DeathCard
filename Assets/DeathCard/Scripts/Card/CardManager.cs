@@ -7,30 +7,16 @@ public class CardManager : MonoBehaviour
     [SerializeField] private List<CardAction> cardSlots = new List<CardAction>(10);
     [SerializeField] private List<CardData> selectedCards = new List<CardData>();
 
-    private void OnEnable()
-    {
-        GameManager.OnDistributeCards += HandleGlobalCardDistribution;
-        GameManager.OnRoundOver += HandleRoundOver;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnDistributeCards -= HandleGlobalCardDistribution;
-        GameManager.OnRoundOver -= HandleRoundOver;
-    }
-
-    private void HandleRoundOver(int domeIndex)
+    public void HandleRoundOver(int domeIndex)
     {
         foreach (CardAction slot in cardSlots)
         {
             if (slot != null && slot.data != null)
-            {
                 RemoveCard(slot);
-            }
         }
     }
 
-    private void HandleGlobalCardDistribution(int count)
+    public void HandleGlobalCardDistribution(int count)
     {
         for (int i = 0; i < count; i++)
         {

@@ -224,4 +224,10 @@ public class RoomManager : MonoBehaviour
         foreach (var player in room.players)
             player.Send(msg);
     }
+
+    public void HandleDomeBroken(string roomId)
+    {
+        if (_gameManagers.TryGetValue(roomId, out GameManager gm))
+            gm.TriggerDomeBroken();
+    }
 }
