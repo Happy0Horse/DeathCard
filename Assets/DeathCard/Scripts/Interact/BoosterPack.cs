@@ -50,6 +50,7 @@ public class BoosterPack : Interactable
                         cardPool.Add(items[j] as CardData);
                 }
                 itemList.Add(Instantiate(cardPool[random.Next(0, cardPool.Count)]));
+
             }
             else if (rand >= 3 && rand <= 6)
             {
@@ -95,7 +96,9 @@ public class BoosterPack : Interactable
             bool successfulAdd = player.inventory.AddItem(item);
             if (successfulAdd)
             {
-                PlayerPrefs.SetInt("BoosterPacks", PlayerPrefs.GetInt("BoosterPacks", 0) + 1);
+                gameObject.layer = LayerMask.NameToLayer("Default");
+                //PlayerPrefs.SetInt("BoosterPacks", PlayerPrefs.GetInt("BoosterPacks", 0) + 1);
+                LocalStorage.Instance.boosterPackCount++;
                 animator.SetTrigger("PickUp");
                 Destroy(gameObject, 1f);
             }
@@ -105,7 +108,6 @@ public class BoosterPack : Interactable
             if (items.Length >= 5)
             {
                 gameObject.layer = LayerMask.NameToLayer("Default");
-
 
                 GetCards(player, unlockDoor, breakFences);
 

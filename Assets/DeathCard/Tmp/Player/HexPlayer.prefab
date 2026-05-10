@@ -2063,7 +2063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -276.99994, y: 167.5}
+  m_AnchoredPosition: {x: -277, y: 167.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6894589515476524803
@@ -7401,6 +7401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292acbfac4492ee40a08ea0e648cebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HexGridNavigator
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   grid: {fileID: 0}
   moveSpeed: 8
   rotationSpeed: 720
