@@ -1,32 +1,32 @@
 using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public enum GameState { MainMenu, Maze, Game, GameOver }
-    public GameState CurrentState { get; private set; } = GameState.MainMenu;
+    public enum GameState { Maze, Game, GameOver }
+    public GameState CurrentState { get; private set; } = GameState.Maze;
 
     [Header("Scene Names")]
-    [SerializeField] private string mainMenuScene = "Main_Menu";
-    [SerializeField] private string mazeScene = "Maze_Scene";
-    [SerializeField] private string gameScene = "Game_Scene";
+    public string mazeScene = "Maze_Scene";
+    public string gameScene = "Game_Scene";
 
     [Header("Global Timing")]
-    [SerializeField] private float deadlineDuration = 300f;
-    [SerializeField] private float cardDistributionInterval = 10f;
-    [SerializeField] private float preGameWaitDuration = 10f;
-    [SerializeField] private float mazeTimerDuration = 60f;
-    [SerializeField] private int cardsPerInterval = 3;
+    public float deadlineDuration = 120f;
+    public float cardDistributionInterval = 10f;
+    public float preGameWaitDuration = 60f;
+    public float mazeTimerDuration = 60f;
+    public int cardsPerInterval = 4;
 
     [Header("Overtime Settings")]
-    [SerializeField] private float overtimeDamagePerSecond = 5f;
+    public float overtimeDamagePerSecond = 5f;
 
     [Header("Round Transition")]
-    [SerializeField] private float roundTransitionDelay = 5f;
+    public float roundTransitionDelay = 5f;
 
+    public int maxRounds = 3;
     public int CurrentRound { get; private set; } = 0;
 
     private float _timeRemaining;
@@ -34,12 +34,19 @@ public class GameManager : MonoBehaviour
     private float _startWaitTimer;
     private float _overtimeTickTimer;
     private float _roundTransitionTimer;
-    private bool _gameActive;
     private bool _gameStarted;
     private bool _firstDistributionDone;
     private bool _timersFrozen;
     private bool _isOvertime;
     private bool _isRoundTransition;
+    private float _mazeTimer;
+    private bool _mazeActive = false;
+    private float _mazeTimerSendInterval = 0f;
+    private float _gameStartDelay = 5f;
+    private bool _clientsReady = false;
+
+    // Только на сервере
+    private string _roomId;
 
     public static event Action<float> OnTimerUpdated;
     public static event Action<float> OnStartWaitUpdated;
@@ -67,14 +74,45 @@ public class GameManager : MonoBehaviour
     private void OnEnable() => GlobalEvents.OnDomeBroken += HandleDomeBroken;
     private void OnDisable() => GlobalEvents.OnDomeBroken -= HandleDomeBroken;
 
+    public void Initialize(string roomId)
+    {
+        _roomId = roomId;
+        CurrentRound = 0;
+        EnterMaze();
+    }
+
     private void Update()
     {
-        if (CurrentState != GameState.Game) return;
+        if (CurrentState == GameState.Maze && _mazeActive)
+        {
+            _mazeTimer -= Time.deltaTime;
 
+            _mazeTimerSendInterval -= Time.deltaTime;
+            if (_mazeTimerSendInterval <= 0)
+            {
+                _mazeTimerSendInterval = 1f;
+                Debug.Log($"[GameManager] Update: State={CurrentState}, mazeActive={_mazeActive}, mazeTimer={_mazeTimer}");
+                RoomManager.instance.SendToRoom(_roomId, new MazeTimerMessage { timeRemaining = _mazeTimer });
+            }
+
+            if (_mazeTimer <= 0)
+            {
+                _mazeActive = false;
+                EnterGame();
+            }
+            return;
+        }
+
+        if (CurrentState != GameState.Game) return;
+        if (!_clientsReady) return;
         if (_isRoundTransition)
         {
             _roundTransitionTimer -= Time.deltaTime;
-            OnRoundTransitionTick?.Invoke(_roundTransitionTimer);
+            RoomManager.instance.SendToRoom(_roomId, new RoundOverMessage
+            {
+                round = CurrentRound,
+                transitionTime = _roundTransitionTimer
+            });
             if (_roundTransitionTimer <= 0)
             {
                 _isRoundTransition = false;
@@ -86,7 +124,7 @@ public class GameManager : MonoBehaviour
         if (!_gameStarted)
         {
             _startWaitTimer -= Time.deltaTime;
-            OnStartWaitUpdated?.Invoke(_startWaitTimer);
+            RoomManager.instance.SendToRoom(_roomId, new StartWaitMessage { timeUntilStart = _startWaitTimer });
             if (_startWaitTimer <= 0) StartGame();
             return;
         }
@@ -96,32 +134,51 @@ public class GameManager : MonoBehaviour
         HandleCardDistribution();
 
         if (_isOvertime)
-        {
             HandleOvertime();
-            OnTimerUpdated?.Invoke(_timeRemaining);
-        }
         else
-        {
             RunStandardTimers();
-        }
     }
 
     public void EnterMaze()
     {
         CurrentState = GameState.Maze;
-        SceneManager.LoadScene(mazeScene);
+        _mazeTimer = mazeTimerDuration;
+        _mazeActive = true;
+        RoomManager.instance.ChangeRoomScene(_roomId, mazeScene);
+        NotifyClients(0);
     }
 
     public void EnterGame()
     {
         CurrentState = GameState.Game;
         ResetRoundState();
-        SceneManager.LoadScene(gameScene);
+        _clientsReady = false;
+        RoomManager.instance.ChangeRoomScene(_roomId, gameScene);
+        NotifyClients(1);
+        StartCoroutine(WaitForClientsReady());
+    }
+
+    IEnumerator WaitForClientsReady()
+    {
+        yield return new WaitForSeconds(_gameStartDelay);
+        _clientsReady = true;
     }
 
     public void EnterGameOver()
     {
         CurrentState = GameState.GameOver;
+        Debug.Log($"[GameManager] Игра окончена! Комната {_roomId}");
+        NotifyClients(2);
+    }
+
+    private void NotifyClients(int state)
+    {
+        RoomManager.instance.SendToRoom(_roomId, new GameStateMessage
+        {
+            state = state,
+            round = CurrentRound,
+            sceneName = state == 0 ? mazeScene : state == 1 ? gameScene : ""
+        });
     }
 
     private void ResetRoundState()
@@ -131,7 +188,6 @@ public class GameManager : MonoBehaviour
         _startWaitTimer = preGameWaitDuration;
         _overtimeTickTimer = 0f;
         _roundTransitionTimer = 0f;
-        _gameActive = true;
         _gameStarted = false;
         _firstDistributionDone = false;
         _timersFrozen = false;
@@ -153,6 +209,13 @@ public class GameManager : MonoBehaviour
             _cardTimer = cardDistributionInterval;
             OnDistributeCards?.Invoke(cardsPerInterval);
         }
+
+        RoomManager.instance.SendToRoom(_roomId, new TimerUpdateMessage
+        {
+            timeRemaining = _timeRemaining,
+            nextDistribution = _cardTimer,
+            cardsPerInterval = cardsPerInterval
+        });
     }
 
     private void RunStandardTimers()
@@ -162,9 +225,14 @@ public class GameManager : MonoBehaviour
         {
             _timeRemaining = 0;
             _isOvertime = true;
-            OnDeadlineReached?.Invoke();
+            RoomManager.instance.SendToRoom(_roomId, new DeadlineReachedMessage());
         }
-        OnTimerUpdated?.Invoke(_timeRemaining);
+        RoomManager.instance.SendToRoom(_roomId, new TimerUpdateMessage
+        {
+            timeRemaining = _timeRemaining,
+            nextDistribution = _cardTimer,
+            cardsPerInterval = cardsPerInterval
+        });
     }
 
     private void HandleOvertime()
@@ -173,33 +241,40 @@ public class GameManager : MonoBehaviour
         if (_overtimeTickTimer >= 1f)
         {
             _overtimeTickTimer = 0f;
-            OnOvertimeTick?.Invoke(overtimeDamagePerSecond);
+            RoomManager.instance.SendToRoom(_roomId, new OvertimeTickMessage
+            {
+                damage = overtimeDamagePerSecond
+            });
         }
     }
 
     private void HandleDomeBroken()
     {
         CurrentRound++;
-        _isRoundTransition = true;
-        _isOvertime = false;
-        _roundTransitionTimer = roundTransitionDelay;
 
-        if (CurrentRound >= 3)
+        if (CurrentRound >= maxRounds)
         {
-            OnRoundOver?.Invoke(CurrentRound);
+            RoomManager.instance.SendToRoom(_roomId, new RoundOverMessage { round = CurrentRound, transitionTime = 0 });
             OnEndgameStarted?.Invoke();
             EnterGameOver();
             return;
         }
 
-        OnRoundOver?.Invoke(CurrentRound);
+        _isRoundTransition = true;
+        _isOvertime = false;
+        _roundTransitionTimer = roundTransitionDelay;
+        RoomManager.instance.SendToRoom(_roomId, new RoundOverMessage
+        {
+            round = CurrentRound,
+            transitionTime = roundTransitionDelay
+        });
     }
 
     public void StartGame()
     {
         if (_gameStarted) return;
         _gameStarted = true;
-        OnGameStarted?.Invoke();
+        RoomManager.instance.SendToRoom(_roomId, new GameStartedMessage());
     }
 
     public void SetTimerFreeze(bool freeze) => _timersFrozen = freeze;

@@ -13,8 +13,16 @@ public class GameNetworkManager : NetworkManager
         NetworkServer.RegisterHandler<PlayerReadyMessage>(OnPlayerReady);
         NetworkServer.RegisterHandler<SendChatMessage>(OnChatMessage);
         NetworkServer.RegisterHandler<SpawnRequestMessage>(OnSpawnRequest);
+        NetworkServer.RegisterHandler<ManualStartMessage>(OnManualStart);
     }
 
+    void OnManualStart(NetworkConnectionToClient conn, ManualStartMessage msg)
+    {
+        // Находим GameManager для этой комнаты
+        string roomId = RoomManager.instance.GetRoomId(conn);
+        // GameManager хранится per-room — нужно добавить в RoomManager
+        RoomManager.instance.ManualStart(roomId);
+    }
     // public override void OnServerSceneChanged(string sceneName)
     // {
     //     base.OnServerSceneChanged(sceneName);
@@ -154,5 +162,33 @@ public class GameNetworkManager : NetworkManager
         var method = typeof(NetworkManager).GetMethod("ClientChangeScene", 
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         method?.Invoke(this, new object[] { sceneName, SceneOperation.Normal, false });
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        // Только клиентские обработчики
+        NetworkClient.RegisterHandler<GameStateMessage>(OnGameStateReceived);
+        NetworkClient.RegisterHandler<MazeTimerMessage>(OnMazeTimerUpdate);
+        NetworkClient.RegisterHandler<TimerUpdateMessage>(msg => { });
+        NetworkClient.RegisterHandler<StartWaitMessage>(msg => { });
+        NetworkClient.RegisterHandler<GameStartedMessage>(msg => { });
+        NetworkClient.RegisterHandler<RoundOverMessage>(msg => { });
+        NetworkClient.RegisterHandler<DeadlineReachedMessage>(msg => { });
+        NetworkClient.RegisterHandler<OvertimeTickMessage>(msg => { });
+    }
+
+    void OnGameStateReceived(GameStateMessage msg)
+    {
+        Debug.Log($"[Client] GameState={msg.state}, Round={msg.round}, Scene={msg.sceneName}");
+        if (!string.IsNullOrEmpty(msg.sceneName))
+            ((GameNetworkManager)NetworkManager.singleton).ChangeToScene(msg.sceneName);
+    }
+
+    void OnMazeTimerUpdate(MazeTimerMessage msg)
+    {
+        MazeTimer timer = FindObjectOfType<MazeTimer>();
+        if (timer != null)
+            timer.UpdateTimer(msg.timeRemaining);
     }
 }

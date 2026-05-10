@@ -1362,60 +1362,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9077134622255000481, guid: 0ad503b6d109db24e9d8e9c98824d7e0, type: 3}
   m_PrefabInstance: {fileID: 1390725493}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &198500000
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 198500002}
-  - component: {fileID: 198500001}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &198500001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 198500000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5d568b97f3077e4d8732691d056abfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  mainMenuScene: Main_Menu
-  mazeScene: Maze_Scene
-  gameScene: Game_Scene
-  deadlineDuration: 300
-  cardDistributionInterval: 10
-  preGameWaitDuration: 10
-  mazeTimerDuration: 60
-  cardsPerInterval: 3
-  overtimeDamagePerSecond: 5
-  roundTransitionDelay: 5
---- !u!4 &198500002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 198500000}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.83051, y: 9.51152, z: 8.59331}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &232658692
 GameObject:
   m_ObjectHideFlags: 0
@@ -8554,7 +8500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1295457492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13288,6 +13234,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9077134622255000481, guid: 0ad503b6d109db24e9d8e9c98824d7e0, type: 3}
   m_PrefabInstance: {fileID: 1728213033}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2096090941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2096090943}
+  - component: {fileID: 2096090942}
+  m_Layer: 0
+  m_Name: LocalStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2096090942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096090941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015da3dbdd9c6cf458fde993868eb9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalStorage
+  items: []
+  boosterPackCount: 0
+--- !u!4 &2096090943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096090941}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.29355, y: -0, z: 1.29355}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117470433
 GameObject:
   m_ObjectHideFlags: 0
@@ -13448,3 +13440,4 @@ SceneRoots:
   - {fileID: 8263778938418904727}
   - {fileID: 1295457495}
   - {fileID: 198500002}
+  - {fileID: 2096090943}
